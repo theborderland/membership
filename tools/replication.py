@@ -3,6 +3,7 @@
 # +1 Replication
 
 # TODO
+# add an option to filter orders by voucher tag - e.g. only do those from lottery!
 # Send email
 # get correct quota group
 # getopts/tool
@@ -19,10 +20,13 @@ prefname_identifier = getenv("PREFNAME_ID", "prefname")
 pretix = PretixAPI(token="2wxpbi0bwubye1w6z9kq7qd33hoz9svgjq1i4s0xi2e4mfiucnwcehnep8vns4e5")
 
 def replicate():
-    already_invited = get_already_invited()
+    already_invited = list(get_already_used_orders())
+    invites = list(get_order_invitations())
 
-    for inviteinfo in get_order_invitations():
-        if inviteinfo["email"] in already_invited:
+    print("{} invitations pending.".format(len(invites)-len(already_invited)))
+
+    for inviteinfo in invites:
+        if inviteinfo["invited_by_order"] in already_invited:
             continue
         if not create_invitation(inviteinfo):
             print("Creating invitation failed. Assuming quota is full. Bye!")
@@ -49,6 +53,7 @@ def get_inviteinfo_from_order(order):
     return { "email": invited,
              "invited_by_email": order['email'],
              "invited_by_name": prefName,
+             "invited_by_order": order['code'],
              "datetime": order['datetime'] }
 
 def get_answer_from_order(order, identifier):
@@ -58,17 +63,17 @@ def get_answer_from_order(order, identifier):
         return answer[0]['answer']
     return None
 
-def get_already_invited():
+def get_already_used_orders():
     return filter(None,
-                  map(get_invite_emails_from_voucher,
+                  map(get_invite_orders_from_voucher,
                       pretix.get_vouchers()))
 
-def get_invite_emails_from_voucher(voucher):
+def get_invite_orders_from_voucher(voucher):
     try:
         inviteinfo = json.loads(voucher['comment'])
     except json.JSONDecodeError:
         return None
-    return inviteinfo.get('email', None)
+    return inviteinfo.get('invited_by_order', None)
 
 if __name__ == "__main__":
     replicate()
