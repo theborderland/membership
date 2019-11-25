@@ -1,0 +1,72 @@
+\documentclass[a4paper,english,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{parskip}
+\usepackage{babel}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{pifont}
+\usepackage[cm]{fullpage}
+\begin{document}
+\pagestyle{empty}
+
+\usetikzlibrary{patterns}
+\usetikzlibrary{folding}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node (front) [rectangle, rounded corners=3mm, minimum height=53.98mm, minimum width=85.6mm,
+      draw, dashed, anchor=east] { };
+    \node (back) [rectangle, rounded corners=3mm, minimum height=53.98mm, minimum width=85.6mm,
+      draw, dashed, anchor=west] {
+    };
+    \node at (-7,2.86) [] { \Large \ding{33} };
+    \node at (7,-2.87) [rotate=180] { \Large \ding{33} };
+    \node (qrcode) at (6.7, 0.8) [draw, rectangle, minimum height=30mm, minimum width=30mm] { };
+    \node (lick) at (7.3, -1.3) [rectangle] {\begin{tabular}{c}
+        \tiny \textsc{Lick here!} \\ [-1.3ex]
+        \tiny (You may be one \\ [-1.3ex]
+        \tiny of the lucky 25)
+    \end{tabular}};
+    \path [->, draw] (6.6,-1.05) to [bend left] (6.4, -0.8);
+    \node (sign) at (3.2, -1.66) [rectangle, align=flush right, text width=55mm,
+      minimum width=55mm, minimum height=5mm, pattern=north west lines] { };
+    \node at (1.6, -1.33) {\tiny Cardholder's Signature};
+    \node at (4.5, -2.4) {\tiny \textsc{This Card is Personal \& Non-Transferable} };
+  \end{tikzpicture}
+  \\
+  Cut and Fold to Make Your Very Own Membership Card!
+\end{center}
+
+
+%% Front
+%% [Preferred Name] (prominently on top)
+%% VIP Member
+%% No. [Pretix Order Number] (make it long and nice)
+%% Expiry date:  07/2021
+%% This years b/w logo to the side
+
+%% Back
+%% This card certifies that [Preferred Name] is a member in good standing with The Borderland, and
+%% .. 
+%% ..may do as they please when they please.
+%% GENUINE AND AUTHORIZED BY THE BORDERLAND CENTRAL COMMITTEE
+%% Not to be combined with other discounts 
+%% Signature space (cardholder's signature)
+
+
+%% URL FOR WWW GUIDE!!11
+
+%% Consent propaganda: ask for hugs, ask for photo, don’t poop in bushes 
+%% https://www.11thprincipleconsent.org/consent-propaganda/rape-culture-pyramid/
+%% Ask facebook: space left over, make some gfx if you have a message
+
+
+%% \begin{tikzpicture}[transform shape]
+%%   \tikzfoldingdodecahedron[
+%%     face 1={ \node {Radical Inclusion}; }
+%%   ];
+%% \end{tikzpicture}
+
+% Cut, fold, and glue to make your own Decision Dodecahedron.
+% When in doubt, throw the Decision Dodecahedron and it will show you which principle to follow. 
+\end{document}
