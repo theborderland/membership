@@ -24,51 +24,50 @@ def get_pretix(args):
                      token = args.token)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='A collection of things we do with Pretix')
     subparsers = parser.add_subparsers()
 
     # Common Arguments
-    parser.add_argument("--server", "-s"
-                        , default="localhost:8000"
-                        , help="hostname of pretix instance")
-    parser.add_argument("--org", "-o",
-                        default="test",
-                        help="pretix organisation to operate on")
-    parser.add_argument("--event",
-                        "-e",
-                        default="2020", help="pretix event to operate on")
-    parser.add_argument("--token", "-t",
+    parser.add_argument("-t", "--token",
                         required=True,
                         help="api token for pretix (required)")
+    parser.add_argument("-s", "--server", metavar="HOST",
+                        default="localhost:8000",
+                        help="hostname of pretix instance")
+    parser.add_argument("-o", "--org",
+                        default="test",
+                        help="pretix organisation to operate on")
+    parser.add_argument("-e", "--event",
+                        default="2020", help="pretix event to operate on")
 
     # Replicating Vouchers
     replicate_parser = subparsers.add_parser('replicate',
                                              help="replicating +1 vouchers")
     replicate_parser.set_defaults(func=replicate)
 
-    replicate_parser.add_argument("--force", "-f",
+    replicate_parser.add_argument("-f", "--force",
                                   action='store_true',
                                   help="don't ask for confirmation")
-    replicate_parser.add_argument("--tags", "-t",
+    replicate_parser.add_argument("-a", "--all-vouchers",
+                                  action='store_true',
+                                  help="replicate all voucher tags")
+    replicate_parser.add_argument("-q",
+                                  "--quota",
+                                  type=int,
+                                  required=True,
+                                  help="internal identifier of quota group to invite to (e.g. 1)")
+    replicate_parser.add_argument("-t", "--tags",
                                   action='append',
                                   metavar="TAG",
                                   nargs="+",
                                   default=[],
-                                  help="Only replicate orders made with these voucher tags (\"lottery\", \"board\", ...)")
-    replicate_parser.add_argument("--quota",
-                                  "-q",
-                                  type=int,
-                                  required=True,
-                                  help="Internal identifier of quota group to invite to (e.g. 2)")
-    replicate_parser.add_argument("--all-vouchers",
-                                  action='store_true',
-                                  help="Replicate all voucher tags")
+                                  help="only replicate orders made with these voucher tags (\"lottery\", \"board\", ...)")
     replicate_parser.add_argument("--pref-name-id",
                                   default="prefname",
-                                  help="Question Identifier for user's preferred name")
+                                  help="question identifier for user's preferred name")
     replicate_parser.add_argument("--invite-id",
                                   default="invite",
-                                  help="Question Identifier for users' invitation")
+                                  help="question identifier for e-mail address to be invited")
 
 
     args = parser.parse_args()
