@@ -3,7 +3,7 @@
   * Disable refunds/SMEP
   * Disable monster
   * Generate and send vouchers to the board
-  
+
 # Starting lottery registration
 
 # End of lottery registration

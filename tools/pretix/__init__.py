@@ -1,33 +1,13 @@
 from requests import post, get
-from os import getenv
 from datetime import datetime, timedelta
 
 class PretixAPI:
-    def __init__(self, host=getenv("PRETIX_HOST", "localhost:8000"),
-                 org=getenv("PRETIX_ORG", "test"),
-                 event=getenv("PRETIX_EVENT", "2020"),
-                 token=getenv("PRETIX_TOKEN")):
+    def __init__(self, host, org, event, token):
         self.host = host
         self.org = org
         self.event = event
         self.token = token
 
-    def get_paginated(self, url, json):
-        results = []
-        next_url = url
-        while next_url:
-            resp = get(next_url,
-                headers = {
-                    "Authorization": "Token {}".format(self.token)
-                },
-                json = json)
-            if resp.status_code >= 300:
-                print(resp.text)
-                raise RuntimeError("Pretix returned status code {} for {} with {}".format(resp.status_code, url, json))
-            resp_json = resp.json()
-            results += resp_json['results']
-            next_url = resp_json['next'] # !
-        return results
 
     def get_orders(self, status="p"):
         url = "http://{}/api/v1/organizers/{}/events/{}/orders/?page=1".format(self.host, self.org, self.event)
@@ -70,6 +50,20 @@ class PretixAPI:
     # get quota_availability
 
 
-
-
+    def get_paginated(self, url, json):
+        results = []
+        next_url = url
+        while next_url:
+            resp = get(next_url,
+                headers = {
+                    "Authorization": "Token {}".format(self.token)
+                },
+                json = json)
+            if resp.status_code >= 300:
+                print(resp.text)
+                raise RuntimeError("Pretix returned status code {} for {} with {}".format(resp.status_code, url, json))
+            resp_json = resp.json()
+            results += resp_json['results']
+            next_url = resp_json['next'] # !
+        return results
 

@@ -5,9 +5,7 @@
 # TODO
 # Send email
 
-from os import getenv
 import json
-
 
 class VoucherReplicator:
     def __init__(self,
@@ -103,6 +101,7 @@ class VoucherReplicator:
         if inviteinfo:
             return inviteinfo.get('invited_by_order', None)
         return None
+
 
     def get_inviteinfo_from_voucher(self, voucher):
         try:
