@@ -13,7 +13,14 @@ def replicate(args):
                            args.quota,
                            args.pref_name_id,
                            args.invite_id)
-    vr.replicate(args.force)
+    if vars(args)["print"]:
+        invites = vr.invites_to_send()
+        if invites:
+            print(",".join(invites[0].keys()))
+            for i in invites:
+                print(",".join([ str(j) for j in i.values() ]))
+    else:
+        vr.replicate(args.force)
 
 
 def get_pretix(args):
@@ -45,6 +52,9 @@ if __name__ == "__main__":
                                              help="replicating +1 vouchers")
     replicate_parser.set_defaults(func=replicate)
 
+    replicate_parser.add_argument("-p", "--print",
+                                  action='store_true',
+                                  help="print list of emails to invite") 
     replicate_parser.add_argument("-f", "--force",
                                   action='store_true',
                                   help="don't ask for confirmation")

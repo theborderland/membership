@@ -18,6 +18,7 @@ When there are so few lottery vouchers pending that they all get the chance to
   * Run replication for all voucher tags
   
 # After sell-out
+  * move everyone invited without a voucher to waiting list
   * enable waiting list
   * hide replication question
   * disable replication

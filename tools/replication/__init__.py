@@ -23,10 +23,7 @@ class VoucherReplicator:
 
 
     def replicate(self, force=False):
-        already_invited = list(self.get_already_used_orders())
-        invites = list(self.get_order_invitations())
-
-        print("{} invitations pending.".format(len(invites)-len(already_invited)))
+        invites = self.invites_to_send()
 
         # TODO more info here
 
@@ -35,17 +32,22 @@ class VoucherReplicator:
             return
 
         for inviteinfo in invites:
-            if inviteinfo["invited_by_order"] in already_invited:
-                continue
-            if not self.voucher_id_has_allowed_tag(inviteinfo["invited_by_voucherids"]):
-                continue
             if not self.create_invitation(inviteinfo):
                 print("Creating invitation failed. Assuming quota is full. Bye!")
                 break
 
 
+    def invites_to_send(self):
+        already_invited = list(self.get_already_used_orders())
+        invites = list(self.get_order_invitations())
+
+        return [ invite for invite in invites
+                 if invite["invited_by_order"] not in already_invited and
+                 self.voucher_id_has_allowed_tag(invite["invited_by_voucherids"]) ]
+
+
     def voucher_id_has_allowed_tag(self, ids):
-        if not self.allowed_voucher_tags:
+        if self.allowed_voucher_tags == None:
             return True
         id_to_tag = { v['id']: v['tag'] for v in self.vouchers }
         invite_tags = [ id_to_tag[v] for v in ids ]
