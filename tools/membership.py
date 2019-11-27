@@ -5,7 +5,7 @@ import argparse
 def replicate(args):
     from replication import VoucherReplicator
     pretix = get_pretix(args)
-    tags = (sum(args.tags, [])) # flatten
+    tags = sum(args.tags, []) # flatten
     if args.all_vouchers:
         tags = None
     vr = VoucherReplicator(pretix,
@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
     replicate_parser.add_argument("-p", "--print",
                                   action='store_true',
-                                  help="print list of emails to invite") 
+                                  help="print list of pending invites")
     replicate_parser.add_argument("-f", "--force",
                                   action='store_true',
                                   help="don't ask for confirmation")
