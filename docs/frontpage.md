@@ -17,7 +17,7 @@ We conduct the sale in three stages:
      
   1. Lottery
   
-     A few days after the registration deadline we raffle away half of the memberships. If you're picked you have two days to buy a membership. We'll send you an e-mail notification. 
+     A few days after the registration deadline we raffle off half of the memberships. If you're picked you have two days to buy a membership. We'll send you an e-mail notification. 
      If you win you're guaranteed an invite that you can send to someone else.
      
   1. Replicated Sale
@@ -32,7 +32,7 @@ Memberships are personal. They can only change hands on this website.
 
 **We do not allow reselling of memberships privately. If you're asked for money somewhere other than on this website you're being scammed!** Contact the membership team if you suspect a scam.
 
-After we've sold out you can register on a waiting list. This is the the *Secure Membership Exchange Programme* (SMEP). When someone refunds their membership you'll get the option to buy it. This list is first come, first served. This is the best and preferred way to get a membership after the main sale.
+If you didn't get a ticket in the main sale you can register on a waiting list. This is the the *Secure Membership Exchange Programme* (SMEP). When someone refunds their membership you'll get the option to buy it. This list is first come, first served. This is the best and preferred way to get a membership after the main sale.
 
 **We only allow directed transfers in exceptional cases**, see the FAQ. 
 
@@ -44,11 +44,11 @@ The deadline for refunding your membership is two months before the event. After
 
 ### I missed the lottery registration!
 
-Don't fret! Let your camp know and maybe someone has an invitation for you. You can also sign on to the SMEP waiting list.
+Don't fret! Let your camp and friends know and maybe someone has an invitation for you. You can also sign up on to the SMEP waiting list.
 
 ### I missed the sale!
 
-Register on the SMEP waiting list. A lot of memberships are exchange closer to the event.
+Register on the SMEP waiting list. A lot of memberships are exchanged closer to the event.
 
 ### I missed the e-mail with the invitation
 
@@ -64,7 +64,7 @@ We'll ask questions when you buy your membership. We don't need that information
 
 ### But why is it different?
 
-We're a group of people that enjoy building things and setting them on fire. That–apparently–includes software.  ![You're welcome to change the software if you don't like it](https://github.com/theborderland/membership) (for next year).
+We're a group of people that enjoy building things and setting them on fire. That–apparently–includes software. [You're welcome to change the software if you don't like it](https://github.com/theborderland/membership) (for next year).
 
 ## Transfers
 
@@ -117,8 +117,7 @@ Turns out a lottery is a little more complicated than a normal sale, we have to 
 
 ok, boomer. 
 
-The Borderland is a co-created, do-ocratic institution. You're welcome to change the rules. Check out the website for more information on how you can take part in the governance.
-
+The Borderland is a co-created, do-ocratic institution. You're welcome to change the rules. Check out the website for more information on how you can make decisions.
 
 ## I need help!
 
