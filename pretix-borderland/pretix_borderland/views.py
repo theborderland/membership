@@ -21,7 +21,7 @@ class RegisterForm(SuccessMessageMixin, CreateView):
     success_url = '..'
     success_message = "%(first_name)s, you've registered! Good luck!"
 
-    success_email = """
+    email_message = """
 For reference, this is the information you provided:
 
     - First Name: %(first_name)s
@@ -42,7 +42,7 @@ For reference, this is the information you provided:
             send_mail(event_id=self.request.event.id,
                       to = [ request.POST["email"] ],
                       subject = "Borderland Lottery Receipt", # TODO
-                      body = self.success_email % request.POST.dict())
+                      body = self.email_message % request.POST.dict())
             return sup
         except IntegrityError:
             messages.add_message(request, messages.ERROR,

@@ -3,7 +3,7 @@
 
 The Borderland is a co-created community event and organisation. We only have participants–there are no spectators, volunteers, artists, or organisers. Besides entry to the event, a membership gives you as much a say in how we organize and what the event is as anyone else.
 
-Since capacity at the event is limited, we raffle away half of the memberships. When you buy a membership you can invite someone. We sell the remaining memberships by invitation.
+Since capacity at the event is limited, we raffle off half of the memberships. When you buy a membership you can invite someone. We sell the remaining memberships by invitation.
 
 Please read this description and the FAQ carefully. Some things are different from previous years, particularly how transfers work.
 
@@ -12,11 +12,16 @@ Please read this description and the FAQ carefully. Some things are different fr
 We conduct the sale in three stages:
 
   1. Lottery Registration
+  
      You can register to take part in the lottery until January 29. 
+     
   1. Lottery
+  
      A few days after the registration deadline we raffle away half of the memberships. If you're picked you have two days to buy a membership. We'll send you an e-mail notification. 
      If you win you're guaranteed an invite that you can send to someone else.
+     
   1. Replicated Sale
+  
      We won't sell out in the lottery round. 
      Everyone who buys a membership can invite someone else until we're sold out. 
      It pays to be quick, because we send out invitations starting with the earliest sale.
@@ -37,10 +42,6 @@ The deadline for refunding your membership is two months before the event. After
 
 ## The Sale
 
-### I'm a DJ and a fire spinner, can I get a volunteer ticket?
-
-There are no volunteers at the Borderland. Everyone buys a membership, even including everyone on the board! Everyone works together to make the event. Please re-read the Survival Guide *carefully*.
-
 ### I missed the lottery registration!
 
 Don't fret! Let your camp know and maybe someone has an invitation for you. You can also sign on to the SMEP waiting list.
@@ -53,13 +54,17 @@ Register on the SMEP waiting list. A lot of memberships are exchange closer to t
 
 The invitation expires after two days. If you miss it, sign up for SMEP and wait for the next opportunity. Remember to check that our messages don't end up in your spam folder.
 
+### I'm a DJ and a fire spinner, can I get a volunteer ticket?
+
+There are no volunteers at the Borderland. Everyone buys a membership, even including everyone on the board! Everyone works together to make the event. Please re-read the Survival Guide *carefully*.
+
 ### Last year you asked a bunch of questions during sign up, why is it different?
 
 We'll ask questions when you buy your membership. We don't need that information before then.
 
 ### But why is it different?
 
-We're a group of people that enjoy building things and setting them on fire. That–apparently–includes software.  ![You're welcome to change the software if you don't like it.](https://github.com/theborderland/membership)
+We're a group of people that enjoy building things and setting them on fire. That–apparently–includes software.  ![You're welcome to change the software if you don't like it](https://github.com/theborderland/membership) (for next year).
 
 ## Transfers
 
@@ -102,9 +107,11 @@ The fee is progressive the closer we get to the event:
 
 If you know you're not going to go, give someone else a chance as early as possible!
 
+
 ### Why all these rules?
 
-Turns out a lottery is a little more complicated than a normal sale. 
+Turns out a lottery is a little more complicated than a normal sale, we have to work a bit harder so it isn't easy to cheat.
+
 
 ### These rules are draconian, you suck
 
@@ -112,9 +119,8 @@ ok, boomer.
 
 The Borderland is a co-created, do-ocratic institution. You're welcome to change the rules. Check out the website for more information on how you can take part in the governance.
 
-## I need help!
 
-Did you read this entire FAQ?
+## I need help!
 
 ### I read the FAQ and there's something I still don't understand!
 

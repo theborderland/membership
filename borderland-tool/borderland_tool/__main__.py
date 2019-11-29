@@ -30,7 +30,7 @@ def get_pretix(args):
                      event = args.event,
                      token = args.token)
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description='A collection of things we do with Pretix')
     subparsers = parser.add_subparsers()
 
@@ -82,3 +82,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     args.func(args)
+
+if __name__ == "__main__":
+    main()
+
