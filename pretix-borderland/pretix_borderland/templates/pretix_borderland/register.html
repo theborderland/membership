@@ -2,14 +2,26 @@
 {% load i18n %}
 {% load bootstrap3 %}
 
-{% block title %}Registration{% endblock %}
+{% block title %} Registration {% endblock %}
+
+<h1>Lottery Registration</h1>
+
 {% block content %}
+{% if not open %}
+    <h3>We're closed</h3>
+    Sorry! Come back later/earlier.
+{% else %}
+    <h3>Important Information</h3>
+    <p>You <strong>must</strong> register with your <strong>real name and date of birth</strong>, as it appears on official documents. When you buy a membership you must enter <strong>the same information</strong> as you do here. When we exchange your membership for a wristband we will <strong>ask to see official ID documents</strong>.</p>
+    <p>We <i>may</i> invalidate your membership if the information does not match. If the name on your ID does not match your membership, we may deny you entry to the event. This is to stop cheating by entering several times in the lottery.</p>
+    <p>We know this is unfortunate for some of our attendees who go by names other than what's in their documents. We will ask for a preferred name when you buy a membership, which is what we'll use everywhere else.</p>
 
-<h2>I'm a teapot</h2>
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-</form>
+    <h3>Registration Form</h3>
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Send">
+    </form>
 
-
+    <p><small>This information is collected only to conduct the lottery.</small></p>
+{% endif %}
 {% endblock %}

@@ -10,6 +10,7 @@ event_patterns = [
 
 apirouter = routers.DefaultRouter()
 apirouter.register(r'registration', views.RegisterAPIViewSet)
+apirouter.register(r'email', views.EmailViewSet, basename="Email")
 
 urlpatterns = [
     url(r'^api/v1/(?P<organizer>[^/]+)/events/(?P<event>[^/]+)/', include(apirouter.urls))
