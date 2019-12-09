@@ -7,7 +7,6 @@ class LotteryEntrySerializer(I18nAwareModelSerializer):
         model = LotteryEntry
         fields = "__all__"
 
-
 class RefundRequestSerializer(I18nAwareModelSerializer):
     class Meta:
         model = RefundRequest

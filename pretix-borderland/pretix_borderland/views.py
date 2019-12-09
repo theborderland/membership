@@ -123,7 +123,7 @@ class TransferRequestCancel(SuccessMessageMixin, OrderDetailMixin, View):
 # API viewsets TODO move
 
 class RegisterAPIViewSet(viewsets.ModelViewSet):
-    queryset = LotteryEntry.objects.all()
+    queryset = LotteryEntry.objects.all().order_by('id')
     permission = 'can_view_orders'
     serializer_class = LotteryEntrySerializer
 
@@ -140,9 +140,7 @@ class EmailViewSet(viewsets.GenericViewSet):
         return Response({"result": "ok i guess"})
 
 class TransferAPIViewSet(viewsets.ModelViewSet):
-    queryset = RefundRequest.objects.all()
+    queryset = RefundRequest.objects.all().order_by('id')
     permission = 'can_view_orders'
     serializer_class = RefundRequestSerializer
 
-
-    # FIXME UnorderedObjectListWarning : Pagination may yield inconsistent results with an unordered object_list: <class 'pretix_borderland.models.LotteryEntry'> QuerySet.
