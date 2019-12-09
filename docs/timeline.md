@@ -42,5 +42,6 @@ When there are so few lottery vouchers pending that they all get the chance to
   * enable monster
 
 # Before the event
+  * no sales at the gate
   * Prepare check in devices
   

@@ -98,6 +98,7 @@ class RefundRequestView(SuccessMessageMixin, OrderDetailMixin, UpdateView):
         if self.order.status != "p":
             raise ValidationError("Can only cancel paid orders!")
         form.instance.status = "p"
+        self.order.log_action('pretix.plugins.borderland.refund.request', data=form)
         ret = super().form_valid(form)
         return ret
 
@@ -117,6 +118,7 @@ class TransferRequestCancel(SuccessMessageMixin, OrderDetailMixin, View):
         if req.status == 'p':
             req.status = 'c'
             req.save()
+            self.order.log_action('pretix.plugins.borderland.refund.cancel', data=form)
             messages.add_message(request, messages.SUCCESS, "Transfer request cancelled!")
         return redirect(self.get_order_url())
 
@@ -127,10 +129,15 @@ class RegisterAPIViewSet(viewsets.ModelViewSet):
     permission = 'can_view_orders'
     serializer_class = LotteryEntrySerializer
 
+    def update(self, request, *args, **kwargs):
+        self.event.log_action('pretix.plugins.borderland.registration.api_update', data=request.data, auth=request.auth)
+        return super.update(self, request, *args, **kwargs)
+
 class EmailViewSet(viewsets.GenericViewSet):
     permission = 'can_view_orders'
 
     def create(self, request, organizer, event):
+        self.event.log_action('pretix.plugins.borderland.email.send', data=request.data, auth=request.auth)
         d = request.data
         m = send_mail(event_id=self.request.event.id,
                     to=d['to'],
@@ -144,3 +151,6 @@ class TransferAPIViewSet(viewsets.ModelViewSet):
     permission = 'can_view_orders'
     serializer_class = RefundRequestSerializer
 
+    def update(self, request, *args, **kwargs):
+        self.event.log_action('pretix.plugins.borderland.refund.api_update', data=request.data, auth=request.auth)
+        return super.update(self, request, *args, **kwargs)
