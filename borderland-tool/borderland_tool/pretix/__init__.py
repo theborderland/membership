@@ -1,4 +1,4 @@
-from requests import post, get
+from requests import post, get, put, patch
 from datetime import datetime, timedelta
 
 class PretixAPI:
@@ -43,6 +43,25 @@ class PretixAPI:
     # get quota
     # get quota_availability
 
+    ### Borderland plugin
+
+    # TODO make own class
+    def get_refund_requests(self):
+        url = "http://{}/api/v1/organizers/{}/events/{}/refund/".format(self.host, self.org, self.event)
+        return self.get_paginated(url, {})
+
+    def update_refund_request(self, id, status):
+        url = "http://{}/api/v1/organizers/{}/events/{}/refund/{}/".format(self.host, self.org, self.event, id)
+        resp = patch(url,
+                    headers = { "Authorization": "Token {}".format(self.token) },
+                    json = { "status": status })
+        if resp.status_code != 200:
+            print(resp.text)
+            raise RuntimeError("Pretix returned status code {} for {} with {}".format(resp.status_code, url, json))
+        return resp.json()
+
+
+    # Internal
 
     def get_paginated(self, url, json):
         results = []

@@ -5,7 +5,7 @@ The Borderland is a co-created community event and organisation. We only have pa
 
 Since capacity at the event is limited, we raffle off half of the memberships. When you buy a membership you can invite someone. We sell the remaining memberships by invitation.
 
-Please read this description and the FAQ carefully. Some things are different from previous years, particularly how transfers work.
+Please read this description and the FAQ carefully. Some things are different from previous years, particularly how transfers and invitations work.
 
 ## The Lottery
 
@@ -20,7 +20,7 @@ We conduct the sale in three stages:
      A few days after the registration deadline we raffle off half of the memberships. If you're picked you have two days to buy a membership. We'll send you an e-mail notification. 
      If you win you're guaranteed an invite that you can send to someone else.
      
-  1. Replicated Sale
+  1. Invitation Sale
   
      We won't sell out in the lottery round. 
      Everyone who buys a membership can invite someone else until we're sold out. 
@@ -41,6 +41,14 @@ The deadline for refunding your membership is two months before the event. After
 # FAQ
 
 ## The Sale
+
+### I want to invite someone, but I don't know who yet!
+
+You can invite yourself, just enter your own e-mail address.
+
+While you can only hold one membership, you can get as many invitations as you like. 
+
+You can an invitation on to whomever you like, just send them the link.
 
 ### I missed the lottery registration!
 
@@ -81,7 +89,7 @@ The deadline for refunds is two months before the event. After that a fee applie
 
 On the order page click "Request Directed Transfer" and fill out the form. You'll need to give a reason for the why the membership needs to be transferred. 
 
-A human will check that you're a real person transferring to a different, equally real person. That's to stop people from cheating in the lottery by registering under false names.
+A human will be in touch to check that you're a real person transferring to a different, equally real person. That's to stop people from cheating in the lottery by registering under false names.
 
 We will handle payments and reimbursements. There's no need to arrange to exchange money.
 
@@ -110,20 +118,20 @@ If you know you're not going to go, give someone else a chance as early as possi
 
 ### Why all these rules?
 
-Turns out a lottery is a little more complicated than a normal sale, we have to work a bit harder so it isn't easy to cheat.
+Turns out a lottery is a little more complicated than a normal sale, we have to work a bit harder so it isn't too easy to cheat.
 
 
 ### These rules are draconian, you suck
 
 ok, boomer. 
 
-The Borderland is a co-created, do-ocratic institution. You're welcome to change the rules. Check out the website for more information on how you can make decisions.
+The Borderland is a co-created, do-ocratic institution. You're welcome to change the rules. Check out the website for more information on how you can make decisions. Beware you may end up responsible for running the next sale.
 
 ## I need help!
 
 ### I read the FAQ and there's something I still don't understand!
 
-If there's something not related to your order, please use our Facebook group to ask questions. The membership team has very little capacity, so we rely on everyone helping each other out.
+If it's unrelated to your order, please use our Facebook group to ask questions. The membership team has very little capacity, so we rely on everyone helping each other out.
 
 ### I read the FAQ and there's something wrong with my order!
 

@@ -1,26 +1,33 @@
 
 from django.db import transaction, IntegrityError
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, View, UpdateView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.forms import ValidationError
 
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 
 from datetime import datetime
 
-from .models import LotteryForm
-from .serializers import LotteryFormSerializer
+from pretix.presale.views.order import OrderDetailMixin
+
+from .models import LotteryEntry, RefundRequest
+from .serializers import LotteryEntrySerializer, RefundRequestSerializer
 from .tasks import send_mail
+
+# Lottery
 
 class RegisterForm(SuccessMessageMixin, CreateView):
     template_name = "pretix_borderland/register.html"
-    model = LotteryForm
+    model = LotteryEntry
     fields = [ "email", "first_name", "last_name", "dob" ]
     success_url = '..'
     success_message = "%(first_name)s, you've registered! Good luck!"
 
+    # TODO move to config
+    email_subject = "Receipt"
     email_message = """
 For reference, this is the information you provided:
 
@@ -36,12 +43,12 @@ For reference, this is the information you provided:
         return ctx
 
 
-    def post(self, request, *args, **kwargs): # Is this the way to do it?
+    def post(self, request, *args, **kwargs):
         try:
             sup = super().post(request, *args, **kwargs)
             send_mail(event_id=self.request.event.id,
                       to = [ request.POST["email"] ],
-                      subject = "Borderland Lottery Receipt", # TODO
+                      subject = self.email_subject,
                       body = self.email_message % request.POST.dict())
             return sup
         except IntegrityError:
@@ -61,16 +68,64 @@ For reference, this is the information you provided:
         return ret
 
 
-class RegisterAPIViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = LotteryForm.objects.all()
-    permission = 'can_view_orders'
-    serializer_class = LotteryFormSerializer
+# SMEP
 
-    def get_serializer_context(self):
-        ctx = super().get_serializer_context()
-        ctx['event'] = self.request.event
+class RefundRequestView(SuccessMessageMixin, OrderDetailMixin, UpdateView):
+    template_name = "pretix_borderland/refund_request.html"
+    model = RefundRequest
+    fields = []
+
+    def get_success_url(self):
+        return self.get_order_url()
+
+    def get_error_url(self):
+        return self.get_order_url()
+
+    def get_success_message(self, value):
+        return 'Refund request sent.'
+
+    def get_object(self, queryset=None):
+        obj, created = self.model.objects.get_or_create(order=self.order)
+        return obj
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['order'] = self.order
         return ctx
 
+    @transaction.atomic
+    def form_valid(self, form):
+        if self.order.status != "p":
+            raise ValidationError("Can only cancel paid orders!")
+        form.instance.status = "p"
+        ret = super().form_valid(form)
+        return ret
+
+
+
+class TransferRequestView(RefundRequestView):
+    template_name = "pretix_borderland/transfer_request.html"
+    fields = ["target", "user_comment"]
+
+    def get_success_message(self, value):
+        return 'Transfer request sent!'
+
+
+class TransferRequestCancel(SuccessMessageMixin, OrderDetailMixin, View):
+    def post(self, request, *args, **kwargs):
+        req, created = RefundRequest.objects.get_or_create(order=self.order)
+        if req.status == 'p':
+            req.status = 'c'
+            req.save()
+            messages.add_message(request, messages.SUCCESS, "Transfer request cancelled!")
+        return redirect(self.get_order_url())
+
+# API viewsets TODO move
+
+class RegisterAPIViewSet(viewsets.ModelViewSet):
+    queryset = LotteryEntry.objects.all()
+    permission = 'can_view_orders'
+    serializer_class = LotteryEntrySerializer
 
 class EmailViewSet(viewsets.GenericViewSet):
     permission = 'can_view_orders'
@@ -83,3 +138,11 @@ class EmailViewSet(viewsets.GenericViewSet):
                     subject=d['subject']
         )
         return Response({"result": "ok i guess"})
+
+class TransferAPIViewSet(viewsets.ModelViewSet):
+    queryset = RefundRequest.objects.all()
+    permission = 'can_view_orders'
+    serializer_class = RefundRequestSerializer
+
+
+    # FIXME UnorderedObjectListWarning : Pagination may yield inconsistent results with an unordered object_list: <class 'pretix_borderland.models.LotteryEntry'> QuerySet.

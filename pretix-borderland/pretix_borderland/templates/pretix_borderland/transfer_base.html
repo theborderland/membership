@@ -1,0 +1,33 @@
+{% extends "pretixpresale/event/base.html" %}
+{% load i18n %}
+{% load eventurl %}
+{% load bootstrap3 %}
+
+
+
+{% block content %}
+
+{% if object.status == 'p' %}
+<h1>Transfer</h1>
+
+Transfer/refund is pending! You can cancel it.
+<form method="post"
+      action="{% eventurl request.event 'plugins:pretix_borderland:transfer.cancel' secret=order.secret order=order.code %}">{% csrf_token %}
+    <button class="btn btn-danger" type="submit">
+        Cancel request
+    </button>
+</form>
+
+{% elsif object.status == 'i' %}
+Transfer is in progress ~
+{% else %}
+{% block transfer %}
+{% endblock %}
+{% endif %}
+
+<a class="btn btn-default"
+   href="{% eventurl request.event "presale:event.order" secret=order.secret order=order.code %}">
+    {% trans "No, take me back" %}
+</a>
+
+{% endblock %}

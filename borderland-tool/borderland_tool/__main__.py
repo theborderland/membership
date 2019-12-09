@@ -23,6 +23,14 @@ def replicate(args):
         vr.replicate(args.force)
 
 
+def smep(args):
+    from smep import TransferTool
+    pretix = get_pretix(args)
+    smep = TransferTool(pretix)
+    smep.update()
+    smep.display()
+
+
 def get_pretix(args):
     from pretix import PretixAPI
     return PretixAPI(org = args.org,
@@ -32,7 +40,8 @@ def get_pretix(args):
 
 def main():
     parser = argparse.ArgumentParser(description='A collection of things we do with Pretix')
-    subparsers = parser.add_subparsers()
+    subparsers = parser.add_subparsers(dest='cmd')
+    subparsers.required = True
 
     # Common Arguments
     parser.add_argument("-t", "--token",
@@ -46,6 +55,10 @@ def main():
                         help="pretix organisation to operate on")
     parser.add_argument("-e", "--event",
                         default="2020", help="pretix event to operate on")
+
+    # Transfers
+    smep_parser = subparsers.add_parser('smep', help='Membership Transfers')
+    smep_parser.set_defaults(func=smep)
 
     # Replicating Vouchers
     replicate_parser = subparsers.add_parser('replicate',

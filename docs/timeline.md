@@ -12,11 +12,14 @@ Just notes to be filled out for next year's team
   * Generate and send vouchers to the board
 
 # Starting lottery registration
+  * update webpage
 
 # End of lottery registration
+  * update webpage
   * Enable waiting list
 
 # Lottery
+  * update webpage
   * Run the lottery draw
   * Run replication for board and lottery tags
 
@@ -30,6 +33,7 @@ When there are so few lottery vouchers pending that they all get the chance to
   * When lottery pool is exhausted, send out waiting list vouchers
 
 # After sell-out
+  * update webpage
   * hide replication question
   * disable replication
   * move everyone invited without a voucher to waiting list

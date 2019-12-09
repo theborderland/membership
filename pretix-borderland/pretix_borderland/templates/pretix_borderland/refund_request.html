@@ -1,0 +1,13 @@
+{% extends "pretix_borderland/transfer_base.html" %}
+{% load eventurl %}
+
+{% block title %}Refund Request{% endblock %}
+
+{% block transfer %}
+
+<form method="post">{% csrf_token %}
+    <input type="submit" value="Send">
+</form>
+{% endblock %}
+
+

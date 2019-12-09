@@ -1,0 +1,16 @@
+{% extends "pretix_borderland/transfer_base.html" %}
+{% load i18n %}
+{% load eventurl %}
+{% load bootstrap3 %}
+
+{% block title %}Transfer Request{% endblock %}
+
+
+{% block transfer %}
+you can transfer request
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Send">
+</form>
+{% endblock %}
+

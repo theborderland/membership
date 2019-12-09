@@ -1,8 +1,14 @@
 from pretix.api.serializers.i18n import I18nAwareModelSerializer
 
-from .models import LotteryForm
+from .models import LotteryEntry, RefundRequest
 
-class LotteryFormSerializer(I18nAwareModelSerializer):
+class LotteryEntrySerializer(I18nAwareModelSerializer):
     class Meta:
-        model = LotteryForm
+        model = LotteryEntry
+        fields = "__all__"
+
+
+class RefundRequestSerializer(I18nAwareModelSerializer):
+    class Meta:
+        model = RefundRequest
         fields = "__all__"
