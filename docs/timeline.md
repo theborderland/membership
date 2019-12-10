@@ -9,10 +9,11 @@ Just notes to be filled out for next year's team
   * Make sure refunds/SMEP is off
   * Make sure monster is off
   * ...
-  * Generate and send vouchers to the board
 
 # Starting lottery registration
   * update webpage
+  * Generate and send vouchers to the board
+  * create facebook event
 
 # End of lottery registration
   * update webpage

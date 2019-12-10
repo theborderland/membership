@@ -61,6 +61,10 @@ class PretixAPI:
         return resp.json()
 
 
+    def get_registrations(self):
+        url = "http://{}/api/v1/organizers/{}/events/{}/registration/".format(self.host, self.org, self.event)
+        return self.get_paginated(url, {})
+
     # Internal
 
     def get_paginated(self, url, json):
