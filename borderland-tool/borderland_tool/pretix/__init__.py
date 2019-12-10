@@ -65,6 +65,17 @@ class PretixAPI:
         url = "http://{}/api/v1/organizers/{}/events/{}/registration/".format(self.host, self.org, self.event)
         return self.get_paginated(url, {})
 
+    def send_email(self, to, subject, body):
+        url = "http://{}/api/v1/organizers/{}/events/{}/email/".format(self.host, self.org, self.event)
+        resp = post(url,
+                    headers = { "Authorization": "Token {}".format(self.token) },
+                    json = { "to": to, "subject": subject, "body": body })
+        if resp.status_code != 200:
+            print(resp.text)
+            raise RuntimeError("Pretix returned status code {} for {}".format(resp.status_code, url))
+
+
+
     # Internal
 
     def get_paginated(self, url, json):

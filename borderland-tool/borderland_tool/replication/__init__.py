@@ -62,10 +62,28 @@ class VoucherReplicator:
                                         comment = json.dumps(inviteinfo,
                                                             indent=2))
         if voucher:
-            print(voucher['code'])
-            # send email
+            self.send_invitation(self, voucher, inviteinfo)
             return True
         return False
+
+
+    def send_invitation(self, voucher, inviteinfo):
+        self.pretix.send_email(to = [inviteinfo["email"]],
+                               subject = "You've been invited to The Borderland 2020! 🔥",
+                               body = """Lovely Borderling,
+
+Someone really likes you! They've invited you to purchase a membership for the Borderland!
+
+Follow this link to get yours! It's valid for two days.
+
+https://{}/{}/{}/redeem?voucher={}
+
+Bleeps and Bloops,
+The Borderland Computer 🤖
+""".format(self.pretix.host, self.pretix.org, self.pretix.event,
+           voucher["code"])) # TODO validity from voucher, and inviter name
+
+
 
 
     def get_order_invitations(self):

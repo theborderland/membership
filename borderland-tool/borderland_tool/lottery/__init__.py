@@ -37,10 +37,31 @@ class Lottery:
                                              comment=json.dumps(target, indent=2))
         if not voucher:
             raise RuntimeError("Unable to create voucher")
-        #self.send_voucher(self, target, voucher) TODO
+        self.send_voucher(target, voucher)
         return voucher
 
-#    def send_voucher(self, target, voucher):
+    def send_voucher(self, target, voucher):
+        self.pretix.send_email(to = [target["email"]],
+                               subject = "You're invited to The Borderland 2020! 🔥",
+                               body = """Lovely Borderling,
+
+You've won the lottery! You're invited to get a membership for the Borderland, and to invite your friends to come along!
+
+Follow this link to shopping nirvana! It's valid for two days.
+
+https://{}/{}/{}/redeem?voucher={}
+
+Please note that is a ~special~ lottery invitation. That means you have to use the same name and birth date as when you registered. For reference, the information you provided was:
+
+  * First Name: {}
+  * Last Name: {}
+  * Date of Birth: {}
+
+Bleeps and Bloops,
+The Borderland Computer 🤖
+""".format(self.pretix.host, self.pretix.org, self.pretix.event,
+           voucher["code"], target["first_name"], target["last_name"],
+           target["dob"])) # TODO validity from voucher
 
 
     def is_eligible(self, email):
@@ -57,7 +78,7 @@ class Lottery:
                 except: #json.decoder.JSONDecodeError:
                     continue
 
-        return email not in self.has_order and email not in self.has_voucher
+        return True or email not in self.has_order and email not in self.has_voucher
 
     #def order_names_control()
     # check that order == voucher name == registration name

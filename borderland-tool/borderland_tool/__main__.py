@@ -32,11 +32,12 @@ class LotteryCmd:
         lottery_raffle.set_defaults(func=self.raffle)
         lottery_raffle.add_argument("-n", "--num", default=1, type=int,
                                     help="Number of winners to draw")
-        lottery_raffle.add_argument("-q",
-                                   "--quota",
-                                   type=int,
-                                   required=True,
-                                   help="internal identifier of quota group to invite to (e.g. 1)")
+        lottery_parser.add_argument("-q",
+                                    "--quota",
+                                    type=int,
+                                    default=1,
+                                    required=True,
+                                    help="internal identifier of quota group to invite to (e.g. 1)")
 
 def replicate(args):
     from replication import VoucherReplicator

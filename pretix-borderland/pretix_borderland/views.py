@@ -137,7 +137,7 @@ class EmailViewSet(viewsets.GenericViewSet):
     permission = 'can_view_orders'
 
     def create(self, request, organizer, event):
-        self.event.log_action('pretix.plugins.borderland.email.send', data=request.data, auth=request.auth)
+        self.request.event.log_action('pretix.plugins.borderland.email.send', data=request.data, auth=request.auth)
         d = request.data
         m = send_mail(event_id=self.request.event.id,
                     to=d['to'],
