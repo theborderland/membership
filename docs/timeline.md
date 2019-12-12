@@ -11,6 +11,7 @@ Just notes to be filled out for next year's team
 ## Configure Pretix
   * (document the ones that should be set by plugin here)
   * Make sure waiting list is off
+  * Disable automatic waiting list assignments (or use this feature?)
   * Make sure refunds/SMEP is off
   * Make sure monster is off
 
