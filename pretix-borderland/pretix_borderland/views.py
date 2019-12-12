@@ -30,9 +30,6 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = LotteryEntry
         fields = [ "email", "first_name", "last_name", "dob" ]
-        widgets = {
-            'email': forms.EmailInput()
-        }
 
 class Register(SuccessMessageMixin, CreateView):
     template_name = "pretix_borderland/register.html"

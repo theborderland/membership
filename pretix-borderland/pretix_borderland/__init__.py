@@ -14,10 +14,11 @@ class PluginApp(PluginConfig):
     # Inject our own translation as early as possible, before other components
     # are instantiated.
     settings.ALL_LANGUAGES.append(('en-bl', 'English (Borderland)'))
-    import os
-    locale = os.path.dirname(__file__) + '/pretix-locale'
-    if os.access(locale, os.W_OK | os.X_OK):
-        settings.LOCALE_PATHS.append(os.path.dirname(__file__) + '/pretix-locale')
+    settings.LANGUAGES.append(('en-bl', 'English (Borderland)'))
+
+    localepath = os.path.dirname(__file__) + '/pretix-locale'
+    if os.access(localepath, os.W_OK | os.X_OK):
+        settings.LOCALE_PATHS.append(localepath)
 
     class PretixPluginMeta:
         name = ugettext_lazy('Pretix Borderland Customizations')
