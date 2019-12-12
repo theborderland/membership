@@ -1,19 +1,27 @@
 Just notes to be filled out for next year's team
 
 # Before lottery registration
+  * Determine location, price(s) and quotas
+  
   * Run logo competition
   * Make e-mail template design
   * Design ticket
-  * Determine location, price(s) and quotas
+  
+  
+## Configure Pretix
+  * (document the ones that should be set by plugin here)
   * Make sure waiting list is off
   * Make sure refunds/SMEP is off
   * Make sure monster is off
-  * ...
 
 # Starting lottery registration
   * update webpage
-  * Generate and send vouchers to the board
+  * generate and send vouchers to the board
   * create facebook event
+  * spam places: underbroen, labitat, other makerspaces and the boat
+  * share facebook event on other pages
+  * email previous years' attendees
+
 
 # End of lottery registration
   * update webpage

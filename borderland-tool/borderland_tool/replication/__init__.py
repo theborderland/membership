@@ -2,9 +2,6 @@
 
 # +1 Replication
 
-# TODO
-# Send email
-
 import json
 
 class VoucherReplicator:

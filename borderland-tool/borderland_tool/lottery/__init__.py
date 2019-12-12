@@ -61,7 +61,7 @@ Bleeps and Bloops,
 The Borderland Computer 🤖
 """.format(self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"], target["first_name"], target["last_name"],
-           target["dob"])) # TODO validity from voucher
+           target["dob"])) # TODO validity from voucher 
 
 
     def is_eligible(self, email):
