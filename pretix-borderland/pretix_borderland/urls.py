@@ -5,7 +5,7 @@ from rest_framework import routers
 from . import views
 
 event_patterns = [
-    url(r'^register/$', views.RegisterForm.as_view(), name="register"),
+    url(r'^register/$', views.Register.as_view(), name="register"),
     url(r'^order/(?P<order>[^/]+)/(?P<secret>[A-Za-z0-9]+)/refund/$',
         views.RefundRequestView.as_view()),
     url(r'^order/(?P<order>[^/]+)/(?P<secret>[A-Za-z0-9]+)/transfer/$',

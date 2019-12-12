@@ -18,10 +18,18 @@
     <p>We know this is unfortunate for some of our attendees who go by names other than what's in their documents. We will ask for a preferred name when you buy a membership, which is what we'll use everywhere else. If you need special considerations please get in touch.</p>
 
     <h2>Registration Form</h2>
-    <form method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Send">
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <form method="post">{% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Send">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <p><small>This information is collected only to conduct the lottery.</small></p>
 {% endif %}

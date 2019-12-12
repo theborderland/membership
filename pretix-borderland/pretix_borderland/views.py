@@ -1,10 +1,9 @@
-
 from django.db import transaction, IntegrityError
 from django.views.generic import CreateView, TemplateView, View, UpdateView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
-from django.forms import ValidationError
+from django import forms
 
 from rest_framework import status, viewsets
 from rest_framework.response import Response
@@ -12,6 +11,7 @@ from rest_framework.response import Response
 from datetime import datetime
 
 from pretix.presale.views.order import OrderDetailMixin
+from pretix.base.forms.widgets import DatePickerWidget
 
 from .models import LotteryEntry, RefundRequest
 from .serializers import LotteryEntrySerializer, RefundRequestSerializer
@@ -19,10 +19,24 @@ from .tasks import send_mail
 
 # Lottery
 
-class RegisterForm(SuccessMessageMixin, CreateView):
+
+class RegisterForm(forms.ModelForm):
+    dob = forms.DateField(
+        required=True,
+        label='Date of Birth',
+        widget=DatePickerWidget(),
+    )
+
+    class Meta:
+        model = LotteryEntry
+        fields = [ "email", "first_name", "last_name", "dob" ]
+        widgets = {
+            'email': forms.EmailInput()
+        }
+
+class Register(SuccessMessageMixin, CreateView):
     template_name = "pretix_borderland/register.html"
-    model = LotteryEntry
-    fields = [ "email", "first_name", "last_name", "dob" ]
+    form_class = RegisterForm
     success_url = '..'
     success_message = "%(first_name)s, you've registered! Good luck!"
 
@@ -31,9 +45,9 @@ class RegisterForm(SuccessMessageMixin, CreateView):
     email_message = """
 For reference, this is the information you provided:
 
-    - First Name: %(first_name)s
-    - Last Name: %(last_name)s
-    - Date of Birth: %(dob)s
+  * First Name: %(first_name)s
+  * Last Name: %(last_name)s
+  * Date of Birth: %(dob)s
     """ # TODO
 
     def get_context_data(self, **kwargs):
@@ -46,16 +60,15 @@ For reference, this is the information you provided:
     def post(self, request, *args, **kwargs):
         try:
             sup = super().post(request, *args, **kwargs)
-            send_mail(event_id=self.request.event.id,
-                      to = [ request.POST["email"] ],
-                      subject = self.email_subject,
-                      body = self.email_message % request.POST.dict())
-            return sup
         except IntegrityError:
             messages.add_message(request, messages.ERROR,
                                  "This email address or name and date-of-birth combination is already registered!")
             return render(request,template_name=self.template_name,context=self.get_context_data())
-
+        send_mail(event_id=self.request.event.id,
+                    to = [ request.POST["email"] ],
+                    subject = self.email_subject,
+                    body = self.email_message % request.POST.dict())
+        return sup
 
     @transaction.atomic
     def form_valid(self, form):
@@ -96,7 +109,7 @@ class RefundRequestView(SuccessMessageMixin, OrderDetailMixin, UpdateView):
     @transaction.atomic
     def form_valid(self, form):
         if self.order.status != "p":
-            raise ValidationError("Can only cancel paid orders!")
+            raise forms.ValidationError("Can only cancel paid orders!")
         form.instance.status = "p"
         self.order.log_action('pretix.plugins.borderland.refund.request', data=form)
         ret = super().form_valid(form)
