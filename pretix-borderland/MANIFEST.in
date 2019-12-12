@@ -1,3 +1,4 @@
 recursive-include pretix_borderland/static *
 recursive-include pretix_borderland/templates *
 recursive-include pretix_borderland/locale *
+recursive-include pretix_borderland/pretix-locale *
