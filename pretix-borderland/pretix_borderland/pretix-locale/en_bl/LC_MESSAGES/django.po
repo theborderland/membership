@@ -13,5 +13,5 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 3.5.1\n"
 
-msgid "Add to Calendar"
-msgstr "Tilføj til kalender"
+msgid "If you already ordered a ticket"
+msgstr "If you aleady ordered a membership"
