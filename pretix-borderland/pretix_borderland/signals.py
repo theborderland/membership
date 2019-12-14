@@ -1,14 +1,22 @@
 from pretix.presale.signals import order_info, front_page_top
+from pretix.base.signals import register_html_mail_renderers
 # register_global_settings
 from django.dispatch import receiver
 from django.template.loader import get_template
 from datetime import datetime
 
+
+@receiver(register_html_mail_renderers, dispatch_uid="renderer_borderland")
+def register_mail_renderers(sender, **kwargs):
+    from .email import BorderlandMailRenderer
+    return BorderlandMailRenderer
+
+
 @receiver(front_page_top)
 def lottery_registration(sender, **kwargs):
     """"""
     template = get_template('pretix_borderland/registration_button.html')
-    ctx = { "open": datetime.now() < datetime(2020, 2, 1, 4, 0), # TODO
+    ctx = { "open": datetime.now() < datetime(2020, 1, 24, 0, 0), # TODO
             "event": sender,
             "organizer": sender.organizer }
     return template.render(ctx)

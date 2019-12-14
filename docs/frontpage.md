@@ -1,7 +1,7 @@
 
 # The Borderland Membership Sale
 
-The Borderland is a co-created community event and organisation. We only have participants–there are no spectators, volunteers, artists, or organisers. Besides entry to the event, a membership gives you as much a say in how we organize and what the event is as anyone else.
+The Borderland is a co-created community event and organisation. We only have participants – there are no spectators, volunteers, artists, or organisers. Besides entry to the event, a membership gives you as much a say in how we organize and what the event is as anyone else.
 
 Since capacity at the event is limited, we raffle off half of the memberships. When you buy a membership you can invite someone. We sell the remaining memberships by invitation.
 
