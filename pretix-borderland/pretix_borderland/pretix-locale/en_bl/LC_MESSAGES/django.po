@@ -15,3 +15,26 @@ msgstr ""
 
 msgid "If you already ordered a ticket"
 msgstr "If you aleady ordered a membership"
+
+#: pretix/presale/templates/pretixpresale/event/fragment_downloads.html:5
+msgid ""
+"You can download your tickets using the buttons below. Please have your "
+"ticket ready when entering the event."
+msgstr ""
+"You can download your membership card using the buttons below. Please have it "
+"ready when entering the event."
+
+#: pretix/presale/templates/pretixpresale/event/fragment_downloads.html:11
+msgid "Download all tickets at once:"
+msgstr "Download all memberships at once:"
+
+#: pretix/presale/templates/pretixpresale/event/fragment_downloads.html:29
+#, python-format
+msgid "You will be able to download your tickets here starting on %(date)s."
+msgstr "You will be able to download your membership card here starting on %(date)s."
+
+#: pretix/presale/templates/pretixpresale/event/fragment_product_list.html:143
+#: pretix/presale/templates/pretixpresale/event/fragment_product_list.html:257
+msgid "Enter a voucher code below to buy this ticket."
+msgstr "Enter a voucher code below to buy this product."
+
