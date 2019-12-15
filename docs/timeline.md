@@ -7,27 +7,32 @@ Just notes to be filled out for next year's team
   * Make e-mail template design
   * Design ticket
   
-  
 ## Configure Pretix
   * (document the ones that should be set by plugin here)
   * Make sure waiting list is off
   * Disable automatic waiting list assignments (or use this feature?)
+  * Number per order: 1
+  * "This product can only be bought using a voucher."
   * Make sure refunds/SMEP is off
   * Make sure monster is off
-
+  * set modification deadline to now, or before you run the check
+  
 # Starting lottery registration
   * update webpage
-  * generate and send vouchers to the board
   * create facebook event
   * spam places: underbroen, labitat, other makerspaces and the boat
   * share facebook event on other pages
   * email previous years' attendees
-
+  
+## Before any sales are done
+  * Upload ticket design
+  * finish questionnaire
+  * after that, generate and send vouchers to the board, they're guinea pigs 
 
 # End of lottery registration
   * update webpage
   * Enable waiting list
-
+  
 # Lottery
   * update webpage
   * Run the lottery draw

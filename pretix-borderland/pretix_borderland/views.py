@@ -47,16 +47,15 @@ class Register(SuccessMessageMixin, CreateView):
 
 If you can't really wait, here's some things you can do to get ready:
 
+  * Listen to some [music from last year](https://soundcloud.com/korvkorvkorv/sets/borderland-19) and daydream.
+
   * Get inspired by looking at last year's [dreams](https://dreams.theborderland.se/) and [JOMO guide](https://guide.theborderland.se/).
 
-
-  * Want to be in the thick of it? Take up a lead role! [Check out what needs are missing a realizer.](http://realities.theborderland.se/09c8c43a-eed5-476c-b9d6-60a7352ee07c/4f1f2a53-f0ee-485a-bd17-6e0bda8282a4).
-
-  * Listen to [some music from last year](https://soundcloud.com/korvkorvkorv/sets/borderland-19) and daydream.
+  * Want to be in the thick of it? Take on a lead role! [Check out what realizers we're missing.](http://realities.theborderland.se/09c8c43a-eed5-476c-b9d6-60a7352ee07c/4f1f2a53-f0ee-485a-bd17-6e0bda8282a4)
 
   * Read the [web page](http://theborderland.se) and last year's Survival Guide.
 
-  * Join the [main Facebook group](https://www.facebook.com/groups/theborderland/) and the [membership group](https://www.facebook.com/groups/borderlandmembership/).
+  * Join the [main Facebook group](https://www.facebook.com/groups/theborderland/) and the [membership group.](https://www.facebook.com/groups/borderlandmembership/)
 
 
 For reference, this is the information you provided:
@@ -68,6 +67,7 @@ For reference, this is the information you provided:
 You need to provide the same details when you buy your membership.
 
 Bleeps and bloops,
+
 The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
     """ # TODO
 
