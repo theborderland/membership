@@ -12,6 +12,7 @@ from datetime import datetime
 
 from pretix.presale.views.order import OrderDetailMixin
 from pretix.base.forms.widgets import DatePickerWidget
+from pretix.helpers.http import get_client_ip
 
 from .models import LotteryEntry, RefundRequest
 from .serializers import LotteryEntrySerializer, RefundRequestSerializer
@@ -26,6 +27,9 @@ class RegisterForm(forms.ModelForm):
         label='Date of Birth',
         widget=DatePickerWidget(),
     )
+    email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = LotteryEntry
@@ -38,13 +42,40 @@ class Register(SuccessMessageMixin, CreateView):
     success_message = "%(first_name)s, you've registered! Good luck!"
 
     # TODO move to config
-    email_subject = "Receipt"
-    email_message = """
+    email_subject = "Lottery Receipt 🔥"
+    email_message = """You did it! You've registered in the Borderland membership lottery, now kick back and dream!
+
+If you can't really wait, here's some things you can do to get ready for Borderland:
+
+  * Get inspired by looking at last year's dreams and JOMO guide:
+    https://dreams.theborderland.se/
+    https://guide.theborderland.se/
+
+  * Want to be in the thick of it? Take up a lead role!
+    Check out what needs are missing a realizer
+    http://realities.theborderland.se/09c8c43a-eed5-476c-b9d6-60a7352ee07c/4f1f2a53-f0ee-485a-bd17-6e0bda8282a4
+
+  * Listen to some music from last year and daydream
+    https://soundcloud.com/korvkorvkorv/sets/borderland-19
+
+  * Read the web page and last year's Survival Guide
+    http://theborderland.se
+
+  * Join a few Facebook groups and banter
+    https://www.facebook.com/groups/theborderland/
+    https://www.facebook.com/groups/borderlandmembership/
+
+
 For reference, this is the information you provided:
 
   * First Name: %(first_name)s
   * Last Name: %(last_name)s
   * Date of Birth: %(dob)s
+
+You need to provide the same details when you buy your membership.
+
+Bleeps and bloops,
+The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
     """ # TODO
 
     def get_context_data(self, **kwargs):
@@ -71,9 +102,8 @@ For reference, this is the information you provided:
     def form_valid(self, form):
         form.instance.event = self.request.event
         form.instance.browser = self.request.META.get('HTTP_USER_AGENT', "")
-        form.instance.ip = self.request.META.get('REMOTE_ADDR', "")
-        # TODO cookie
-        # emit log message
+        form.instance.ip = get_client_ip(self.request)
+        form.instance.cookie = self.request.COOKIES.get("pretix_csrftoken")
         ret = super().form_valid(form)
         return ret
 

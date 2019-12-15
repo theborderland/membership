@@ -16,7 +16,7 @@
         </td>
     </tr>
     {% if order %}
-        {% include "pretix_borderland/email/2020/separator.html" %}
+    <tr><td><br><br></td></tr>
         <tr>
             <td class="order containertd">
                 <!--[if gte mso 9]>
@@ -47,8 +47,8 @@
             </td>
         </tr>
         {% endif %}
-	{% if signature %}
-        {% include "pretix_borderland/email/2020/separator.html" %}
+	      {% if signature %}
+        <tr><td><br><br></td></tr>
         <tr>
             <td class="order containertd">
                 <!--[if gte mso 9]>

@@ -13,7 +13,7 @@ class PluginApp(PluginConfig):
 
     # Inject our own translation as early as possible, before other components
     # are instantiated.
-    settings.ALL_LANGUAGES.append(('en-bl', 'English (Borderland)'))
+    #settings.ALL_LANGUAGES.append(('en-bl', 'English (Borderland)'))
     settings.LANGUAGES.append(('en-bl', 'English (Borderland)'))
 
     localepath = os.path.dirname(__file__) + '/pretix-locale'

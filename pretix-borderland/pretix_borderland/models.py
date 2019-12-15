@@ -5,7 +5,7 @@ from django.db import models
 
 class LotteryEntry(LoggedModel):
     event = models.ForeignKey('pretixbase.Event', on_delete=models.CASCADE)
-    email = models.EmailField(verbose_name="E-mail")
+    email = models.EmailField(verbose_name="E-mail address")
     first_name = models.CharField(max_length=200,verbose_name="Real First Name")
     last_name = models.CharField(max_length=200,verbose_name="Real Last Name")
     dob = models.DateField(verbose_name="Date of Birth")
