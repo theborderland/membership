@@ -45,25 +45,18 @@ class Register(SuccessMessageMixin, CreateView):
     email_subject = "Lottery Receipt 🔥"
     email_message = """You did it! You've registered in the Borderland membership lottery, now kick back and dream!
 
-If you can't really wait, here's some things you can do to get ready for Borderland:
+If you can't really wait, here's some things you can do to get ready:
 
-  * Get inspired by looking at last year's dreams and JOMO guide:
-    https://dreams.theborderland.se/
-    https://guide.theborderland.se/
+  * Get inspired by looking at last year's [dreams](https://dreams.theborderland.se/) and [JOMO guide](https://guide.theborderland.se/).
 
-  * Want to be in the thick of it? Take up a lead role!
-    Check out what needs are missing a realizer
-    http://realities.theborderland.se/09c8c43a-eed5-476c-b9d6-60a7352ee07c/4f1f2a53-f0ee-485a-bd17-6e0bda8282a4
 
-  * Listen to some music from last year and daydream
-    https://soundcloud.com/korvkorvkorv/sets/borderland-19
+  * Want to be in the thick of it? Take up a lead role! [Check out what needs are missing a realizer.](http://realities.theborderland.se/09c8c43a-eed5-476c-b9d6-60a7352ee07c/4f1f2a53-f0ee-485a-bd17-6e0bda8282a4).
 
-  * Read the web page and last year's Survival Guide
-    http://theborderland.se
+  * Listen to [some music from last year](https://soundcloud.com/korvkorvkorv/sets/borderland-19) and daydream.
 
-  * Join a few Facebook groups and banter
-    https://www.facebook.com/groups/theborderland/
-    https://www.facebook.com/groups/borderlandmembership/
+  * Read the [web page](http://theborderland.se) and last year's Survival Guide.
+
+  * Join the [main Facebook group](https://www.facebook.com/groups/theborderland/) and the [membership group](https://www.facebook.com/groups/borderlandmembership/).
 
 
 For reference, this is the information you provided:
