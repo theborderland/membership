@@ -16,22 +16,30 @@ Just notes to be filled out for next year's team
   * Make sure refunds/SMEP is off
   * Make sure monster is off
   * set modification deadline to now, or before you run the check
+
+## in the plugin
+  * change deadline for registration
+  * look for errant 2020s
+  * update email texts
   
 # Starting lottery registration
   * update webpage
   * create facebook event
-  * spam places: underbroen, labitat, other makerspaces and the boat
-  * share facebook event on other pages
-  * email previous years' attendees
-  
-## Before any sales are done
-  * Upload ticket design
-  * finish questionnaire
-  * after that, generate and send vouchers to the board, they're guinea pigs 
+  * spam places: euroburners, underbroen, labitat, other makerspaces and the boat
+  * email previous years' attendees, mailing list  
+  * scale up container?
 
 # End of lottery registration
   * update webpage
   * Enable waiting list
+
+## Before any sales are done
+  * Upload ticket design
+  * set modification deadline to now, or to before you run the check
+  * edit pretix email texts
+  * finish questionnaire
+  * check that stripe is up to date
+  * after that, generate and send vouchers to the board, they're guinea pigs 
   
 # Lottery
   * update webpage

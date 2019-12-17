@@ -12,14 +12,14 @@ class LotteryEntry(LoggedModel):
     timestamp = models.DateTimeField(auto_now_add=True)
     vouchers = models.ManyToManyField('pretixbase.Voucher')
     ip = models.CharField(max_length=200, blank=True)
-    cookie = models.CharField(max_length=200, blank=True)
-    browser = models.CharField(max_length=200, blank=True)
+    cookie = models.CharField(max_length=2048, blank=True)
+    browser = models.CharField(max_length=2048, blank=True)
 
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=["event", "email"], name="register_email_once"),
-            models.UniqueConstraint(fields=["event", "first_name", "last_name", "dob"],
-                                    name="register_person_once")
+#            models.UniqueConstraint(fields=["event", "first_name", "last_name", "dob"],
+#                                    name="register_person_once")
         ]
 
 

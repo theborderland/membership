@@ -4,6 +4,7 @@ IMG    := ${NAME}:${TAG}
 LATEST := ${NAME}:latest
 STABLE := ${NAME}:stable
 
+# pretix/standalone:stable 
 build:
 	docker build --build-arg tag=${TAG} -t ${IMG} .
 	docker tag ${IMG} ${LATEST}
