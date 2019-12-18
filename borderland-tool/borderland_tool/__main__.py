@@ -14,7 +14,7 @@ class LotteryCmd:
     # def control(self, args)
 
     def get_lottery(self, args):
-        from lottery import Lottery
+        from borderland_tool.lottery import Lottery
         return Lottery(get_pretix(args), args.file, args.quota)
 
     def add_parser(self, subparsers):
@@ -40,7 +40,7 @@ class LotteryCmd:
                                     help="internal identifier of quota group to invite to (e.g. 1)")
 
 def replicate(args):
-    from replication import VoucherReplicator
+    from borderland_tool.replication import VoucherReplicator
     pretix = get_pretix(args)
     tags = sum(args.tags, []) # flatten
     if args.all_vouchers:
@@ -61,7 +61,7 @@ def replicate(args):
 
 
 def smep(args):
-    from smep import TransferTool
+    from borderland_tool.smep import TransferTool
     pretix = get_pretix(args)
     smep = TransferTool(pretix)
     smep.update()
@@ -69,7 +69,7 @@ def smep(args):
 
 
 def get_pretix(args):
-    from pretix import PretixAPI
+    from borderland_tool.pretix import PretixAPI
     return PretixAPI(org = args.org,
                      host = args.server,
                      event = args.event,

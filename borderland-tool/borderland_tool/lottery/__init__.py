@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
 import csv, random, json
 
 from datetime import datetime, timezone
