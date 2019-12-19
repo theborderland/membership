@@ -27,9 +27,12 @@ class RegisterForm(forms.ModelForm):
         label='Date of Birth',
         widget=DatePickerWidget(),
     )
-    email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),
+                            label="E-mail address")
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),
+                                 label="Legal First Name")
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),
+                                label="Legal Last Name")
 
     class Meta:
         model = LotteryEntry
