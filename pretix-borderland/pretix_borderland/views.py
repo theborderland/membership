@@ -82,7 +82,7 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
         # TODO move to config
-        ctx.update({ "open": datetime.now() < datetime(2020, 1, 24, 18, 0) })
+        ctx.update({ "open": datetime.now() < datetime(2020, 1, 29, 18, 0) })
         return ctx
 
 
