@@ -27,6 +27,11 @@ class RegisterForm(forms.ModelForm):
         label='Date of Birth',
         widget=DatePickerWidget(),
     )
+    dob_again = forms.DateField(
+        required=True,
+        label='Date of Birth again',
+        widget=DatePickerWidget(),
+    )
     email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),
                             label="E-mail address")
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),
@@ -86,7 +91,7 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
             sup = super().post(request, *args, **kwargs)
         except IntegrityError:
             messages.add_message(request, messages.ERROR,
-                                 "This email address or name and date-of-birth combination is already registered!")
+                                 "This email address is already registered!")
             return render(request,template_name=self.template_name,context=self.get_context_data())
         send_mail(event_id=self.request.event.id,
                     to = [ request.POST["email"] ],
@@ -96,6 +101,9 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
 
     @transaction.atomic
     def form_valid(self, form):
+        if form.instance.dob.strftime("%Y-%m-%d") != self.request.POST.get("dob_again", "") or form.instance.dob.year > 2008:
+            messages.add_message(self.request, messages.ERROR, "Check your date of birth!".format(form.instance.dob, self.request.POST.get("dob_again")))
+            return render(self.request,template_name=self.template_name,context=self.get_context_data())
         form.instance.event = self.request.event
         form.instance.browser = self.request.META.get('HTTP_USER_AGENT', "")
         form.instance.ip = get_client_ip(self.request)
