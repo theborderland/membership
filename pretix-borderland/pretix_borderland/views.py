@@ -86,20 +86,6 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
         return ctx
 
 
-    def post(self, request, *args, **kwargs):
-        try:
-            sup = super().post(request, *args, **kwargs)
-        except IntegrityError:
-            messages.add_message(request, messages.ERROR,
-                                 "This email address is already registered!")
-            return render(request,template_name=self.template_name,context=self.get_context_data())
-        send_mail(event_id=self.request.event.id,
-                    to = [ request.POST["email"] ],
-                    subject = self.email_subject,
-                    body = self.email_message % request.POST.dict())
-        return sup
-
-    @transaction.atomic
     def form_valid(self, form):
         if form.instance.dob.strftime("%Y-%m-%d") != self.request.POST.get("dob_again", "") or form.instance.dob.year > 2008:
             messages.add_message(self.request, messages.ERROR, "Check your date of birth!".format(form.instance.dob, self.request.POST.get("dob_again")))
@@ -108,7 +94,17 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
         form.instance.browser = self.request.META.get('HTTP_USER_AGENT', "")
         form.instance.ip = get_client_ip(self.request)
         form.instance.cookie = self.request.COOKIES.get("pretix_csrftoken")
-        ret = super().form_valid(form)
+        try:
+            with transaction.atomic():
+                ret = super().form_valid(form)
+        except IntegrityError:
+            messages.add_message(self.request, messages.ERROR,
+                                 "This email address is already registered!")
+            return render(self.request,template_name=self.template_name,context=self.get_context_data())
+        send_mail(event_id=self.request.event.id,
+                    to = [ self.request.POST["email"] ],
+                    subject = self.email_subject,
+                    body = self.email_message % self.request.POST.dict())
         return ret
 
 
