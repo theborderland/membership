@@ -1,10 +1,10 @@
 Just notes to be filled out for next year's team
 
 # Before lottery registration
-  * Determine location, price(s) and quotas
+  * Determine location, price(s) and quotas (location: during xmas, ...)
   
   * Run logo competition
-  * Make e-mail template design
+  * Make e-mail template design (before xmas)
   * Design ticket
   
 ## Configure Pretix
@@ -23,15 +23,19 @@ Just notes to be filled out for next year's team
   * update email texts
   
 # Starting lottery registration
-  * update webpage
-  * create facebook event
+  * update webpage (before xmas)
+  * create facebook event (before xmas)
+  * scale up container? (before xmas)
   * spam places: euroburners, underbroen, labitat, other makerspaces and the boat
-  * email previous years' attendees, mailing list  
-  * scale up container?
+  * email previous years' attendees, mailing list
+
+## during registration
+  * watch mailer-daemon delivery reports and track down people (maybe make people type in email twice next year)
 
 # End of lottery registration
   * update webpage
   * Enable waiting list
+
 
 ## Before any sales are done
   * Upload ticket design

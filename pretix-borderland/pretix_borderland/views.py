@@ -34,6 +34,8 @@ class RegisterForm(forms.ModelForm):
     )
     email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),
                             label="E-mail address")
+    email_again = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),
+                            label="E-mail address again")
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),
                                  label="Legal First Name")
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),
@@ -41,7 +43,7 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = LotteryEntry
-        fields = [ "email", "first_name", "last_name", "dob" ]
+        fields = [ "email", "email_again", "first_name", "last_name", "dob" ]
 
 class Register(SuccessMessageMixin, CreateView):
     template_name = "pretix_borderland/register.html"
@@ -88,7 +90,10 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
 
     def form_valid(self, form):
         if form.instance.dob.strftime("%Y-%m-%d") != self.request.POST.get("dob_again", "") or form.instance.dob.year > 2008:
-            messages.add_message(self.request, messages.ERROR, "Check your date of birth!".format(form.instance.dob, self.request.POST.get("dob_again")))
+            messages.add_message(self.request, messages.ERROR, "Check your date of birth!")
+            return render(self.request,template_name=self.template_name,context=self.get_context_data())
+        if form.instance.email != self.request.POST.get("email_again", ""):
+            messages.add_message(self.request, messages.ERROR, "Check your email address!")
             return render(self.request,template_name=self.template_name,context=self.get_context_data())
         form.instance.event = self.request.event
         form.instance.browser = self.request.META.get('HTTP_USER_AGENT', "")

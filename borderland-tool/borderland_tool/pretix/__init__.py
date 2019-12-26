@@ -10,14 +10,14 @@ class PretixAPI:
 
 
     def get_orders(self, status="p"):
-        url = "http://{}/api/v1/organizers/{}/events/{}/orders/?page=1".format(self.host, self.org, self.event)
+        url = "https://{}/api/v1/organizers/{}/events/{}/orders/?page=1".format(self.host, self.org, self.event)
         return self.get_paginated(url,
                                   json = { "ordering": "datetime",
                                            "status": status })
 
 
     def get_vouchers(self):
-        url = "http://{}/api/v1/organizers/{}/events/{}/vouchers/?page=1".format(self.host, self.org, self.event)
+        url = "https://{}/api/v1/organizers/{}/events/{}/vouchers/?page=1".format(self.host, self.org, self.event)
         return self.get_paginated(url, {})
 
 
@@ -27,7 +27,7 @@ class PretixAPI:
                        block_quota=True,
                        tag="replication",
                        valid_until=str(datetime.now()+timedelta(days=2))):
-        url = "http://{}/api/v1/organizers/{}/events/{}/vouchers/".format(self.host, self.org, self.event)
+        url = "https://{}/api/v1/organizers/{}/events/{}/vouchers/".format(self.host, self.org, self.event)
         resp = post(url,
                     headers = { "Authorization": "Token {}".format(self.token) },
                     json = { "comment": comment,
@@ -47,11 +47,11 @@ class PretixAPI:
 
     # TODO make own class
     def get_refund_requests(self):
-        url = "http://{}/api/v1/organizers/{}/events/{}/refund/".format(self.host, self.org, self.event)
+        url = "https://{}/api/v1/organizers/{}/events/{}/refund/".format(self.host, self.org, self.event)
         return self.get_paginated(url, {})
 
     def update_refund_request(self, id, status):
-        url = "http://{}/api/v1/organizers/{}/events/{}/refund/{}/".format(self.host, self.org, self.event, id)
+        url = "https://{}/api/v1/organizers/{}/events/{}/refund/{}/".format(self.host, self.org, self.event, id)
         resp = patch(url,
                     headers = { "Authorization": "Token {}".format(self.token) },
                     json = { "status": status })
@@ -62,11 +62,11 @@ class PretixAPI:
 
 
     def get_registrations(self):
-        url = "http://{}/api/v1/organizers/{}/events/{}/registration/".format(self.host, self.org, self.event)
+        url = "https://{}/api/v1/organizers/{}/events/{}/registration/".format(self.host, self.org, self.event)
         return self.get_paginated(url, {})
 
     def send_email(self, to, subject, body):
-        url = "http://{}/api/v1/organizers/{}/events/{}/email/".format(self.host, self.org, self.event)
+        url = "https://{}/api/v1/organizers/{}/events/{}/email/".format(self.host, self.org, self.event)
         resp = post(url,
                     headers = { "Authorization": "Token {}".format(self.token) },
                     json = { "to": to, "subject": subject, "body": body })
