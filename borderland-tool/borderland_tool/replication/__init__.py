@@ -69,7 +69,7 @@ class VoucherReplicator:
                                subject = "You've been invited to The Borderland 2020! 🔥",
                                body = """Lovely Borderling,
 
-Someone really likes you! They've invited you to purchase a membership for the Borderland!
+{} must really like you, they've invited you to purchase a membership for the Borderland!
 
 Follow this link to get yours! It's valid for two days.
 
@@ -77,8 +77,9 @@ https://{}/{}/{}/redeem?voucher={}
 
 Bleeps and Bloops,
 The Borderland Computer 🤖
-""".format(self.pretix.host, self.pretix.org, self.pretix.event,
-           voucher["code"])) # TODO validity from voucher, and inviter name
+""".format(inviteinfo["invited_by_name"].split()[0].capitalize(),
+           self.pretix.host, self.pretix.org, self.pretix.event,
+           voucher["code"])) # TODO validity from voucher
 
 
 

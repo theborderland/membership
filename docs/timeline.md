@@ -26,11 +26,46 @@ Just notes to be filled out for next year's team
   * update webpage (before xmas)
   * create facebook event (before xmas)
   * scale up container? (before xmas)
-  * spam places: euroburners, underbroen, labitat, other makerspaces and the boat
-  * email previous years' attendees, mailing list
+  * spam places: euroburners (jan 3), burners playground (done), (underbroen, labitat, other makerspaces and the boat)
+  * email previous years' attendees, mailing list (jan 12-ish)
+
+
+## webpage text
+The Borderland is a community and an event that anyone can be part of. There are only participants, no volunteers, vendors, or organizers. Besides entry to the event, a membership gives you as much a say in what the event is as anyone else. 
+
+Read more about the Borderland on [our website](https://theborderland.se).
+
+Since capacity at the event is limited, we raffle off half of the memberships. The remaining memberships are sold by invitation. When you buy a membership you can invite someone.
+
+Note that this sale is a bit different from previous years, particularly how transfers and invitations work.
+
+### The Lottery
+
+We conduct the sale in three stages:
+
+  1. Lottery Registration
+  
+     You can [register](register/) to take part in the lottery until Wednesday January 29 16:00 Copenhagen time. 
+     
+  1. Lottery
+  
+     A few days after the registration deadline we raffle off half of the memberships. If you're picked you have two days to buy a membership, and you're guaranteed an invite that you can send to a friend.
+
+  1. Invitation Sale
+  
+     Anyone who buys a membership can invite someone else, until we're sold out. It pays to be quick, because we send out invitations starting with the earliest one. You don't need to have registered in the lottery to be invited.
+
+### More information
+  * Memberships are personal, read about our [Secure Membership Exchange Programme (SMEP)](page/smep/)
+  * Read the full [FAQ](page/faq/).
+
+You can find our contact info in the FAQ.
+
 
 ## during registration
-  * watch mailer-daemon delivery reports and track down people (maybe make people type in email twice next year)
+  * watch mailer-daemon delivery reports and track down people 
+  * periodic reminders of deadline
+  
 
 # End of lottery registration
   * update webpage

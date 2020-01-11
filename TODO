@@ -1,0 +1,30 @@
+  * email texts for replication and lottery
+
+  * membership card
+  * child membership card
+
+  * add SMEP and directed transfers to tool
+  * test transfers
+
+# nice to have 
+  * human readable log display
+  * add settings - nav_event_settings
+  * make transfer allowed configurable
+  * make a PretixResponse object to paginate (with e.g. .first(), .all())
+  * move tool things to pretix tasks
+  * split out features useful for others into their own plugins
+  * a way for group leads to directly email volunteer groups based on questions
+
+User stories
+  * Register for lottery
+  * Buy a membership
+  * Invite a friend
+  * Refund membership
+  * Transfer memberships
+  * Get volunteers to contact for clowns/perimeter/etc 
+  * Get demographics for survey weighting
+
+
+NExt year
+  * send a link to change reg details
+

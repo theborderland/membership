@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-# -*- coding: UTF-8 -*-
 import csv, random, json
 
 from datetime import datetime, timezone
@@ -15,7 +14,15 @@ class Lottery:
 
     def registrations_to_csv(self):
         """Retrieve registered users from Pretix plugin and update CSV"""
-        self.registered = self.pretix.get_registrations()
+        registrations = self.pretix.get_registrations()
+        if self.registered:
+            last = int(self.registered[-1]['id'])
+        else:
+            last = -1
+        new = [ r for r in registrations if int(r['id']) > last ]
+        for r in new:
+            print(f'{r["email"]}: {r["first_name"]} {r["last_name"]}')
+        self.registered = self.registered + new
         self.save_csv()
 
     def lottery(self, num):
@@ -47,7 +54,7 @@ class Lottery:
                                subject = "You're invited to The Borderland 2020! 🔥",
                                body = """Lovely Borderling,
 
-You've won the lottery! You're invited to get a membership for the Borderland, and to invite your friends to come along!
+You've won the lottery! You're invited to get a membership for the Borderland, and to invite a friend along!
 
 Follow this link to shopping nirvana! It's valid for two days.
 
@@ -63,12 +70,22 @@ Bleeps and Bloops,
 The Borderland Computer 🤖
 """.format(self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"], target["first_name"], target["last_name"],
-           target["dob"])) # TODO validity from voucher 
+           target["dob"])) # TODO validity from voucher
 
 
     def is_eligible(self, email):
+        load_orders_and_vouchers()
+        # Eligible if email doesn't already have an order or a valid voucher
+        return email not in self.has_order and email not in self.has_voucher
+
+    #def order_names_control()
+    # check that order == voucher name == registration name
+
+    def load_orders_and_vouchers(self):
+        # Cache preexisting orders
         if not self.has_order:
             self.has_order = [ o["email"] for o in self.pretix.get_orders() if o['status'] == 'p' ]
+        # Cache preexisting vouchers
         if not self.has_voucher:
             valids = [ v for v in self.pretix.get_vouchers() if v['quota'] == self.quota and
                        v['redeemed'] < v['max_usages'] and
@@ -79,11 +96,6 @@ The Borderland Computer 🤖
                     self.has_voucher += [ comment["email"] ]
                 except: #json.decoder.JSONDecodeError:
                     continue
-
-        return True or email not in self.has_order and email not in self.has_voucher
-
-    #def order_names_control()
-    # check that order == voucher name == registration name
 
     def load_csv(self):
         try:
