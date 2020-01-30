@@ -62,20 +62,21 @@ We conduct the sale in three stages:
 You can find our contact info in the FAQ.
 
 
+<!-- we are here -->
+
 ## during registration
   * watch mailer-daemon delivery reports and track down people 
+  * answer emails
   * periodic reminders of deadline
   
 
 # End of lottery registration
   * update webpage
-  * Enable waiting list
-
-
+  * Enable waiting list (done)
+  * unhide products so they show even without a voucher
+  
 ## Before any sales are done
-  * Upload ticket design
-  * set modification deadline to now, or to before you run the check
-  * edit pretix email texts
+  * edit pretix email texts (done 17 jan)
   * finish questionnaire
   * check that stripe is up to date
   * after that, generate and send vouchers to the board, they're guinea pigs 
@@ -101,7 +102,13 @@ When there are so few lottery vouchers pending that they all get the chance to
   * move everyone invited without a voucher to waiting list
   * enable waiting list
   * enable refunds/SMEP
-  * enable monster
+  * enable monster?
+  
+# before sending out tickets
+  * disable changes (order modification deadline)
+  * control names and dob against lottery vouchers
+  * Upload ticket design
+  * send out tickets
 
 # Before the event
   * no sales at the gate

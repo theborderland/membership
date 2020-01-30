@@ -75,6 +75,8 @@ Follow this link to get yours! It's valid for two days.
 
 https://{}/{}/{}/redeem?voucher={}
 
+You can read more about the Borderland at https://theborderland.se/
+
 Bleeps and Bloops,
 The Borderland Computer 🤖
 """.format(inviteinfo["invited_by_name"].split()[0].capitalize(),
