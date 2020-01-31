@@ -17,12 +17,19 @@ class VoucherReplicator:
         self.quota_group = quota_group # TODO using internal id is cumbersome
         self.invite_identifier = invite_identifier
         self.prefname_identifier = prefname_identifier
+        self.pretix = pretix
 
 
     def replicate(self, force=False):
         invites = self.invites_to_send()
 
         # TODO more info here
+        for i in invites:
+            print("{} invites {}".format(i['invited_by_name'], i['email']))
+
+        if len(invites) == 0:
+            print('No new invites')
+            return
 
         if not force and input("Continue? (y/n) ").lower().strip() != "y":
             print("User aborted.")
@@ -55,11 +62,11 @@ class VoucherReplicator:
 
 
     def create_invitation(self, inviteinfo):
-        voucher = pretix.create_voucher(quota = self.quota_group,
-                                        comment = json.dumps(inviteinfo,
-                                                            indent=2))
+        voucher = self.pretix.create_voucher(quota = self.quota_group,
+                                             comment = json.dumps(inviteinfo,
+                                                                  indent=2))
         if voucher:
-            self.send_invitation(self, voucher, inviteinfo)
+            self.send_invitation(voucher, inviteinfo)
             return True
         return False
 
@@ -82,7 +89,6 @@ The Borderland Computer 🤖
 """.format(inviteinfo["invited_by_name"].split()[0].capitalize(),
            self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"])) # TODO validity from voucher
-
 
 
 

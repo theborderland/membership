@@ -48,8 +48,8 @@ def replicate(args):
     vr = VoucherReplicator(pretix,
                            tags,
                            args.quota,
-                           args.pref_name_id,
-                           args.invite_id)
+                           args.invite_id,
+                           args.pref_name_id)
     if vars(args)["print"]:
         invites = vr.invites_to_send()
         if invites:

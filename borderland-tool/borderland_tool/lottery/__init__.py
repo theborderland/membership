@@ -10,7 +10,8 @@ class Lottery:
         self.csvfile = csvfile
         self.quota = quota
         self.registered = self.load_csv()
-        self.has_order = self.has_voucher = []
+        self.has_order = []
+        self.has_voucher = None
 
     def registrations_to_csv(self):
         """Retrieve registered users from Pretix plugin and update CSV"""
@@ -74,9 +75,10 @@ The Borderland Computer 🤖
 
 
     def is_eligible(self, email):
-        load_orders_and_vouchers()
+        self.load_orders_and_vouchers()
         # Eligible if email doesn't already have an order or a valid voucher
         return email not in self.has_order and email not in self.has_voucher
+
 
     #def order_names_control()
     # check that order == voucher name == registration name
@@ -86,7 +88,8 @@ The Borderland Computer 🤖
         if not self.has_order:
             self.has_order = [ o["email"] for o in self.pretix.get_orders() if o['status'] == 'p' ]
         # Cache preexisting vouchers
-        if not self.has_voucher:
+        if self.has_voucher is None:
+            self.has_voucher = []
             valids = [ v for v in self.pretix.get_vouchers() if v['quota'] == self.quota and
                        v['redeemed'] < v['max_usages'] and
                        parser.parse(v['valid_until']) > datetime.now(timezone.utc) ]
