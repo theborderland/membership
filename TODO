@@ -1,3 +1,5 @@
+  * implement caching using x-modified-since for fetch paginated
+
   * waiting list: send voucher for all products
 
   * membership card

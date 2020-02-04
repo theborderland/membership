@@ -10,8 +10,7 @@ class Lottery:
         self.csvfile = csvfile
         self.quota = quota
         self.registered = self.load_csv()
-        self.has_order = []
-        self.has_voucher = None
+        self.has_order = self.has_voucher = None
 
     def registrations_to_csv(self):
         """Retrieve registered users from Pretix plugin and update CSV"""
@@ -48,6 +47,7 @@ class Lottery:
         if not voucher:
             raise RuntimeError("Unable to create voucher")
         self.send_voucher(target, voucher)
+        print("sent voucher {}".format(voucher))
         return voucher
 
     def send_voucher(self, target, voucher):
@@ -71,7 +71,7 @@ Bleeps and Bloops,
 The Borderland Computer 🤖
 """.format(self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"], target["first_name"], target["last_name"],
-           target["dob"])) # TODO validity from voucher
+           target["dob"])) # TODO show validity from voucher
 
 
     def is_eligible(self, email):
@@ -86,6 +86,8 @@ The Borderland Computer 🤖
     def load_orders_and_vouchers(self):
         # Cache preexisting orders
         if not self.has_order:
+            # TODO there's a wrong assumption in this strategy - users can just use a secondary email on their other
+            # the right thing to do here is to include emails from vouchers that has been redeemed
             self.has_order = [ o["email"] for o in self.pretix.get_orders() if o['status'] == 'p' ]
         # Cache preexisting vouchers
         if self.has_voucher is None:

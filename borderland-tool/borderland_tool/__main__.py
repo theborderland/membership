@@ -56,6 +56,8 @@ def replicate(args):
             print(",".join(invites[0].keys()))
             for i in invites:
                 print(",".join([ str(j) for j in i.values() ]))
+    elif vars(args)["graphviz"]:
+        print(vr.vizualise())
     else:
         vr.replicate(args.force)
 
@@ -109,6 +111,9 @@ def main():
     replicate_parser.add_argument("-p", "--print",
                                   action='store_true',
                                   help="print list of pending invites")
+    replicate_parser.add_argument("-g", "--graphviz",
+                                  action='store_true',
+                                  help="make a DOT graph")
     replicate_parser.add_argument("-f", "--force",
                                   action='store_true',
                                   help="don't ask for confirmation")

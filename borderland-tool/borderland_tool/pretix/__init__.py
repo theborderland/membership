@@ -1,5 +1,6 @@
 from requests import post, get, put, patch
 from datetime import datetime, timedelta
+import sys
 
 class PretixAPI:
     def __init__(self, host, org, event, token):
@@ -81,7 +82,9 @@ class PretixAPI:
     def get_paginated(self, url, json):
         results = []
         next_url = url
+        count = 1
         while next_url:
+            sys.stderr.write("\rLoading {}: {}".format(url, len(results)/count))
             resp = get(next_url,
                 headers = { "Authorization": "Token {}".format(self.token) },
                 json = json)
@@ -91,5 +94,7 @@ class PretixAPI:
             resp_json = resp.json()
             results += resp_json['results']
             next_url = resp_json['next'] # !
+            count = resp_json['count']
+        sys.stderr.write("\r")
         return results
 

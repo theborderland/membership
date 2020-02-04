@@ -23,7 +23,6 @@ class VoucherReplicator:
     def replicate(self, force=False):
         invites = self.invites_to_send()
 
-        # TODO more info here
         for i in invites:
             print("{} invites {}".format(i['invited_by_name'], i['email']))
 
@@ -47,6 +46,7 @@ class VoucherReplicator:
 
         return [ invite for invite in invites
                  if invite["invited_by_order"] not in already_invited and
+                 invite["email"] and
                  self.voucher_id_has_allowed_tag(invite["invited_by_voucherids"]) ]
 
 
@@ -54,7 +54,7 @@ class VoucherReplicator:
         if self.allowed_voucher_tags == None:
             return True
         id_to_tag = { v['id']: v['tag'] for v in self.vouchers }
-        invite_tags = [ id_to_tag[v] for v in ids ]
+        invite_tags = [ id_to_tag[v] for v in ids if v != None ]
         intersect = set(invite_tags) & set(self.allowed_voucher_tags)
         if len(intersect) > 0:
             return True
@@ -78,9 +78,11 @@ class VoucherReplicator:
 
 {} must really like you, they've invited you to purchase a membership for the Borderland!
 
-Follow this link to get yours! It's valid for two days.
+Follow this link to get yours! It's valid for 47 hours.
 
 https://{}/{}/{}/redeem?voucher={}
+
+This invitation is not personal, so you can pass it on if you like. It only works once though!
 
 You can read more about the Borderland at https://theborderland.se/
 
@@ -135,3 +137,43 @@ The Borderland Computer 🤖
         except json.JSONDecodeError:
             return None
         return inviteinfo
+
+    def get_orders_for_voucher(self, voucher_id):
+        result = []
+        for order in self.orders:
+            for pos in order['positions']:
+                if pos['voucher'] == voucher_id:
+                    result += [order]
+        return result
+
+    def vizualise(self):
+        # voucher that are redeemed
+        redeemed = [ v for v in self.vouchers if v['redeemed'] > 0 ]
+        # get preferred name for vouchers -> list of node labels
+        nodes = []
+        for voucher in redeemed:
+            orders = self.get_orders_for_voucher(voucher['id'])
+            for order in orders:
+                nodes += [ {"id": voucher['id'], "label": self.get_answer_from_order(order, self.prefname_identifier) } ]
+        # edges:
+        # if tag == lottery, lottery -> id
+        edges = [ {"from": "lottery", "to": v['id'] } for v in redeemed if v['tag'] == 'lottery' ]
+        # if tag other: try to get comments, comments.invited_by_id -> id
+        for voucher in [ v for v in redeemed if v['tag'] != 'lottery' ]:
+            iinfo = self.get_inviteinfo_from_voucher(voucher)
+            if iinfo:
+                print(iinfo)
+                for fromid in iinfo['invited_by_voucherids']:
+                    if fromid:
+                        edges += [ { "from": fromid, "to": voucher['id'] } ]
+        result = "digraph {\n"
+        for node in nodes:
+            result += "{} [label='{}'];\n".format(node['id'], node['label'])
+        for edge in edges:
+            result += "{} -> {};\n".format(edge['from'], edge['to'])
+        result += "}\n"
+        return result
+
+
+
+
