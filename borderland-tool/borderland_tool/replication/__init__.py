@@ -161,8 +161,7 @@ The Borderland Computer 🤖
         # if tag other: try to get comments, comments.invited_by_id -> id
         for voucher in [ v for v in redeemed if v['tag'] != 'lottery' ]:
             iinfo = self.get_inviteinfo_from_voucher(voucher)
-            if iinfo:
-                print(iinfo)
+            if iinfo and 'invited_by_voucherids' in iinfo:
                 for fromid in iinfo['invited_by_voucherids']:
                     if fromid:
                         edges += [ { "from": fromid, "to": voucher['id'] } ]
