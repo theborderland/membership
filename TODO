@@ -1,4 +1,5 @@
   * implement caching using x-modified-since for fetch paginated
+  * put the invite link straight in peoples profiles
 
   * waiting list: send voucher for all products
 

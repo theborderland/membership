@@ -70,6 +70,17 @@ def smep(args):
     smep.display()
 
 
+def unblock_vouchers(args):
+    from borderland_tool.voucher import Voucher
+    pretix = get_pretix(args)
+    vouchers = sum(args.vouchers, [])
+    voucher = Voucher(pretix)
+    if len(vouchers) > 0:
+        voucher.unblock(vouchers)
+    else:
+        voucher.unblock_all()
+
+
 def get_pretix(args):
     from borderland_tool.pretix import PretixAPI
     return PretixAPI(org = args.org,
@@ -138,6 +149,10 @@ def main():
                                   default="invite",
                                   help="question identifier for e-mail address to be invited")
 
+
+    voucher_parser = subparsers.add_parser('unblock_vouchers', help="Unblock vouchers")
+    voucher_parser.set_defaults(func=unblock_vouchers)
+    voucher_parser.add_argument('vouchers', action='append', metavar='V', nargs='*', default=[])
 
     args = parser.parse_args()
     args.func(args)

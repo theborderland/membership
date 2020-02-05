@@ -22,6 +22,17 @@ class PretixAPI:
         return self.get_paginated(url, {})
 
 
+    def patch_voucher(self, vid, updates):
+        url = "https://{}/api/v1/organizers/{}/events/{}/vouchers/{}/".format(self.host, self.org, self.event, vid)
+        resp = patch(url,
+                     headers = { "Authorization": "Token {}".format(self.token) },
+                     json = updates)
+        if resp.status_code > 299:
+            print(resp.text)
+            return None
+        return resp.json()
+
+
     def create_voucher(self,
                        quota,
                        comment="",
