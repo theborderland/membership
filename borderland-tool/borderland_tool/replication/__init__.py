@@ -167,7 +167,7 @@ The Borderland Computer 🤖
                         edges += [ { "from": fromid, "to": voucher['id'] } ]
         result = "digraph {\n"
         for node in nodes:
-            result += "{} [label='{}'];\n".format(node['id'], node['label'])
+            result += "{} [label=\"{}\"];\n".format(node['id'], node['label'].replace('"', '\"'))
         for edge in edges:
             result += "{} -> {};\n".format(edge['from'], edge['to'])
         result += "}\n"

@@ -1,5 +1,8 @@
 Just notes to be filled out for next year's team
 
+# Ideas for next year
+  * differentiate lottery memberships and invitaiton memberships, and make the invitaiton process different
+
 # Before lottery registration
   * Determine location, price(s) and quotas (location: during xmas, ...)
   
@@ -62,7 +65,6 @@ We conduct the sale in three stages:
 You can find our contact info in the FAQ.
 
 
-<!-- we are here -->
 
 ## during registration
   * watch mailer-daemon delivery reports and track down people 
@@ -70,25 +72,57 @@ You can find our contact info in the FAQ.
   * periodic reminders of deadline
   
 
+
 # End of lottery registration
-  * update webpage
+  * update webpage (done)
   * Enable waiting list (done)
-  * unhide products so they show even without a voucher
   
+### webpage text
+
+### The Lottery
+...
+We conduct the sale in three stages:
+
+  1. Lottery Registration
+
+  Registration is now closed.
+     
+  1. Lottery
+  
+    Very soon we'll raffle off half of the memberships. If you're picked you have two days to buy a membership, and you're guaranteed an invite that you can send to a friend.
+
+  1. Invitation Sale
+  
+     Anyone who buys a membership can invite someone else, until we're sold out. It pays to be quick, because we send out invitations starting with the earliest one. You don't need to have registered in the lottery to be invited.
+...
+
 ## Before any sales are done
   * edit pretix email texts (done 17 jan)
-  * finish questionnaire
-  * check that stripe is up to date
-  * after that, generate and send vouchers to the board, they're guinea pigs 
+  * finish questionnaire (ish)
+  * check that stripe is up to date (never done)
+  * after that, generate and send vouchers to the board, they're guinea pigs (never done, they refused)
   
+
 # Lottery
   * update webpage
-  * Run the lottery draw
+  * Run the lottery draw (jan 31)
   * Run replication for board and lottery tags
+
+<!-- we are here -->
 
 # After lottery invitations expire
 When there are so few lottery vouchers pending that they all get the chance to
 +1, or they've all expired.
+  * change invite q text. removed: 
+
+          If you don't know who to invite yet you can: 
+            1. Leave it empty and come back later (click the Edit button on your order), but if you wait for two days after the lottery draw there are no guarantees, or
+            2. You can enter your own email address, but then if you won the lottery you will get invited straight away and the clock starts ticking.
+
+          People who won the lottery go first, so if you were invited by someone your invite won't be sent until Sunday.
+
+  * change birthdate descr.  removed: (02022020) 
+        If you got your invitation through the lottery, your legal name and date of birth *must match* what you registered with. We will check. We also check ID at the port when you arrive.
   * Run replication for all voucher tags
 
 # If we sell out too slowly
@@ -96,6 +130,7 @@ When there are so few lottery vouchers pending that they all get the chance to
   * When lottery pool is exhausted, send out waiting list vouchers
 
 # After sell-out
+  * unhide products so they shown even without a voucher
   * update webpage
   * hide replication question
   * disable replication
