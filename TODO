@@ -1,6 +1,8 @@
   * implement caching using x-modified-since for fetch paginated
   * put the invite link straight in peoples profiles
 
+  * have an end stage / flash sale thing at the end when the algo is too slow
+
   * waiting list: send voucher for all products
 
   * membership card

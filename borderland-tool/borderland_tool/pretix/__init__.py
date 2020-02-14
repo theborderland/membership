@@ -38,7 +38,7 @@ class PretixAPI:
                        comment="",
                        block_quota=True,
                        tag="replication",
-                       valid_until=str(datetime.now()+timedelta(days=2))):
+                       valid_until=str(datetime.now()+timedelta(hours=12))): # FIXME
         url = "https://{}/api/v1/organizers/{}/events/{}/vouchers/".format(self.host, self.org, self.event)
         resp = post(url,
                     headers = { "Authorization": "Token {}".format(self.token) },
