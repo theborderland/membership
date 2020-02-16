@@ -25,57 +25,6 @@ class Lottery:
         self.registered = self.registered + new
         self.save_csv()
 
-    def losers(self):
-        self.load_orders_and_vouchers()
-        eligible = [ r for r in self.registered if self.is_eligible(r["email"]) ]
-        print(", ".join([e["email"] for e in eligible]))
-        print(len(eligible))
-        if input("Send sad email (2020 specific text!)? (y/n) ") != 'y':
-            return
-        for target in eligible:
-            self.pretix.send_email(to = [target["email"]],
-                                   subject = "Re: So you didn't win the lottery 😭",
-                                   body = """Lovely Borderling,
-
-If you got this email and you *have a membership*, sorry.
-
-I went a bit too broad with this email aparrently. Your order isn't cancelled or anything, you're safe.
-
-Krisses,
-K
-""")
-#                                    subject = "So you didn't win the lottery 😭",
-#                                    body = """Lovely Borderling,
-
-# Hello from memberships HQ. It's time to cry.
-
-# It's an inevitable fact that Borderland grows in popularity faster than we can
-# create the organisational knowledge to host a bigger event.
-
-# Your chances this year where about 55%, and it's incredibly sad and unfair to
-# have say no to any one of you.
-
-# All hope is not lost though, many memberships change hands as the event grows
-# closer and summer plans change. This year we're trying a new thing in
-# the Secure Membership Exchange Programme (SMEP), where we make it very easy to
-# sign up for a waiting list to receive a membership:
-
-# https://memberships.theborderland.se/borderland/2020/waitinglist?item=98
-
-# Note that unlike what I've told some of you before, you have to sign up
-# to this list manually!
-
-# That's to make sure you still want to go. A lot of you may want more certainty
-# and may already have made other plans. For instance, tickets to our quaint
-# little precompression Nowhere goes on sale Saturday.
-
-# Kisses,
-# K
-# """)
-            print("Emailt {}" + target["email"])
-
-
-
     def lottery(self, num):
         winners = self.raffle(num)
         print([ w["email"] for w in winners])
@@ -144,8 +93,8 @@ The Borderland Computer 🤖
         if self.has_voucher is None:
             self.has_voucher = []
             valids = [ v for v in self.pretix.get_vouchers() if v['quota'] == self.quota and
-                       v['redeemed'] < v['max_usages'] ] #and
-                       #parser.parse(v['valid_until']) > datetime.now(timezone.utc) ]
+                       v['redeemed'] < v['max_usages'] and
+                       parser.parse(v['valid_until']) > datetime.now(timezone.utc) ]
             for v in valids:
                 try:
                     comment = json.loads(v['comment'])

@@ -11,10 +11,6 @@ class LotteryCmd:
         lottery = self.get_lottery(args)
         lottery.lottery(args.num)
 
-    def losers(self, args):
-        lottery = self.get_lottery(args)
-        lottery.losers()
-
     # def control(self, args)
 
     def get_lottery(self, args):
@@ -42,8 +38,6 @@ class LotteryCmd:
                                     default=1,
                                     required=True,
                                     help="internal identifier of quota group to invite to (e.g. 1)")
-        lottery_losers = lottery_subparsers.add_parser("losers", help="Make a list of losers")
-        lottery_losers.set_defaults(func=self.losers)
 
 def replicate(args):
     from borderland_tool.replication import VoucherReplicator
