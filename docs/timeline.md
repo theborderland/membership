@@ -108,6 +108,7 @@ We conduct the sale in three stages:
   * Run the lottery draw (jan 31)
   * Run replication for board and lottery tags
 
+<!-- we are here -->
 
 # After lottery invitations expire
 When there are so few lottery vouchers pending that they all get the chance to
@@ -124,7 +125,6 @@ When there are so few lottery vouchers pending that they all get the chance to
         If you got your invitation through the lottery, your legal name and date of birth *must match* what you registered with. We will check. We also check ID at the port when you arrive.
   * Run replication for all voucher tags
 
-<!-- we are here -->
 # If we sell out too slowly
   * Send out more lottery invitations (implement voucher id reg update)
   * When lottery pool is exhausted, send out waiting list vouchers
@@ -132,7 +132,6 @@ When there are so few lottery vouchers pending that they all get the chance to
 # After sell-out
   * unhide products so they shown even without a voucher
   * update webpage
-     
   * hide replication question
   * disable replication
   * move everyone invited without a voucher to waiting list
