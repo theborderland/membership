@@ -39,3 +39,10 @@ msgstr "You will be able to download your membership card here starting on %(dat
 msgid "Enter a voucher code below to buy this ticket."
 msgstr "Enter a voucher code below to buy this product."
 
+#: pretix/presale/templates/pretixpresale/event/order.html:275
+#: pretix/presale/templates/pretixpresale/event/order.html:282
+#: pretix/presale/templates/pretixpresale/event/order.html:295
+#: pretix/presale/templates/pretixpresale/event/order_cancel.html:16
+msgid "This will invalidate all tickets in this order."
+msgstr "This will invalidate all memberships in this order."
+

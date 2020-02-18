@@ -29,7 +29,9 @@ def order_transfer_request(sender, order=None, **kwargs):
     # to find the URL and submit a request nothing would happen as the actual
     # background jobs don't run
 
-    # if order.status = 'p'
+    if order.status == 'p':
+        template = get_template('pretix_borderland/order_info.html')
+        return template.render()
+        return "Request refund (SMEP) --- Transfer ticket  "
     # have warning about transferability
-    # return "Request refund (SMEP) --- Transfer ticket  "
 
