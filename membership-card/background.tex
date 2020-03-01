@@ -13,22 +13,28 @@
 \usetikzlibrary{patterns}
 \usetikzlibrary{folding}
 
+
+% TODO
+% card text massage
+% consent text headers
+% consent text split horizontal
+
 \begin{center}
   \begin{tikzpicture}
     \node (front) [rectangle, rounded corners=3mm, minimum height=53.98mm, minimum width=85.6mm,
       draw, dashed, anchor=east] { };
     \node (back) [rectangle, rounded corners=3mm, minimum height=53.98mm, minimum width=85.6mm,
       draw, dashed, anchor=west] {};
-    \node at (-1.6,-1) {\includegraphics[width=2.4cm]{logo}};
-    \node at (-4.2,2) {\Huge Burn Burnersson};
-    \node at (-4.2,1.3) {\scalebox{0.7}{\sc Platinum VIP Member}};
+    \node at (-4.2,-0.1) {\includegraphics[width=80mm]{bl-logo-text}};
+    \node at (-4.2,1.7) {\Huge Burn Burnersson};
+    \node at (-4.2,1.2) {\scalebox{0.7}{\sc Platinum VIP Member}};
     \node at (-7,-2) {\scalebox{0.7}{Member Number }};
-    \node at (-7,-1.55) {\scalebox{0.7}{Expires July 2021}};
+    \node at (-2,-2) {\scalebox{0.7}{Expires February 2021}};
     \node at (2.6,1.1) {\begin{minipage}{4.5cm}
         \fontfamily{qcs}\selectfont \footnotesize
         The bearer of this card is a genuine and authorized
         {\normalsize \textbf{member}} 
-        \footnotesize of The Borderland, and can do whatever they want whenever they want. 
+        \footnotesize of The Borderland, so please treat them right good forever. 
         \end{minipage}};
     \node at (-7,2.86) [] { \Large \ding{33} };
     \node at (7,-2.87) [rotate=180] { \Large \ding{33} };
@@ -45,44 +51,80 @@
     \node at (4.5, -2.4) {\tiny \textsc{This Card is Personal \& Non-Transferable} };
   \end{tikzpicture}
   \\
-  Cut and Fold to Make Your Very Own Membership Card!  \\
+  Cut and Fold to Make Your Very Own Membership Card!
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.6pt}}
 \end{center}
-\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
-\begin{center}
-  \tiny Advertisements
-\end{center}
-
 \begin{figure*}[!b]
   \centering
-  \begin{minipage}{.5\textwidth}
-    The Borderland is an inclusive place for everyone to express themselves and experiment. As with any event this size, things can happen.
+  \begin{minipage}{.155\textwidth}
+    \includegraphics[width=15cm,angle=90,origin=c]{bl-logo-text}
+  \end{minipage}
+  \begin{minipage}{.835\textwidth}
+%\fontsize{11pt}{11pt}\selectfont
+    \section*{Consent is F.R.I.E.S.}
+    \vspace{-3mm}
+    The Borderland is an inclusive place for everyone to express themselves and experiment. Such a place relies on our ability to respect each other's boundaries.
+    \\[-0.7\baselineskip]
 
-    If you experience, witness, or suspect:
-
-    % double list?
+    State both your wishes and your boundaries out loud, and think of deep-fried potatoes:
     \begin{itemize}
-      \item Racism
-      \item Sexism
-      \item Homophobia
-      \item Transphobia
-      \item Unwanted attention
-      \item Predatory behavior
-      \item Assault % small space
+    \item \textbf{F}reely Given --- Consent is given without pressure, force, or manipulation.
+    \item \textbf{R}eversible --- Change your mind about anything at any time.
+    \item \textbf{I}nformed --- Be honest about your intentions.
+    \item \textbf{E}nthusiastic --- Sometimes people say ``yes'' just to be polite.
+    \item \textbf{S}pecific --- Saying yes to one thing doesn’t mean they've said yes to others.
     \end{itemize}
 
-    The \emph{\underline{Consent Team}} is here to check in, mediate, support, care, and ensure accountability.
+    \vspace{3mm}
+%\fontsize{11pt}{11pt}\selectfont
+    Consent applies anywhere, including: \textbf{touch} (including hugs!), \textbf{kink} (a yes to spanking doesn't mean you can grope), \textbf{gifts} (keep your \textsc{moop}), \textbf{foods} (people have very different restrictions), \textbf{photography} (some of us have security clearances).
+    \vspace{-4mm}
+    \section*{Get Informed}
+    \vspace{-3mm}
+    How do I express my desires without being awkward? What's the difference between serving and accepting, taking and allowing? How can I help take care of people and ensure an inclusive Borderland?
 
-    Ask for us through \emph{Sanctuary} or any \emph{Clown Police} clown, or directly via Signal, SMS, Whatsapp, or voice:
-
+    \vspace{3mm}
+    Find articles on consent, times for workshops and trainings, and sign up for consent team shifts at:
+    \vspace{-2mm}
     \begin{center}
-      \Large{+45 11 22 33 44}
+      \Large{https://consent.theborderland.se/}
     \end{center}
 
-    Inclusion is everyone's responsibility. If you see something that looks non-consensual or someone who looks like they're in distress, it's your job to check in.
+    \vspace{3mm}
+    Here you'll also find our \emph{reporting tool} where you can report event and year-round community incidents.
+
+    \vspace{-4mm}
+    \section*{Event Support}
+    \vspace{-3mm}
+
+
+
+    %% As with any event this size, things can happen.
+
+    %% If you experience, witness, or suspect:
+
+    %% % double list?
+    %% \begin{itemize}
+    %%   \item Racism
+    %%   \item Sexism
+    %%   \item Homophobia
+    %%   \item Transphobia
+    %%   \item Unwanted attention
+    %%   \item Predatory behavior
+    %%   \item Assault % small space
+    %% \end{itemize}
+
+    The \emph{\underline{Consent Team}} is here to check in, support, care, mediate, and ensure accountability. Ask for us through \emph{Sanctuary} or any \emph{Clown Police} clown, or directly via Signal, SMS, Whatsapp, or voice:
+
+    \vspace{-2mm}
+    \begin{center}
+      \Large{(+45) 11 22 33 44}
+    \end{center}
+    \vspace{2mm}
+    
+    Inclusion is everyone's responsibility. If you see something that looks non-consensual or someone who looks like they're in distress, it's your job to check in!
   \end{minipage}
-  \begin{minipage}{.49\textwidth}
-    \includegraphics[width=8.8cm,right]{Rape-Culture-v5_crop}
-  \end{minipage}
+
 \end{figure*}
 
 

@@ -32,6 +32,5 @@ def order_transfer_request(sender, order=None, **kwargs):
     if order.status == 'p':
         template = get_template('pretix_borderland/order_info.html')
         return template.render()
-        return "Request refund (SMEP) --- Transfer ticket  "
     # have warning about transferability
 
