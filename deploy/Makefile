@@ -12,9 +12,7 @@ build:
 stable:
 	docker tag ${IMG} ${STABLE}
 	docker push ${NAME}
-	aws ecs update-service --service pretix2 --force-new-deployment
 
 push:
 	docker push ${NAME}
-	aws ecs update-service --service pretix2 --force-new-deployment
 

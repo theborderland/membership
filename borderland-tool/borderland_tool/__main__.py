@@ -160,6 +160,11 @@ def main():
     voucher_parser.set_defaults(func=unblock_vouchers)
     voucher_parser.add_argument('vouchers', action='append', metavar='V', nargs='*', default=[])
 
+    waitlist_parser = subparser.add_parser('waitlist')
+    waitlist_parser.set_defaults(func=waitlist)
+    waitlist_parser.add_argument('')
+
+
     args = parser.parse_args()
     args.func(args)
 
