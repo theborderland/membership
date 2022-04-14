@@ -73,7 +73,7 @@ class VoucherReplicator:
 
     def send_invitation(self, voucher, inviteinfo):
         self.pretix.send_email(to = [inviteinfo["email"]],
-                               subject = "You've been invited to The Borderland 2020! 🔥",
+                               subject = "You've been invited to The Borderland 2022! 🔥",
                                body = """Lovely Borderling,
 
 {} must really like you, they've invited you to purchase a membership for the Borderland!
