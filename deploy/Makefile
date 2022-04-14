@@ -1,10 +1,9 @@
-NAME   := krav/pretix
-TAG    := $$(git log -1 --pretty='%H')
+NAME   := borderland.azurecr.io/pretix
+TAG    := $$(git rev-parse HEAD)
 IMG    := ${NAME}:${TAG}
 LATEST := ${NAME}:latest
 STABLE := ${NAME}:stable
 
-# pretix/standalone:stable 
 build:
 	docker build --build-arg tag=${TAG} -t ${IMG} .
 	docker tag ${IMG} ${LATEST}
