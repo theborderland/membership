@@ -6,11 +6,11 @@ We're part of a vibrant network of similar events and communities, based on the 
 
 # The Practical
 
-Memberships for the Borderland 2020 go on sale mid-to-late January. 
+Memberships for the Borderland 2022 go on sale May 2022. 
 
 We're still working on some practical details at the moment. Details like how much it will cost, and when the event will be. Subscribe to the newsletter to be kept up to date.
 
-A qualified guess for the next event is week 30, July 20-26 2020, in Hedeland, Denmark. Art grant applications open somewhere around April.
+A qualified guess for the next event is week 30, July 25-31 2022, in ALVERSJÖ, Sweden. Art grant applications open somewhere around May-June.
 
 # Contributing
 
@@ -52,7 +52,7 @@ Everyone can add events to it.
 
 Part of the membership price is directed towards grants that are allocated by the community.
 
-The [dreams platform](https://dreams.theborderland.se/) for 2020 isn't open yet, but meanwhile you can check out last year's applications.
+The [dreams platform](https://dreams.theborderland.se/) for 2022 isn't open yet, but meanwhile you can check out last year's applications.
 
 ### Practical Advice for Building things
 

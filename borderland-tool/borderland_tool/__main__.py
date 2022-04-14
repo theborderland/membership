@@ -110,7 +110,7 @@ def main():
                         default="test",
                         help="pretix organisation to operate on")
     parser.add_argument("-e", "--event",
-                        default="2020", help="pretix event to operate on")
+                        default="2022", help="pretix event to operate on")
 
     # Transfers
     smep_parser = subparsers.add_parser('smep', help='Membership Transfers')

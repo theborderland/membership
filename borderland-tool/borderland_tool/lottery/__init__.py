@@ -30,7 +30,7 @@ class Lottery:
         eligible = [ r for r in self.registered if self.is_eligible(r["email"]) ]
         print(", ".join([e["email"] for e in eligible]))
         print(len(eligible))
-        if input("Send sad email (2020 specific text!)? (y/n) ") != 'y':
+        if input("Send sad email (2022 specific text!)? (y/n) ") != 'y':
             return
         for target in eligible:
             self.pretix.send_email(to = [target["email"]],
@@ -103,7 +103,7 @@ K
 
     def send_voucher(self, target, voucher):
         self.pretix.send_email(to = [target["email"]],
-                               subject = "You're invited to The Borderland 2020! 🔥",
+                               subject = "You're invited to The Borderland 2022! 🔥",
                                body = """Lovely Borderling,
 
 You've won the lottery! You're invited to get a membership for the Borderland, and to invite a friend along!
