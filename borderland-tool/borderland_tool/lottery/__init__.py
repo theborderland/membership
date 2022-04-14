@@ -60,7 +60,7 @@ K
 # the Secure Membership Exchange Programme (SMEP), where we make it very easy to
 # sign up for a waiting list to receive a membership:
 
-# https://memberships.theborderland.se/borderland/2020/waitinglist?item=98
+# https://memberships.theborderland.se/borderland/2022/waitinglist?item=98
 
 # Note that unlike what I've told some of you before, you have to sign up
 # to this list manually!
