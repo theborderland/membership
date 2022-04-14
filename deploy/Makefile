@@ -5,7 +5,7 @@ LATEST := ${NAME}:latest
 STABLE := ${NAME}:stable
 
 build:
-	docker build --build-arg tag=${TAG} -t ${IMG} .
+	docker build --no-cache --build-arg tag=${TAG} -t ${IMG} .
 	docker tag ${IMG} ${LATEST}
 
 stable:

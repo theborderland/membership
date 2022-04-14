@@ -6,4 +6,4 @@ RUN pip3 install "git+https://github.com/theborderland/membership.git#subdirecto
 RUN cp -r /usr/local/lib/python*/site-packages/pretix_borderland/pretix-locale/* /pretix/src/pretix/locale/
 RUN chown -R pretixuser /pretix/src/pretix/locale/
 USER pretixuser
-RUN cd /pretix/src && make production
+RUN cd /pretix/src && make all
