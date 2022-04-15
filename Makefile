@@ -4,8 +4,13 @@ IMG    := ${NAME}:${TAG}
 LATEST := ${NAME}:latest
 STABLE := ${NAME}:stable
 
+
 build:
+ifeq ($(DEBUG),1)
+	docker build --progress=plain --no-cache --build-arg tag=${TAG} -t ${IMG} .
+else
 	docker build --no-cache --build-arg tag=${TAG} -t ${IMG} .
+endif
 	docker tag ${IMG} ${LATEST}
 
 stable:

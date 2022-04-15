@@ -1,0 +1,36 @@
+version: "3.5"
+services:
+  membertix:
+    image: borderland.azurecr.io/pretix
+    ports:
+      - 8000:80
+    volumes:
+      - pretix:/data
+      - ${PWD}/pretix-borderland/pretix.local.cfg:/etc/pretix/pretix.cfg:ro
+    depends_on:
+      - postgresql
+      - redis
+
+  postgresql:
+    image: postgres:13-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test123
+      - POSTGRES_DB=pretix
+
+  redis:
+    image: redis:6.2
+
+  # Received mails are listed on 
+  # http://mailserver:1080/api/emails
+  mailserver:
+    image: reachfive/fake-smtp-server
+    ports:
+      - 587:587
+      - 1080:1080 
+    command: node index.js -s 587 -m 2340 -a test:test123
+
+volumes:
+  pretix:
