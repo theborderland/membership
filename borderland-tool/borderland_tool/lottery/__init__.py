@@ -30,7 +30,7 @@ class Lottery:
         eligible = [ r for r in self.registered if self.is_eligible(r["email"]) ]
         print(", ".join([e["email"] for e in eligible]))
         print(len(eligible))
-        if input("Send sad email (2020 specific text!)? (y/n) ") != 'y':
+        if input("Send sad email (2022 specific text!)? (y/n) ") != 'y':
             return
         for target in eligible:
             self.pretix.send_email(to = [target["email"]],
@@ -60,7 +60,7 @@ K
 # the Secure Membership Exchange Programme (SMEP), where we make it very easy to
 # sign up for a waiting list to receive a membership:
 
-# https://memberships.theborderland.se/borderland/2020/waitinglist?item=98
+# https://memberships.theborderland.se/borderland/2022/waitinglist?item=98
 
 # Note that unlike what I've told some of you before, you have to sign up
 # to this list manually!
@@ -103,7 +103,7 @@ K
 
     def send_voucher(self, target, voucher):
         self.pretix.send_email(to = [target["email"]],
-                               subject = "You're invited to The Borderland 2020! 🔥",
+                               subject = "You're invited to The Borderland 2022! 🔥",
                                body = """Lovely Borderling,
 
 You've won the lottery! You're invited to get a membership for the Borderland, and to invite a friend along!
