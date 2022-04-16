@@ -86,6 +86,9 @@ def unblock_vouchers(args):
     else:
         voucher.unblock_all()
 
+def waitlist(args):
+    pass
+
 
 def get_pretix(args):
     from borderland_tool.pretix import PretixAPI
@@ -160,9 +163,9 @@ def main():
     voucher_parser.set_defaults(func=unblock_vouchers)
     voucher_parser.add_argument('vouchers', action='append', metavar='V', nargs='*', default=[])
 
-    waitlist_parser = subparser.add_parser('waitlist')
-    waitlist_parser.set_defaults(func=waitlist)
-    waitlist_parser.add_argument('')
+#    waitlist_parser = subparsers.add_parser('waitlist')
+#    waitlist_parser.set_defaults(func=waitlist)
+#    waitlist_parser.add_argument('')
 
 
     args = parser.parse_args()
