@@ -34,6 +34,7 @@ You can use the available makefile as follows:
 make
 ```
 
+Windows: Install Cygwin, reinstall Docker and run `make`. Currently there is an issue running from Powershell or the default commandline. 
 After the image is built (it may take a few minutes), you can execute pretix
 locally and start testing:
 
