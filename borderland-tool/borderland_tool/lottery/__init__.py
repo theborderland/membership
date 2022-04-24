@@ -52,9 +52,6 @@ K
 # It's an inevitable fact that Borderland grows in popularity faster than we can
 # create the organisational knowledge to host a bigger event.
 
-# Your chances this year where about 55%, and it's incredibly sad and unfair to
-# have say no to any one of you.
-
 # All hope is not lost though, many memberships change hands as the event grows
 # closer and summer plans change. This year we're trying a new thing in
 # the Secure Membership Exchange Programme (SMEP), where we make it very easy to
