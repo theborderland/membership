@@ -16,7 +16,7 @@ def register_mail_renderers(sender, **kwargs):
 def lottery_registration(sender, **kwargs):
     """"""
     template = get_template('pretix_borderland/registration_button.html')
-    ctx = { "open": datetime.now() < datetime(2020, 1, 29, 18, 0), # TODO
+    ctx = { "open": datetime.now() < datetime(2022, 4, 25, 0, 0), # TODO
             "event": sender,
             "organizer": sender.organizer }
     return template.render(ctx)
@@ -33,4 +33,4 @@ def lottery_registration(sender, **kwargs):
  #       template = get_template('pretix_borderland/order_info.html')
  #       return template.render()
     # have warning about transferability
-
+0
