@@ -2,9 +2,15 @@ FROM pretix/standalone:4.7.1
 
 USER root
 
+ENV DJANGO_SETTINGS_MODULE=
+
 RUN pip3 install pretix-passbook pretix-pages pretix-fontpack-free
 
 ARG tag
+
+ENV PYTHONPATH=$PYTHONPATH:/pretix/src
+
+ENV DJANGO_SETTINGS_MODULE=production_settings
 
 RUN pip3 install "git+https://github.com/theborderland/membership.git#subdirectory=pretix-borderland&egg=pretix_borderland&fixme_hash=$TAG" 
 
@@ -14,4 +20,4 @@ RUN chown -R pretixuser /pretix/src/pretix/locale/
 
 USER pretixuser
 
-RUN cd /pretix/src && make all compress
+RUN cd /pretix/src && make production
