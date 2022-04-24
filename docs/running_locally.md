@@ -1,22 +1,22 @@
 # Running and Testing Membertix and the Borderland-tool locally
 
-A good way to get acquainted with the project, and perhaps the best forward
+A good way to get acquainted with the project, and perhaps the best way
 to test quick fixes in your local machine without having to setup a pretix
-development environemnt, is to use docker and docker-compose. 
+development environemnt, is to use docker and docker-compose.
 
 ## Running Membertix locally
 
 You can run Membertix (Pretix + The Borderland memberships Plugin) locally
 using the `docker-comopose` configuration file available in this repository.
 
-To do this build a docker image with your latest changes in the repository. 
-You can use the available makefile as follows: 
+To do this build a docker image with your latest changes in the repository.
+You can use the available makefile as follows:
 
 ```
 make
 ```
 
-Windows: Install Cygwin, reinstall Docker and run `make`. Currently there is an issue running from Powershell or the default commandline. 
+Windows: Install Cygwin, reinstall Docker and run `make`. Currently there is an issue running from Powershell or the default commandline.
 After the image is built (it may take a few minutes), you can execute pretix
 locally and start testing:
 
@@ -27,28 +27,27 @@ docker-compose up
 Once it's running you'll be able to see locally in your broser a barebone
 installation of "Membertix" which you can use to test your code changes.
 
-You can do by opening `http://localhost:8000` on your browser 
+You can do by opening `http://localhost:8000` on your browser
 
 You may be able to register yourself or use the default user `admin@localhost`
 and password `admin`.
 
 OBS: this is disblaed in production for obvious reasons
 
-
 ### Emails
 
 By default I have setup docker-compose to use a fake email server, which you
 could use to check if emails and content is being sent correctly.
 
-You could check the emails that are being delivered to the mailserver 
+You could check the emails that are being delivered to the mailserver
 by curling on the port 1080::
 
 ```
 curl -v http://localhost:1080/api/emails
 ```
 
-
 ## Running the borderland-tool locally against a local me
+
 Addionally you should be able to run the borderland tool towards your local setup.
 
 To do so, you can setup a virtual environemnt for the tool (you can choose, but
@@ -60,6 +59,7 @@ pipenv --python 3.9 install -r requirements.txt
 ```
 
 Then you could use the help command as usual:
+
 ```
 borderland-tool $ python borderland_tool -h
 usage: borderland_tool [-h] -t TOKEN [-s HOST] [-o ORG] [-e EVENT]
@@ -86,18 +86,22 @@ optional arguments:
 
 ```
 
-### Runnig the lottery
-The lottery runs in two steps: 
- * Fetch all the registered users
+### Running the lottery
+
+The lottery runs in two steps:
+
+- Fetch all the registered users
 
 ```
 python borderland_tool -t localhost:8000/token -s localhost:8000 -o ORGANISATION -e EVENT lottery fetch -f registrations
 ```
 
- * Run the lottery and send purchase vouchers to the event to the winners
+TODO: specify where the token should come from, and where to find the name of Organization and Event
+
+TODO: Specify about where the registered users are stored
+
+- Run the lottery and send purchase vouchers to the event to the winners
 
 ```
 python borderland_tool -t localhost:8000/token -s localhost:8000 -o ORGANISATION -e EVENT raffle -q QUOTA -f registrations
 ```
-
-
