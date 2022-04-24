@@ -14,4 +14,4 @@ RUN chown -R pretixuser /pretix/src/pretix/locale/
 
 USER pretixuser
 
-RUN cd /pretix/src && make all
+RUN cd /pretix/src && make all compress
