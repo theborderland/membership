@@ -34,41 +34,20 @@ class Lottery:
             return
         for target in eligible:
             self.pretix.send_email(to = [target["email"]],
-                                   subject = "Re: So you didn't win the lottery 😭",
-                                   body = """Lovely Borderling,
+                                   subject = "So, you didn't win the Borderland lottery 😭",
+                                   body = """Hello from memberships HQ. It's time to cry.
 
-If you got this email and you *have a membership*, sorry.
+It's an inevitable fact that Borderland grows in popularity faster than we can create the organizational knowledge to host a bigger event.
 
-I went a bit too broad with this email aparrently. Your order isn't cancelled or anything, you're safe.
+It's incredibly sad and unfair to have to say no to any single one of you. But sometimes facts are unfair, even in the land between dreams and reality.
 
-Krisses,
-K
+All hope is not lost though, as many memberships tend to change hands as the event grows
+closer and summer plans change. Also, anyone who won the lottery has the chance to invite a +1 (so now you know who to flirt with). Maybe you’ll find a way to get your membership!
+
+Bleeps and Bloops,
+
+The Borderland Understaffed Tech Team 🤖
 """)
-#                                    subject = "So you didn't win the lottery 😭",
-#                                    body = """Lovely Borderling,
-
-# Hello from memberships HQ. It's time to cry.
-
-# It's an inevitable fact that Borderland grows in popularity faster than we can
-# create the organisational knowledge to host a bigger event.
-
-# All hope is not lost though, many memberships change hands as the event grows
-# closer and summer plans change. This year we're trying a new thing in
-# the Secure Membership Exchange Programme (SMEP), where we make it very easy to
-# sign up for a waiting list to receive a membership:
-
-# https://memberships.theborderland.se/borderland/2022/waitinglist?item=98
-
-# Note that unlike what I've told some of you before, you have to sign up
-# to this list manually!
-
-# That's to make sure you still want to go. A lot of you may want more certainty
-# and may already have made other plans. For instance, tickets to our quaint
-# little precompression Nowhere goes on sale Saturday.
-
-# Kisses,
-# K
-# """)
             print("Emailt {}" + target["email"])
 
 
@@ -101,22 +80,24 @@ K
     def send_voucher(self, target, voucher):
         self.pretix.send_email(to = [target["email"]],
                                subject = "You're invited to The Borderland 2022! 🔥",
-                               body = """Lovely Borderling,
+                               body = """
+Wow, you won the Borderland lottery! You hereby can purchase a membership for the Borderland, and to invite a friend of your choice to purchase their membership!
 
-You've won the lottery! You're invited to get a membership for the Borderland, and to invite a friend along!
-
-Follow this link to shopping nirvana! It's valid for two days.
+Follow this link to purchase your membership! It's valid for 48 hours.
 
 https://{}/{}/{}/redeem?voucher={}
 
-Please note that is a ~special~ lottery invitation. That means you have to use the same name and birth date as when you registered. For reference, the information you provided was:
+Please note that this is a ~special~ lottery invitation. This means you have to use the same name and birth date as when you registered. For reference, the information you provided was:
 
   * First Name: {}
   * Last Name: {}
   * Date of Birth: {}
 
+The second voucher you receive is not personal and can be sent to a friend of your choice, so that they may get the possibility to purchase a membership! This can be anyone really, but try to reflect on who would contribute to the co-created event, and/or who would get out a lot from going. This gift voucher has the same 48 hours limit as your original voucher.
+
 Bleeps and Bloops,
-The Borderland Computer 🤖
+
+The Borderland Understaffed Tech Team 🤖
 """.format(self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"], target["first_name"], target["last_name"],
            target["dob"])) # TODO show validity from voucher
