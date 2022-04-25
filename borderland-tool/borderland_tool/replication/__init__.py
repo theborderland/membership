@@ -74,23 +74,25 @@ class VoucherReplicator:
     def send_invitation(self, voucher, inviteinfo):
         self.pretix.send_email(to = [inviteinfo["email"]],
                                subject = "You've been invited to The Borderland 2022! 🔥",
-                               body = """Lovely Borderling,
+                               body = """
+Wow, {} must really like you! They've invited you to purchase a membership for the Borderland!
 
-{} must really like you, they've invited you to purchase a membership for the Borderland!
-
-Follow this link to get yours! It's valid for 47 hours.
+Follow this link to get yours! It's valid for 48 hours.
 
 https://{}/{}/{}/redeem?voucher={}
 
 This invitation is not personal, so you can pass it on if you like. It only works once though!
-
 You can read more about the Borderland at https://theborderland.se/
 
+The voucher is valid for 48 hours from the time it was sent to {}.
+
 Bleeps and Bloops,
-The Borderland Computer 🤖
+
+The Borderland Understaffed Tech Team 🤖
 """.format(inviteinfo["invited_by_name"].split()[0].capitalize(),
            self.pretix.host, self.pretix.org, self.pretix.event,
-           voucher["code"])) # TODO validity from voucher
+           voucher["code"],
+           inviteinfo["email"]) # TODO validity from voucher
 
 
 
