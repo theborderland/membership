@@ -95,7 +95,7 @@ class PretixAPI:
         next_url = url
         count = 1
         while next_url:
-            sys.stderr.write("\rLoading {}: {}".format(url, len(results)/count))
+            sys.stderr.write("\rLoading {}: {}\n".format(url, len(results)/count))
             resp = get(next_url,
                 headers = { "Authorization": "Token {}".format(self.token) },
                 json = json)

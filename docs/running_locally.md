@@ -93,7 +93,7 @@ The lottery runs in two steps:
 - Fetch all the registered users
 
 ```
-python borderland_tool -t localhost:8000/token -s localhost:8000 -o ORGANISATION -e EVENT lottery fetch -f registrations
+python borderland_tool -t localhost:8000/token -s localhost:8000 -o ORGANISATION -e EVENT lottery -q QUOTA -f registrations fetch
 ```
 
 TODO: specify where the token should come from, and where to find the name of Organization and Event
