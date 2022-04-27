@@ -6,10 +6,10 @@
 
 
 {% block content %}
-{% if not open %}
+{% if not context.open %}
     <h2>We're closed</h2>
     Sorry! Come back later/earlier.
-    {% else %}
+{% else %}
     Since the event has a limited capacity we sell memberships using a lottery. Read more about it on the <a href="..">front page</a>.
     <h2>Important</h2>
     <p>You <strong>must</strong> register with your <strong>legal name and date of birth</strong>, as it appears on official documents. When you buy a membership you must enter <strong>the same information</strong> as you do here. When we exchange your membership for a wristband we will <strong>ask to see official ID documents</strong>.</p>
