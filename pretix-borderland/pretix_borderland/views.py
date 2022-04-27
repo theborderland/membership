@@ -53,28 +53,23 @@ class Register(SuccessMessageMixin, CreateView):
 
     # TODO move to config
     email_subject = "Lottery Receipt 🔥"
-    email_message = """You did it! You've registered in the Borderland membership lottery, now kick back and dream!
+    email_message = """Yay, you did it! You’ve successfully registered for the Grand Membership Lottery of the Borderland 2022! Now it’s time to kick back and give yourself time for some dreaming!
 
-If you can't really wait, here's some things you can do to get ready:
+If you’re super eager and can’t wait, here’s some things you can do to get ready:
 
-  * Listen to some [music from last year](https://soundcloud.com/korvkorvkorv/sets/borderland-19) and daydream.
+  * Dream your dreams! Anything (ish) is possible at the Borderland, you just gotta dream it (and then potentially realize it)! Think about what cool shennanigans you want to cook up this year!
 
-  * Get inspired by looking at last year's [dreams](https://dreams.theborderland.se/) and [JOMO guide](https://guide.theborderland.se/).
+  * Want to get into the thick of it? Check out what [responsibilities and lead roles that still has to be filled](https://coda.io/d/Realities-2022_dFvRNS5423Z/Responsibilities_sulZB#_luxNx) up for the event to actually happen and run smooothly! 
 
-  * Want to be in the thick of it? Take on a lead role! [Check out what realizers we're missing.](http://realities.theborderland.se/09c8c43a-eed5-476c-b9d6-60a7352ee07c/4f1f2a53-f0ee-485a-bd17-6e0bda8282a4)
+  * Involve yourself! If you’re ready to dive head first into some live action plotting, you should check out the [Borderland Discord](https://discord.gg/9bvgcSW2Ej) server! There’s so many cool things happening there, and anyone can help out. This is also a great place to ask questions! 
 
-  * Read the [web page](http://theborderland.se) and last year's Survival Guide.
+  * Read last year's Survival Guide! The Survival Guide contains EVERYTHING (ish) that you need to survive the Borderland! It hasn’t been updated to the 2022 edition yet though, but there’s a bunch of vital information in the old one that is still relevant! [https://talk.theborderland.se/survival](https://talk.theborderland.se/survival/) 
 
-  * Join the [main Facebook group](https://www.facebook.com/groups/theborderland/) and the [membership group.](https://www.facebook.com/groups/borderlandmembership/)
+  * Join the Facebook group! So, Facebook isn’t always the best communication channel, as it tend to become a bit messy. But it’s still a great way to connect with people, and there’s a lot of future friends just waiting for you in there!
 
+  * Create or join a camp! Camps are great to augment your Borderland experience! If you haven’t found one yet (or if you have and you’re looking for members), there’s a Facebook group for camp matchmaking. [Check it out](https://www.facebook.com/groups/2080911315480407)!  
 
-For reference, this is the information you provided:
-
-  * First Name: %(first_name)s
-  * Last Name: %(last_name)s
-  * Date of Birth: %(dob)s
-
-You need to provide the same details when you buy your membership.
+Let’s keep our fingers crossed for a lucky strike at the Lottery, and see you soon! <3
 
 Bleeps and bloops,
 
