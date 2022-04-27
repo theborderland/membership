@@ -22,4 +22,4 @@ RUN chown -R pretixuser /pretix/src/pretix/locale /pretix/src/pretix/plugins/pre
 
 USER pretixuser
 
-RUN cd /pretix/src && make production
+RUN cd /pretix/src && python3 manage.py makemigrations && make production
