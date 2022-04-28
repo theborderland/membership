@@ -133,7 +133,7 @@ The Borderland Understaffed Tech Team 🤖
 
     def load_csv(self):
         try:
-            with open(self.csvfile, newline='') as c:
+            with open(self.csvfile, newline='', encoding="utf8") as c:
                 r=list(csv.DictReader(c))
         except FileNotFoundError:
             print("Creating new file ...")
