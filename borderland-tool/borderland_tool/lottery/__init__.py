@@ -141,7 +141,7 @@ The Borderland Understaffed Tech Team 🤖
         return r
 
     def save_csv(self):
-        with open(self.csvfile, 'w', newline='', encoding="utf8") as c:
+        with open(self.csvfile, 'w', newline='') as c:
             fieldnames = self.registered[0].keys() if len(self.registered) > 0 else ["No", "users"]
             writer = csv.DictWriter(c, fieldnames=fieldnames)
             writer.writeheader()
