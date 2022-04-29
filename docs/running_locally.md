@@ -96,9 +96,9 @@ The lottery runs in two steps:
 python borderland_tool -t localhost:8000/token -s localhost:8000 -o ORGANISATION -e EVENT lottery -q QUOTA -f registrations.csv fetch
 ```
 
-TODO: specify where the token should come from, and where to find the name of Organization and Event
+If there is no local registration CSV file, one will be created from the existing registrations in pretix. Otherwise, an existing CSV file is augmented by new entries since last run.
 
-TODO: Specify about where the registered users are stored
+TODO: specify where the token should come from, and where to find the name of Organization and Event
 
 - Run the lottery and send purchase vouchers to the event to the winners
 
