@@ -1,6 +1,7 @@
 from requests import post, get, put, patch
 from datetime import datetime, timedelta
 import sys
+import math
 
 class PretixAPI:
     def __init__(self, host, org, event, token):
@@ -95,7 +96,7 @@ class PretixAPI:
         next_url = url
         count = 1
         while next_url:
-            sys.stderr.write("\rLoading {}: {}\n".format(url, len(results)/count))
+            sys.stderr.write("\rLoading {}: {}% complete".format(url, math.floor(100.0* len(results)/count)))
             resp = get(next_url,
                 headers = { "Authorization": "Token {}".format(self.token) },
                 json = json)
@@ -106,6 +107,6 @@ class PretixAPI:
             results += resp_json['results']
             next_url = resp_json['next'] # !
             count = resp_json['count']
-        sys.stderr.write("\r")
+        sys.stderr.write("\r\n")
         return results
 
