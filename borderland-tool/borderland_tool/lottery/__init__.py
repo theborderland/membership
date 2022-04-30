@@ -16,7 +16,7 @@ class Lottery:
         self.has_order = self.has_voucher = None
 
     def registrations_to_csv(self):
-        """Retrieve registrered users from Pretix plugin and update CSV"""
+        """Retrieve registered users from Pretix plugin and update CSV"""
         registrations_pretix = self.pretix.get_registrations()
         if self.registrations_csv:
             last = int(self.registrations_csv[-1]['id'])
