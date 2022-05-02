@@ -1,3 +1,5 @@
+import re
+
 from django.db import transaction, IntegrityError
 from django.views.generic import CreateView, TemplateView, View, UpdateView
 from django.contrib import messages
@@ -12,11 +14,13 @@ from datetime import datetime
 
 from pretix.presale.views.order import OrderDetailMixin
 from pretix.base.forms.widgets import DatePickerWidget
+from pretix.base.models.event import Event
 from pretix.helpers.http import get_client_ip
 
 from .models import LotteryEntry, RefundRequest
 from .serializers import LotteryEntrySerializer, RefundRequestSerializer
 from .tasks import send_mail
+
 
 # Lottery
 
@@ -165,11 +169,21 @@ class TransferRequestCancel(SuccessMessageMixin, OrderDetailMixin, View):
 # API viewsets TODO move
 
 class RegisterAPIViewSet(viewsets.ModelViewSet):
-    queryset = LotteryEntry.objects.all().order_by('id')
     permission = 'can_view_orders'
     serializer_class = LotteryEntrySerializer
 
-    def update(self, request, *args, **kwargs):
+    def get_queryset(self):
+        event = re.findall(r"events/([^.]*)/registration", self.request.path)
+        if not event:
+            return Response({'error': 'invalid request, event not found'}, status=401)
+
+        events = Event.objects.filter(slug=event[0])
+        if not events:
+            return Response({'error': 'event not found'}, status=404)
+
+        return LotteryEntry.objects.filter(event_id=events[0].id).order_by('id')
+
+    def update(self, request, pk=None):
         self.event.log_action('pretix.plugins.borderland.registration.api_update', data=request.data, auth=request.auth)
         return super.update(self, request, *args, **kwargs)
 
