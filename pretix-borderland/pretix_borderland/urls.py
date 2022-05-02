@@ -18,7 +18,7 @@ event_patterns = [
 
 
 apirouter = routers.DefaultRouter()
-apirouter.register(r'registration', views.RegisterAPIViewSet)
+apirouter.register(r'registration', views.RegisterAPIViewSet, basename="RegisterAPI")
 apirouter.register(r'refund', views.TransferAPIViewSet)
 apirouter.register(r'email', views.EmailViewSet, basename="Email")
 
