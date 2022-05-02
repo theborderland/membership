@@ -39,13 +39,13 @@ class PretixAPI:
                        comment="",
                        block_quota=True,
                        tag="replication",
-                       valid_until=str(datetime.now()+timedelta(hours=12))): # FIXME
+                       valid_until=datetime.now()+timedelta(hours=1)):
         url = "https://{}/api/v1/organizers/{}/events/{}/vouchers/".format(self.host, self.org, self.event)
         resp = post(url,
                     headers = { "Authorization": "Token {}".format(self.token) },
                     json = { "comment": comment,
                              "block_quota": block_quota,
-                             "valid_until": valid_until,
+                             "valid_until": str(valid_until),
                              "tag": tag,
                              "quota": quota })
         if resp.status_code != 201:
