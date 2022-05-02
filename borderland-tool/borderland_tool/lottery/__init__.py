@@ -3,7 +3,7 @@ import csv
 import random
 import json
 
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from dateutil import parser
 
 
@@ -75,7 +75,8 @@ The Borderland Understaffed Tech Team 🤖
     def create_voucher(self, target):
         voucher = self.pretix.create_voucher(self.quota,
                                              tag="lottery",
-                                             comment=json.dumps(target, indent=2))
+                                             comment=json.dumps(target, indent=2),
+                                             valid_until=datetime.now()+timedelta(hours=48))
         if not voucher:
             raise RuntimeError("Unable to create voucher")
         self.send_voucher(target, voucher)

@@ -3,6 +3,7 @@
 # +1 Replication
 
 import json
+from datetime import datetime, timedelta
 
 class VoucherReplicator:
     def __init__(self,
@@ -63,8 +64,8 @@ class VoucherReplicator:
 
     def create_invitation(self, inviteinfo):
         voucher = self.pretix.create_voucher(quota = self.quota_group,
-                                             comment = json.dumps(inviteinfo,
-                                                                  indent=2))
+                                             comment = json.dumps(inviteinfo, indent=2),
+                                             valid_until=datetime.now()+timedelta(hours=48))
         if voucher:
             self.send_invitation(voucher, inviteinfo)
             return True
