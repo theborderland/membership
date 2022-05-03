@@ -150,7 +150,7 @@ The Borderland Understaffed Tech Team 🤖
             if num_csv_registrations > 0:
                 fieldnames = self.registrations_csv[0].keys()
                 print("found {} registered users".format(
-                    num_csv_registrations-1))
+                    num_csv_registrations))
             else:
                 print("No registered users found")
             writer = csv.DictWriter(c, fieldnames=fieldnames)
