@@ -1,3 +1,4 @@
+import os
 import re
 
 from django.db import transaction, IntegrityError
@@ -9,8 +10,6 @@ from django import forms
 
 from rest_framework import status, viewsets
 from rest_framework.response import Response
-
-from datetime import datetime
 
 from pretix.presale.views.order import OrderDetailMixin
 from pretix.base.forms.widgets import DatePickerWidget
@@ -83,7 +82,7 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
         # TODO move to config
-        ctx.update({ "open": datetime.now() >= datetime(2022, 4, 25, 0, 0) })
+        ctx.update({ "open": bool(os.getenv("ENABLE_LOTTERY_REGISTRATION")) })
         return ctx
 
 
