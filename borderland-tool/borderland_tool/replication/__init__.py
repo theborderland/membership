@@ -93,7 +93,7 @@ The Borderland Understaffed Tech Team 🤖
 """.format(inviteinfo["invited_by_name"].split()[0].capitalize(),
            self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"],
-           inviteinfo["email"]) # TODO validity from voucher
+           inviteinfo["email"])) # TODO validity from voucher
 
 
 
