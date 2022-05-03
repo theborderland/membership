@@ -93,15 +93,29 @@ The lottery runs in two steps:
 - Fetch all the registered users
 
 ```
-python borderland_tool -t localhost:8000/token -s localhost:8000 -o ORGANISATION -e EVENT lottery -q QUOTA -f registrations.csv fetch
+python borderland_tool -t <API token> -s localhost:8000 -o ORGANISATION -e EVENT lottery -q QUOTA -f lottery.csv fetch
 ```
 
 If there is no local registration CSV file, one will be created from the existing registrations in pretix. Otherwise, an existing CSV file is augmented by new entries since last run.
 
-TODO: specify where the token should come from, and where to find the name of Organization and Event
-
 - Run the lottery and send purchase vouchers to the event to the winners
 
 ```
-python borderland_tool -t localhost:8000/token -s localhost:8000 -o ORGANISATION -e EVENT raffle -q QUOTA -f registrations.csv
+python borderland_tool -t <API token> -s localhost:8000 -o ORGANISATION -e EVENT raffle -q QUOTA -f lottery.csv
 ```
+
+### How to get a token
+
+- Get admin access to membertix
+- Go into `Admin mode`
+- Navigate to `Organizers` (sidebar) => `The Borderland` (select event) => `Teams` (side bar) => `Borderland 2022` (select team)
+- Go to `API tokens`, type in token name and press `Add`
+- Up at the top, the token will appear in green.
+
+### How to get a the value of the quota parameter
+
+- Go into `Admin mode`
+- Navigate to the event
+- Go to `Products => Quotas`
+- Select one of the quota names (?which one?)
+- The URL should end in `quotas/75/` or something similar. The number after `quotas` is the one you're looking for
