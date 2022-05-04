@@ -13,7 +13,7 @@ class VoucherReplicator:
                  invite_identifier,
                  prefname_identifier):
         self.vouchers = pretix.get_vouchers()
-        self.orders = pretix.get_orders()
+        self.orders = pretix.get_orders(status='p')
         self.allowed_voucher_tags = allowed_voucher_tags
         self.quota_group = quota_group # TODO using internal id is cumbersome
         self.invite_identifier = invite_identifier
@@ -73,6 +73,9 @@ class VoucherReplicator:
 
 
     def send_invitation(self, voucher, inviteinfo):
+        name = "Someone"
+        if inviteinfo["invited_by_name"]:
+            name =inviteinfo["invited_by_name"].split()[0].capitalize()
         self.pretix.send_email(to = [inviteinfo["email"]],
                                subject = "You've been invited to The Borderland 2022! 🔥",
                                body = """
@@ -90,7 +93,7 @@ The voucher is valid for 48 hours from the time it was sent to {}.
 Bleeps and Bloops,
 
 The Borderland Understaffed Tech Team 🤖
-""".format(inviteinfo["invited_by_name"].split()[0].capitalize(),
+""".format(name,
            self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"],
            inviteinfo["email"])) # TODO validity from voucher
