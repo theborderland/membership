@@ -93,7 +93,7 @@ The lottery runs in two steps:
 - Fetch all the registered users
 
 ```
-python borderland_tool -t <API token> -s localhost:8000 -o ORGANISATION -e EVENT lottery -q QUOTA -f lottery.csv fetch
+python3 borderland_tool -t <API token> -s localhost:8000 -o ORGANISATION -e EVENT lottery -q QUOTA -f lottery.csv fetch
 ```
 
 If there is no local registration CSV file, one will be created from the existing registrations in pretix. Otherwise, an existing CSV file is augmented by new entries since last run.
@@ -101,7 +101,8 @@ If there is no local registration CSV file, one will be created from the existin
 - Run the lottery and send purchase vouchers to the event to the winners
 
 ```
-python borderland_tool -t <API token> -s localhost:8000 -o ORGANISATION -e EVENT raffle -q QUOTA -f lottery.csv
+python borderland_tool -t $TOKEN -o borderland -s memberships.theborderland.se -e 2022-test lottery -q 88 raffle -n 10
+python borderland_tool -t <API token> -s localhost:8000 -o ORGANISATION -e EVENT lottery -q QUOTA raffle -n 10
 ```
 
 ### How to get a token
