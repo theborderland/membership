@@ -55,8 +55,12 @@ for the sake of the example I'll use pipenv, which is my favorite).
 
 ```
 cd borderland-tool
-pipenv --python 3.9 install -r requirements.txt
+pipenv --python 3.9 install
 ```
+
+Note: If the pipenv command fails, try running `pipenv --rm` and repeat the above command.
+
+Then run `pipenv shell` to start the virtual environment
 
 Then you could use the help command as usual:
 
