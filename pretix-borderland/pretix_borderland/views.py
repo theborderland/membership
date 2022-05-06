@@ -10,6 +10,7 @@ from django import forms
 
 from rest_framework import status, viewsets
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 
 from pretix.presale.views.order import OrderDetailMixin
 from pretix.base.forms.widgets import DatePickerWidget
@@ -168,9 +169,15 @@ class TransferRequestCancel(SuccessMessageMixin, OrderDetailMixin, View):
 
 # API viewsets TODO move
 
+class ResultsSetPagination(PageNumberPagination):
+    page_size = 500
+    page_size_query_param = 'page_size'
+    max_page_size = 4000
+
 class RegisterAPIViewSet(viewsets.ModelViewSet):
     permission = 'can_view_orders'
     serializer_class = LotteryEntrySerializer
+    pagination_class = ResultsSetPagination
 
     def get_queryset(self):
         event = re.findall(r"events/([^.]*)/registration", self.request.path)
@@ -213,6 +220,7 @@ class TransferAPIViewSet(viewsets.ModelViewSet):
     queryset = RefundRequest.objects.all().order_by('id')
     permission = 'can_view_orders'
     serializer_class = RefundRequestSerializer
+    pagination_class = ResultsSetPagination
 
     def update(self, request, *args, **kwargs):
         self.event.log_action('pretix.plugins.borderland.refund.api_update', data=request.data, auth=request.auth)
