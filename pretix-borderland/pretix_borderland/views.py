@@ -182,7 +182,7 @@ class RegisterAPIViewSet(viewsets.ModelViewSet):
             return Response({'error': 'event not found'}, status=404)
         event = events[0]
 
-        registered_users = LotteryEntry.objects.filter(event_id=event.id).order_by('id')
+        registered_users = LotteryEntry.objects.filter(event_id=event).order_by('id')
         if "without-membership" in self.request.query_params:
             registered_users_without_membership = []
             for reg_user in registered_users:
