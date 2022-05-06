@@ -180,13 +180,14 @@ class RegisterAPIViewSet(viewsets.ModelViewSet):
         events = Event.objects.filter(slug=event[0])
         if not events:
             return Response({'error': 'event not found'}, status=404)
+        event = events[0]
 
-        registered_users = LotteryEntry.objects.filter(event_id=events[0].id).order_by('id')
+        registered_users = LotteryEntry.objects.filter(event_id=event.id).order_by('id')
         if "without-membership" in self.request.query_params:
             registered_users_without_membership = []
             for reg_user in registered_users:
-                orders = Order.objects.filter(email=reg_user.email)
-                if not orders or orders[0].status != "p":
+                orders = Order.objects.filter(email=reg_user.email, event=event)
+                if not orders:
                     registered_users_without_membership.append(reg_user)
             return registered_users_without_membership
         return registered_users
