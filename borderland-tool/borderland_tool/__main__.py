@@ -128,7 +128,8 @@ def get_pretix(args):
     return PretixAPI(org = args.org,
                      host = args.server,
                      event = args.event,
-                     token = args.token)
+                     token = args.token,
+                     no_ssl = args.no_ssl)
 
 def main():
     parser = argparse.ArgumentParser(description='A collection of things we do with Pretix')
@@ -147,6 +148,8 @@ def main():
                         help="pretix organisation to operate on")
     parser.add_argument("-e", "--event",
                         default="2022", help="pretix event to operate on")
+    parser.add_argument("-N", "--no-ssl", action='store_true',
+                        help="disable ssl when communicating with pretix, good for testing locally")
 
     # Transfers
     smep_parser = subparsers.add_parser('smep', help='Membership Transfers')

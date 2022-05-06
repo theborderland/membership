@@ -4,27 +4,30 @@ import sys
 import math
 
 class PretixAPI:
-    def __init__(self, host, org, event, token):
+    def __init__(self, host, org, event, token, no_ssl=False):
         self.host = host
         self.org = org
         self.event = event
         self.token = token
+        self.url_scheme = "https"
+        if no_ssl:
+            self.url_scheme = "http"
 
 
     def get_orders(self, status="p"):
-        url = "https://{}/api/v1/organizers/{}/events/{}/orders/?page=1".format(self.host, self.org, self.event)
+        url = f"{self.url_scheme}://{self.host}/api/v1/organizers/{self.org}/events/{self.event}/orders/?page=1"
         return self.get_paginated(url,
                                   json = { "ordering": "datetime",
                                            "status": status })
 
 
     def get_vouchers(self):
-        url = "https://{}/api/v1/organizers/{}/events/{}/vouchers/?page=1".format(self.host, self.org, self.event)
+        url = f"{self.url_scheme}://{self.host}/api/v1/organizers/{self.org}/events/{self.event}/vouchers/?page=1"
         return self.get_paginated(url, {})
 
 
     def patch_voucher(self, vid, updates):
-        url = "https://{}/api/v1/organizers/{}/events/{}/vouchers/{}/".format(self.host, self.org, self.event, vid)
+        url = f"{self.url_scheme}://{self.host}/api/v1/organizers/{self.org}/events/{self.event}/vouchers/{vid}/"
         resp = patch(url,
                      headers = { "Authorization": "Token {}".format(self.token) },
                      json = updates)
@@ -40,7 +43,7 @@ class PretixAPI:
                        block_quota=True,
                        tag="replication",
                        valid_until=datetime.now()+timedelta(hours=1)):
-        url = "https://{}/api/v1/organizers/{}/events/{}/vouchers/".format(self.host, self.org, self.event)
+        url = f"{self.url_scheme}://{self.host}/api/v1/organizers/{self.org}/events/{self.event}/vouchers/"
         resp = post(url,
                     headers = { "Authorization": "Token {}".format(self.token) },
                     json = { "comment": comment,
@@ -60,11 +63,11 @@ class PretixAPI:
 
     # TODO make own class
     def get_refund_requests(self):
-        url = "https://{}/api/v1/organizers/{}/events/{}/refund/".format(self.host, self.org, self.event)
+        url = f"{self.url_scheme}://{self.host}/api/v1/organizers/{self.org}/events/{self.event}/refund/"
         return self.get_paginated(url, {})
 
     def update_refund_request(self, id, status):
-        url = "https://{}/api/v1/organizers/{}/events/{}/refund/{}/".format(self.host, self.org, self.event, id)
+        url = f"{self.url_scheme}://{self.host}/api/v1/organizers/{self.org}/events/{self.event}/refund/{id}/"
         resp = patch(url,
                     headers = { "Authorization": "Token {}".format(self.token) },
                     json = { "status": status })
@@ -75,15 +78,15 @@ class PretixAPI:
 
 
     def get_registrations(self):
-        url = "https://{}/api/v1/organizers/{}/events/{}/registration/".format(self.host, self.org, self.event)
+        url = f"{self.url_scheme}://{self.host}/api/v1/organizers/{self.org}/events/{self.event}/registration/"
         return self.get_paginated(url, {})
 
     def get_registrations_without_membership(self):
-        url = "https://{}/api/v1/organizers/{}/events/{}/registration??without-membership=true".format(self.host, self.org, self.event)
+        url = f"{self.url_scheme}://{self.host}/api/v1/organizers/{self.org}/events/{self.event}/registration??without-membership=true"
         return self.get_paginated(url, {})
 
     def send_email(self, to, subject, body):
-        url = "https://{}/api/v1/organizers/{}/events/{}/email/".format(self.host, self.org, self.event)
+        url = f"{self.url_scheme}://{self.host}/api/v1/organizers/{self.org}/events/{self.event}/email/"
         resp = post(url,
                     headers = { "Authorization": "Token {}".format(self.token) },
                     json = { "to": to, "subject": subject, "body": body })
