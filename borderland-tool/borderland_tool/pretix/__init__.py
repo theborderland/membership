@@ -78,6 +78,10 @@ class PretixAPI:
         url = "https://{}/api/v1/organizers/{}/events/{}/registration/".format(self.host, self.org, self.event)
         return self.get_paginated(url, {})
 
+    def get_registrations_without_membership(self):
+        url = "https://{}/api/v1/organizers/{}/events/{}/registration??without-membership=true".format(self.host, self.org, self.event)
+        return self.get_paginated(url, {})
+
     def send_email(self, to, subject, body):
         url = "https://{}/api/v1/organizers/{}/events/{}/email/".format(self.host, self.org, self.event)
         resp = post(url,
