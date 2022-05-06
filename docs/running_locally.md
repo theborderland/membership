@@ -55,7 +55,7 @@ for the sake of the example I'll use pipenv, which is my favorite).
 
 ```
 cd borderland-tool
-pipenv --python 3.9 install
+pipenv install
 ```
 
 Note: If the pipenv command fails, try running `pipenv --rm` and repeat the above command.
