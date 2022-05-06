@@ -17,7 +17,7 @@ class FCFS:
 
     def registrations_to_csv(self):
         self.registered_without_membership_csv = self.pretix.get_registrations_without_membership()
-        print("{} members registered to the lottery but did not have a membership".format(len(new_registrations)))
+        print("Found {} member(s) registered to the lottery without a membership...".format(len(self.registered_without_membership_csv)))
         self.save_csv()
 
     def send_vouchers(self, num):
@@ -73,8 +73,8 @@ PS: These vouchers expire in 24h and are not transferable.
 
     def save_csv(self):
         with open(self.csvfile, 'w', newline='', encoding="utf8") as c:
-            print("found {} registered without membership users".format(len(self.registered_without_membership_csv)))
             if len(self.registered_without_membership_csv) > 0:
+                print(f"Saved {len(self.registered_without_membership_csv)} member(s) on file '{self.csvfile}'")
                 fieldnames = self.registered_without_membership_csv[0].keys()
                 writer = csv.DictWriter(c, fieldnames=fieldnames)
                 writer.writeheader()
