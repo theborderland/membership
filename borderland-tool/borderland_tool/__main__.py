@@ -56,7 +56,7 @@ class FCFSCmd:
 
     def send_vouchers(self, args):
         fcfs = self.get_fcfs(args)
-        fcfs.send_vouchers(args.num)
+        fcfs.send_vouchers()
 
     def add_parser(self, subparsers):
         parser = subparsers.add_parser('fcfs', help='First Come First Served Sale')

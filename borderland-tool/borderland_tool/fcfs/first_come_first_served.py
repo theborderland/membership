@@ -20,7 +20,7 @@ class FCFS:
         print("Found {} member(s) registered to the lottery without a membership...".format(len(self.registered_without_membership_csv)))
         self.save_csv()
 
-    def send_vouchers(self, num):
+    def send_vouchers(self):
         if input("Send vouchers to {} registered without membership people? (y/n) ".format(len(self.registered_without_membership_csv))) != 'y':
             return
         self.create_vouchers(self.registered_without_membership_csv)
@@ -33,7 +33,7 @@ class FCFS:
                                              block_quota=False,
                                              tag="fcfs",
                                              comment=json.dumps(target, indent=2),
-                                             valid_until=datetime.now()+timedelta(hours=24))
+                                             valid_until=datetime.now()+timedelta(hours=180))
         if not voucher:
             raise RuntimeError("Unable to create voucher")
         self.send_voucher(target, voucher)
@@ -57,8 +57,6 @@ https://{}/{}/{}/redeem?voucher={}
 Bleeps and Bloops,
 
 The Borderland Understaffed Tech Team 🤖
-
-PS: These vouchers expire in 24h and are not transferable.
 """.format(self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"]))
 

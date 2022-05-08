@@ -82,7 +82,7 @@ class PretixAPI:
         return self.get_paginated(url, {})
 
     def get_registrations_without_membership(self):
-        url = f"{self.url_scheme}://{self.host}/api/v1/organizers/{self.org}/events/{self.event}/registration??without-membership=true"
+        url = f"{self.url_scheme}://{self.host}/api/v1/organizers/{self.org}/events/{self.event}/registration?without-membership=true"
         return self.get_paginated(url, {})
 
     def send_email(self, to, subject, body):
