@@ -45,6 +45,39 @@ class LotteryCmd:
         lottery_losers = lottery_subparsers.add_parser("losers", help="Make a list of losers")
         lottery_losers.set_defaults(func=self.losers)
 
+class FCFSCmd:
+    def get_fcfs(self, args):
+        from borderland_tool.fcfs import FCFS
+        return FCFS(get_pretix(args), args.file, args.quota)
+
+    def fetch(self, args):
+        fcfs = self.get_fcfs(args)
+        fcfs.registrations_to_csv()
+
+    def send_vouchers(self, args):
+        fcfs = self.get_fcfs(args)
+        fcfs.send_vouchers(args.num)
+
+    def add_parser(self, subparsers):
+        parser = subparsers.add_parser('fcfs', help='First Come First Served Sale')
+        parser.add_argument("-f", "--file", default="registered_without_membership.csv",
+                                    help="CSV file to store/load registrations")
+
+        subparsers = parser.add_subparsers(dest='fcfs_action')
+        subparsers.required = True
+
+        fetch = subparsers.add_parser("fetch", help="Retrieve registrations without memberships from Pretix")
+        fetch.set_defaults(func=self.fetch)
+
+        send_vouchers = subparsers.add_parser("send", help="Send vouchers to all registered users without membership")
+        send_vouchers.set_defaults(func=self.send_vouchers)
+        parser.add_argument("-q",
+                            "--quota",
+                            type=int,
+                            default=1,
+                            required=True,
+                            help="internal identifier of quota group to invite to (e.g. 1)")
+
 def replicate(args):
     from borderland_tool.replication import VoucherReplicator
     pretix = get_pretix(args)
@@ -95,7 +128,8 @@ def get_pretix(args):
     return PretixAPI(org = args.org,
                      host = args.server,
                      event = args.event,
-                     token = args.token)
+                     token = args.token,
+                     no_ssl = args.no_ssl)
 
 def main():
     parser = argparse.ArgumentParser(description='A collection of things we do with Pretix')
@@ -114,6 +148,8 @@ def main():
                         help="pretix organisation to operate on")
     parser.add_argument("-e", "--event",
                         default="2022", help="pretix event to operate on")
+    parser.add_argument("-N", "--no-ssl", action='store_true',
+                        help="disable ssl when communicating with pretix, good for testing locally")
 
     # Transfers
     smep_parser = subparsers.add_parser('smep', help='Membership Transfers')
@@ -122,6 +158,11 @@ def main():
     # Lottery
     lotterycmd = LotteryCmd()
     lotterycmd.add_parser(subparsers)
+
+    # Firs Come, First Served Sale (FCFS)
+    fcfs = FCFSCmd()
+    fcfs.add_parser(subparsers)
+
 
     # Replicating Vouchers
     replicate_parser = subparsers.add_parser('replicate',
