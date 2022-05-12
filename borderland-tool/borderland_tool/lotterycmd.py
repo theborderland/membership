@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from get_pretix import get_pretix
+from borderland_tool.get_pretix import get_pretix
 from borderland_tool.lottery import Lottery
 
 

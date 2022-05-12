@@ -1,5 +1,5 @@
 import unittest
-from LotteryCmd import *
+from borderland_tool.lotterycmd import LotteryCmd
 import argparse
 
 
@@ -33,7 +33,6 @@ class Test2Plus2(unittest.TestCase):
     def test_string(self):
         a = 'some'
         b = 'some'
-        print("lotterycmd="+self.lotterycmd)
         self.assertEqual(a, b)
 
     def test_2plus2(self):

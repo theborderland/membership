@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-import get_pretix
+from borderland_tool.get_pretix import get_pretix
+from borderland_tool.voucher import Voucher
 
 
 def unblock_vouchers(args):
-    from borderland_tool.voucher import Voucher
     pretix = get_pretix(args)
     vouchers = sum(args.vouchers, [])
     voucher = Voucher(pretix)

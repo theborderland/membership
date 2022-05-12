@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
+from borderland_tool.pretix import PretixAPI
+
 
 def get_pretix(args):
-    from borderland_tool.pretix import PretixAPI
     return PretixAPI(org=args.org,
                      host=args.server,
                      event=args.event,

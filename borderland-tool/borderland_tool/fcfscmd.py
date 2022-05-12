@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import get_pretix
+from borderland_tool.get_pretix import get_pretix
 
 
 class FCFSCmd:

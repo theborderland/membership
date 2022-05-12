@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-import get_pretix
+from borderland_tool.get_pretix import get_pretix
+from borderland_tool.replication import VoucherReplicator
 
 
 def replicate(args):
-    from borderland_tool.replication import VoucherReplicator
     pretix = get_pretix(args)
     tags = sum(args.tags, [])  # flatten
     if args.all_vouchers:
