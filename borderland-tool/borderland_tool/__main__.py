@@ -5,8 +5,8 @@ import argparse
 import replicate
 import smep
 import unblock_vouchers
-import LotteryCmd
-import FCFSCmd
+from lotterycmd import LotteryCmd
+from fcfscmd import FCFSCmd
 
 
 def waitlist(args):
@@ -92,7 +92,7 @@ def main():
 #    waitlist_parser.add_argument('')
 
     args = parser.parse_args()
-    print("args={}".format(args))
+    print("\nargs={}".format(args))
     args.func(args)
 
 

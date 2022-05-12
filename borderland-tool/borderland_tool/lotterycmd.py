@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-import get_pretix
+from get_pretix import get_pretix
+from borderland_tool.lottery import Lottery
 
 
 class LotteryCmd:
@@ -19,7 +20,7 @@ class LotteryCmd:
     # def control(self, args)
 
     def get_lottery(self, args):
-        from borderland_tool.lottery import Lottery
+        #from borderland_tool.lottery import Lottery
         return Lottery(get_pretix(args), args.file, args.quota)
 
     def add_parser(self, subparsers):
