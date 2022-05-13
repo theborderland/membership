@@ -1,5 +1,7 @@
+from threading import local
 import unittest
 from borderland_tool.lotterycmd import LotteryCmd
+from borderland_tool.get_pretix import get_pretix
 import argparse
 
 
@@ -7,38 +9,29 @@ class Test2Plus2(unittest.TestCase):
     lotterycmd = LotteryCmd()
 
     def setUp(self):
-        parser = argparse.ArgumentParser(
-            description='A collection of things we do with Pretix')
-        subparsers = parser.add_subparsers(dest='cmd')
-        subparsers.required = True
+        pass
 
-        # Common Arguments
-        parser.add_argument("-t", "--token",
-                            required=True,
-                            help="api token for pretix (required)")
-        parser.add_argument("-s", "--server", metavar="HOST",
-                            default="localhost:8000",
-                            help="hostname of pretix instance")
-        parser.add_argument("-o", "--org",
-                            default="test",
-                            help="pretix organisation to operate on")
-        parser.add_argument("-e", "--event",
-                            default="2022", help="pretix event to operate on")
-        parser.add_argument("-N", "--no-ssl", action='store_true',
-                            help="disable ssl when communicating with pretix, good for testing locally")
+    def test_argparse(self):
+        simple_parser = argparse.ArgumentParser(
+            description='Simple parser to test')
+        simple_parser.add_argument("-a", "--arg1",
+                                   required=True,
+                                   help="first argument (required)")
+        simple_parser.add_argument("-b", "--arg2",
+                                   required=True,
+                                   help="second argument (required)")
 
-        self.lotterycmd.add_parser(subparsers)
-        print('setUp method called!!')
+        cmd_args = ['--arg1', 'asdf', '--arg2', 'qwer']
+        result_args = simple_parser.parse_args(cmd_args)
+        self.assertEqual(len(cmd_args), 4)
+        self.assertEqual(result_args.arg1, "asdf")
+        self.assertEqual(result_args.arg2, "qwer")
 
-    def test_string(self):
-        a = 'some'
-        b = 'some'
-        self.assertEqual(a, b)
-
-    def test_2plus2(self):
-        a = 2
-        b = 2
-        self.assertEqual(a + b, 4)
+    # def test_get_pretix_not_null(self):
+    #     args = self.theparser.parse_args()
+    #     print("after args")
+    #     pretix = get_pretix(args)
+    #     self.assertIsNotNone(pretix)
 
     def tearDown(self):
-        print('teardown method called!!')
+        pass
