@@ -1,4 +1,3 @@
-from threading import local
 import unittest
 from borderland_tool.lotterycmd import LotteryCmd
 from borderland_tool.get_pretix import get_pretix
@@ -31,11 +30,38 @@ class Test2Plus2(unittest.TestCase):
         self.assertEqual(result_args.arg1, "ASDF")
         self.assertEqual(result_args.arg2, "QWER")
 
-    # def test_get_pretix_not_null(self):
-    #     args = self.theparser.parse_args()
-    #     print("after args")
-    #     pretix = get_pretix(args)
-    #     self.assertIsNotNone(pretix)
+    def test_lottery_args(self):
+        parser = argparse.ArgumentParser(
+            description='A collection of things we do with Pretix')
+        subparsers = parser.add_subparsers(dest='cmd')
+        subparsers.required = True
+
+        # Common Arguments
+        parser.add_argument("-t", "--token",
+                            required=True,
+                            help="api token for pretix (required)")
+        parser.add_argument("-s", "--server", metavar="HOST",
+                            default="localhost:8000",
+                            help="hostname of pretix instance")
+        parser.add_argument("-o", "--org",
+                            default="test",
+                            help="pretix organisation to operate on")
+        parser.add_argument("-e", "--event",
+                            default="2022", help="pretix event to operate on")
+        parser.add_argument("-N", "--no-ssl", action='store_true',
+                            help="disable ssl when communicating with pretix, good for testing locally")
+
+        # Lottery
+        lotterycmd = LotteryCmd()
+        lotterycmd.add_parser(subparsers)
+        cmd_args = ['-t', 'mytoken', '-s', 'myserver',
+                    '-o', 'myorg', '-e', 'myevent', 'lottery', '-q', '88', 'fetch']
+        args = parser.parse_args(cmd_args)
+        self.assertEqual(args.cmd, 'lottery')
+        self.assertEqual(args.lottery_action, 'fetch')
+        self.assertEqual(args.quota, 88)
+        pretix = get_pretix(args)
+        self.assertIsNotNone(pretix)
 
     def tearDown(self):
         pass
