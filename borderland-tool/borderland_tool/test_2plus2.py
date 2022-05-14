@@ -62,6 +62,10 @@ class Test2Plus2(unittest.TestCase):
         self.assertEqual(args.quota, 88)
         pretix = get_pretix(args)
         self.assertIsNotNone(pretix)
+        self.assertEqual(pretix.org, "myorg")
+        self.assertEqual(pretix.host, "myserver")
+        self.assertEqual(pretix.event, "myevent")
+        self.assertEqual(pretix.token, "mytoken")
 
     def tearDown(self):
         pass
