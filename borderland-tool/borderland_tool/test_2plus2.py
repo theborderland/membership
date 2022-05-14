@@ -26,6 +26,10 @@ class Test2Plus2(unittest.TestCase):
         self.assertEqual(len(cmd_args), 4)
         self.assertEqual(result_args.arg1, "asdf")
         self.assertEqual(result_args.arg2, "qwer")
+        short_args = ['-a', 'ASDF', '-b', 'QWER']
+        result_args = simple_parser.parse_args(short_args)
+        self.assertEqual(result_args.arg1, "ASDF")
+        self.assertEqual(result_args.arg2, "QWER")
 
     # def test_get_pretix_not_null(self):
     #     args = self.theparser.parse_args()
