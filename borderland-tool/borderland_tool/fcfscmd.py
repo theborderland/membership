@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 from borderland_tool.get_pretix import get_pretix
+from borderland_tool.fcfs import FCFS
 
 
 class FCFSCmd:
     def get_fcfs(self, args):
-        from borderland_tool.fcfs import FCFS
         return FCFS(get_pretix(args), args.file, args.quota)
 
     def fetch(self, args):
