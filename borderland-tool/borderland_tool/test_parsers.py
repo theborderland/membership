@@ -61,11 +61,8 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(args.lottery_action, 'fetch')
         self.assertEqual(args.quota, 88)
         pretix = get_pretix(args)
-        self.assertIsNotNone(pretix)
-        self.assertEqual(pretix.org, "myorg")
-        self.assertEqual(pretix.host, "myserver")
-        self.assertEqual(pretix.event, "myevent")
-        self.assertEqual(pretix.token, "mytoken")
+        self.__assertPretixValues(
+            pretix, "myorg", "myserver", "myevent", "mytoken")
 
     def test_lottery_args_raffle(self):
         cmd_args = ['-t', 'mytoken', '-s', 'myserver',
@@ -76,11 +73,16 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(args.lottery_action, 'raffle')
         self.assertEqual(args.quota, 88)
         pretix = get_pretix(args)
-        self.assertIsNotNone(pretix)
-        self.assertEqual(pretix.org, "myorg")
-        self.assertEqual(pretix.host, "myserver")
-        self.assertEqual(pretix.event, "myevent")
-        self.assertEqual(pretix.token, "mytoken")
+        self.__assertPretixValues(
+            pretix, "myorg", "myserver", "myevent", "mytoken")
 
     def tearDown(self):
         pass
+
+    def __assertPretixValues(self, pretix, expected_org, expected_host, expected_event, expected_token):
+        self.assertIsNotNone(pretix)
+        self.assertEqual(pretix.org, expected_org)
+        self.assertEqual(pretix.host, expected_host)
+        self.assertEqual(pretix.event, expected_event)
+        self.assertEqual(pretix.token, expected_token)
+        self.assertEqual(pretix.url_scheme, "https")
