@@ -4,7 +4,7 @@ from borderland_tool.get_pretix import get_pretix
 import argparse
 
 
-class Test2Plus2(unittest.TestCase):
+class TestParsers(unittest.TestCase):
     lotterycmd = LotteryCmd()
 
     def setUp(self):
