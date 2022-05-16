@@ -29,8 +29,8 @@ class TestParsers(unittest.TestCase):
                                  help="disable ssl when communicating with pretix, good for testing locally")
 
         # Lottery
-        lotterycmd = LotteryCmd()
-        lotterycmd.add_parser(subparsers)
+        self.lotterycmd = LotteryCmd()
+        self.lotterycmd.add_parser(subparsers)
 
     def test_argparse(self):
         simple_parser = argparse.ArgumentParser(
@@ -63,6 +63,15 @@ class TestParsers(unittest.TestCase):
         pretix = get_pretix(args)
         self.__assertPretixValues(
             pretix, "myorg", "myserver", "myevent", "mytoken")
+        lottery = self.lotterycmd.get_lottery(args)
+        self.lotterycmd.fetch(args)
+
+        self.assertIsNotNone(lottery)
+        self.assertIsNotNone(lottery.pretix)
+        self.assertIsNone(lottery.has_order)
+        self.assertIsNone(lottery.has_voucher)
+        self.assertEqual(lottery.quota, 88)
+        self.assertEqual(lottery.pretix.url, "blah")
 
     def test_lottery_args_raffle(self):
         cmd_args = ['-t', 'mytoken', '-s', 'myserver',
@@ -75,9 +84,6 @@ class TestParsers(unittest.TestCase):
         pretix = get_pretix(args)
         self.__assertPretixValues(
             pretix, "myorg", "myserver", "myevent", "mytoken")
-
-    def tearDown(self):
-        pass
 
     def __assertPretixValues(self, pretix, expected_org, expected_host, expected_event, expected_token):
         self.assertIsNotNone(pretix)
