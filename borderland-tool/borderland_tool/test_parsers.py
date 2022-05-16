@@ -60,11 +60,24 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(args.cmd, 'lottery')
         self.assertEqual(args.lottery_action, 'fetch')
         self.assertEqual(args.quota, 88)
-        pretix = get_pretix(args)
+        pretix = get_pretix(args, True)
+        self.__assertPretixValues(
+            pretix, "myorg", "myserver", "myevent", "mytoken")
+
+    def test_lottery_raffle_argparse(self):
+        """Test Lottery Raffle argparse"""
+        cmd_args = RAFFLE_CMD_STRING.split()
+        args = self.parser.parse_args(cmd_args)
+        self.assertEqual(args.cmd, 'lottery')
+        self.assertEqual(args.lottery_action, 'raffle')
+        self.assertEqual(args.quota, 88)
+        self.assertEqual(args.num, 10)
+        pretix = get_pretix(args, True)
         self.__assertPretixValues(
             pretix, "myorg", "myserver", "myevent", "mytoken")
 
     def test_lottery_fetch_pretix_url(self):
+        """Test Lottery Fetch URL"""
         cmd_args = FETCH_CMD_STRING.split()
         args = self.parser.parse_args(cmd_args)
         lottery = self.lotterycmd.fetch(args)
@@ -77,29 +90,20 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(lottery.pretix.url,
                          "https://myserver/api/v1/organizers/myorg/events/myevent/registration/")
 
-    def test_lottery_raffle_argparse(self):
-        cmd_args = RAFFLE_CMD_STRING.split()
-        args = self.parser.parse_args(cmd_args)
-        self.assertEqual(args.cmd, 'lottery')
-        self.assertEqual(args.lottery_action, 'raffle')
-        self.assertEqual(args.quota, 88)
-        self.assertEqual(args.num, 10)
-        pretix = get_pretix(args)
-        self.__assertPretixValues(
-            pretix, "myorg", "myserver", "myevent", "mytoken")
-
     def test_lottery_raffle_pretix_url(self):
+        """Test Lottery Raffle URL"""
         cmd_args = RAFFLE_CMD_STRING.split()
         args = self.parser.parse_args(cmd_args)
 
         lottery = self.lotterycmd.raffle(args)
         self.assertIsNotNone(lottery)
         self.assertIsNotNone(lottery.pretix)
-        self.assertIsNone(lottery.has_order)
-        self.assertIsNone(lottery.has_voucher)
+        # self.assertIsNone(lottery.has_order)
+        # self.assertIsNone(lottery.has_voucher)
         self.assertEqual(lottery.quota, 88)
-        # self.assertEqual(lottery.pretix.url,
-        #                  "https://myserver/api/v1/organizers/myorg/events/myevent/registration/")
+        self.assertEqual(lottery.pretix.url,
+                         "https://myserver/api/v1/organizers/myorg/events/myevent/orders/?page=1")
+        # "https://myserver/api/v1/organizers/myorg/events/myevent/registration/")
 
     def __assertPretixValues(self, pretix, expected_org, expected_host, expected_event, expected_token):
         self.assertIsNotNone(pretix)
