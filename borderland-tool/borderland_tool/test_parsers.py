@@ -63,15 +63,15 @@ class TestParsers(unittest.TestCase):
         pretix = get_pretix(args)
         self.__assertPretixValues(
             pretix, "myorg", "myserver", "myevent", "mytoken")
-        lottery = self.lotterycmd.get_lottery(args)
-        self.lotterycmd.fetch(args)
+        lottery = self.lotterycmd.fetch(args)
 
         self.assertIsNotNone(lottery)
         self.assertIsNotNone(lottery.pretix)
         self.assertIsNone(lottery.has_order)
         self.assertIsNone(lottery.has_voucher)
         self.assertEqual(lottery.quota, 88)
-        self.assertEqual(lottery.pretix.url, "blah")
+        self.assertEqual(lottery.pretix.url,
+                         "https://myserver/api/v1/organizers/myorg/events/myevent/registration/")
 
     def test_lottery_args_raffle(self):
         cmd_args = ['-t', 'mytoken', '-s', 'myserver',
