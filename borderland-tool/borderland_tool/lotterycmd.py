@@ -5,6 +5,9 @@ from borderland_tool.lottery import Lottery
 
 
 class LotteryCmd:
+    def __init__(self, dryrun=False):
+        self.dryrun = dryrun
+
     def fetch(self, args):
         lottery = self.get_lottery(args)
         lottery.registrations_to_csv()
@@ -13,6 +16,7 @@ class LotteryCmd:
     def raffle(self, args):
         lottery = self.get_lottery(args)
         lottery.lottery(args.num)
+        return lottery
 
     def losers(self, args):
         lottery = self.get_lottery(args)
@@ -21,7 +25,7 @@ class LotteryCmd:
     # def control(self, args)
 
     def get_lottery(self, args):
-        return Lottery(get_pretix(args), args.file, args.quota)
+        return Lottery(get_pretix(args), args.file, args.quota, self.dryrun)
 
     def add_parser(self, subparsers):
         lottery_parser = subparsers.add_parser(

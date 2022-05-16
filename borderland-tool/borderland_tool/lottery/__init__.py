@@ -4,20 +4,23 @@ import random
 import json
 
 from datetime import datetime, timezone, timedelta
-from dateutil import parser
 
 
 class Lottery:
-    def __init__(self, pretix, csvfile, quota):
+    def __init__(self, pretix, csvfile, quota, dryrun=False):
         self.pretix = pretix
         self.csvfile = csvfile
         self.quota = quota
         self.registrations_csv = self.load_csv()
         self.has_order = self.has_voucher = None
+        self.dryrun = dryrun
 
     def registrations_to_csv(self):
+        if (self.dryrun):
+            return
         """Retrieve registered users from Pretix plugin and update CSV"""
         registrations_pretix = self.pretix.get_registrations()
+
         if self.registrations_csv:
             last = int(self.registrations_csv[-1]['id'])
         else:
