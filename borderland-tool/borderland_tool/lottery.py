@@ -14,10 +14,11 @@ class Lottery:
         self.registrations_csv = self.load_csv()
         self.has_order = self.has_voucher = None
         self.dryrun = dryrun
+        print("calling pretix.set_dry_run: {}".format(dryrun))
+        if dryrun:
+            self.pretix.set_dry_run()
 
     def registrations_to_csv(self):
-        if (self.dryrun):
-            return
         """Retrieve registered users from Pretix plugin and update CSV"""
         registrations_pretix = self.pretix.get_registrations()
 
@@ -41,6 +42,8 @@ class Lottery:
         print(len(eligible))
         if input("Send sad email (2022 specific text!)? (y/n) ") != 'y':
             return
+        if (self.dryrun):
+            return  # skip sending emails
         for target in eligible:
             self.pretix.send_email(to=[target["email"]],
                                    subject="So, you didn't win the Borderland lottery 😭",
@@ -60,10 +63,13 @@ The Borderland Understaffed Tech Team 🤖
             print("Emailt {}" + target["email"])
 
     def lottery(self, num):
+        print("lottery command, drawing winners...dryrun={}".format(self.dryrun))
         winners = self.raffle(num)
         print([w["email"] for w in winners])
-        if input("Drew {} winners! Send invitations? (y/n) ".format(len(winners))) != 'y':
-            return
+        if (not self.dryrun):
+            if input("Drew {} winners! Send invitations? (y/n) ".format(len(winners))) != 'y':
+                return
+        print("not dry run")
         self.create_vouchers(winners)
 
     def raffle(self, num):
@@ -76,9 +82,12 @@ The Borderland Understaffed Tech Team 🤖
         return [self.create_voucher(t) for t in targets]
 
     def create_voucher(self, target):
+        if (self.dryrun):
+            return
         voucher = self.pretix.create_voucher(self.quota,
                                              tag="lottery",
-                                             comment=json.dumps(target, indent=2),
+                                             comment=json.dumps(
+                                                 target, indent=2),
                                              valid_until=datetime.now()+timedelta(hours=48))
         if not voucher:
             raise RuntimeError("Unable to create voucher")

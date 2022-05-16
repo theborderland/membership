@@ -25,7 +25,10 @@ class LotteryCmd:
     # def control(self, args)
 
     def get_lottery(self, args):
-        return Lottery(get_pretix(args), args.file, args.quota, self.dryrun)
+        pretix = get_pretix(args)
+        lottery = Lottery(pretix,
+                          args.file, args.quota, self.dryrun)
+        return lottery
 
     def add_parser(self, subparsers):
         lottery_parser = subparsers.add_parser(
