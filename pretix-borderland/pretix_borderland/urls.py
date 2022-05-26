@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.urls import include, path
 from rest_framework import routers
 
-from . import views
+from . import api, views
 
 event_patterns = [
     url(r'^register/$', views.Register.as_view(), name="register"),
@@ -18,9 +18,9 @@ event_patterns = [
 
 
 apirouter = routers.DefaultRouter()
-apirouter.register(r'registration', views.RegisterAPIViewSet, basename="RegisterAPI")
-apirouter.register(r'refund', views.TransferAPIViewSet)
-apirouter.register(r'email', views.EmailViewSet, basename="Email")
+apirouter.register(r'registration', api.RegisterAPIViewSet, basename="RegisterAPI")
+apirouter.register(r'refund', api.TransferAPIViewSet)
+apirouter.register(r'email', api.EmailViewSet, basename="Email")
 
 urlpatterns = [
     url(r'^api/v1/organizers/(?P<organizer>[^/]+)/events/(?P<event>[^/]+)/', include(apirouter.urls))

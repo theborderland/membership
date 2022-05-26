@@ -25,11 +25,10 @@ cmdclass = {
 
 setup(
     name='pretix-borderland',
-    version='1.0.0',
     description='Language, e-mail template adjustments for The Borderland',
     long_description=long_description,
     url='https://github.com/theborderland/pretix-borderland',
-    author='Kris, Michi et al',
+    author='Kris, Michi, @darkturo et al',
     author_email='memberships@theborderland.se',
     license='Apache Software License',
 

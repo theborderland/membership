@@ -1,15 +1,14 @@
 import os
 
-from pretix.presale.signals import order_info, front_page_top
+from pretix.presale.signals import front_page_top
 from pretix.base.signals import register_html_mail_renderers
-# register_global_settings
 from django.dispatch import receiver
 from django.template.loader import get_template
 
 
 @receiver(register_html_mail_renderers, dispatch_uid="renderer_borderland")
 def register_mail_renderers(sender, **kwargs):
-    from .email import BorderlandMailRenderer
+    from .templates.email import BorderlandMailRenderer
     return BorderlandMailRenderer
 
 
