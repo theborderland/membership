@@ -4,20 +4,24 @@ import random
 import json
 
 from datetime import datetime, timezone, timedelta
-from dateutil import parser
 
 
 class Lottery:
-    def __init__(self, pretix, csvfile, quota):
+    def __init__(self, pretix, csvfile, quota, dryrun=False):
         self.pretix = pretix
         self.csvfile = csvfile
         self.quota = quota
         self.registrations_csv = self.load_csv()
         self.has_order = self.has_voucher = None
+        self.dryrun = dryrun
+        print("calling pretix.set_dry_run: {}".format(dryrun))
+        if dryrun:
+            self.pretix.set_dry_run()
 
     def registrations_to_csv(self):
         """Retrieve registered users from Pretix plugin and update CSV"""
         registrations_pretix = self.pretix.get_registrations()
+
         if self.registrations_csv:
             last = int(self.registrations_csv[-1]['id'])
         else:
@@ -38,6 +42,8 @@ class Lottery:
         print(len(eligible))
         if input("Send sad email (2022 specific text!)? (y/n) ") != 'y':
             return
+        if (self.dryrun):
+            return  # skip sending emails
         for target in eligible:
             self.pretix.send_email(to=[target["email"]],
                                    subject="So, you didn't win the Borderland lottery 😭",
@@ -57,10 +63,13 @@ The Borderland Understaffed Tech Team 🤖
             print("Emailt {}" + target["email"])
 
     def lottery(self, num):
+        print("lottery command, drawing winners...dryrun={}".format(self.dryrun))
         winners = self.raffle(num)
         print([w["email"] for w in winners])
-        if input("Drew {} winners! Send invitations? (y/n) ".format(len(winners))) != 'y':
-            return
+        if (not self.dryrun):
+            if input("Drew {} winners! Send invitations? (y/n) ".format(len(winners))) != 'y':
+                return
+        print("not dry run")
         self.create_vouchers(winners)
 
     def raffle(self, num):
@@ -73,9 +82,12 @@ The Borderland Understaffed Tech Team 🤖
         return [self.create_voucher(t) for t in targets]
 
     def create_voucher(self, target):
+        if (self.dryrun):
+            return
         voucher = self.pretix.create_voucher(self.quota,
                                              tag="lottery",
-                                             comment=json.dumps(target, indent=2),
+                                             comment=json.dumps(
+                                                 target, indent=2),
                                              valid_until=datetime.now()+timedelta(hours=48))
         if not voucher:
             raise RuntimeError("Unable to create voucher")
