@@ -1,0 +1,37 @@
+{% extends "pretixpresale/event/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block title %}Join the Waiting List{% endblock %}
+
+{% block content %}
+{% if waiting_lists_enabled %}
+    <h2>Secure Membership Exchange Program</h2>
+    The Secure Membership Exchange Program (SMEP) implements a safe way for you to get a membership after the main membership sale has concluded.
+    Join the waiting list here and read the FAQ for more information
+
+    <h2>Important</h2>
+    <p>You <strong>must</strong> register with your <strong>legal name and date of birth</strong>, as it appears on official documents as we may <strong>ask to see official ID documents</strong> when validating your membership at the gates of the Borderland.</p>
+    <p>OBS: We may invalidate your membership if the information does not match.</p>
+
+    <h2>Join the Waiting List</h2>
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <form method="post">{% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" class="btn btn-block btn-primary btn-lg" value="Join the Waiting list">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% else %}
+    <h2>The Transfer Waiting List is closed at the moment</h2>
+The memberships team has disabled all waiting lists at the moment. <br/>
+
+The SMEP (Secure Membership Exchange Program) may be activated at any moment, be sure to check the Borderland communication channels for more information.
+{% endif %}
+{% endblock %}
