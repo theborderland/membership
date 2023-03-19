@@ -2,6 +2,7 @@
 .#*
 # vim
 .*.sw?
+.swp
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -107,4 +108,9 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# workspace, and things you don' want to be uploaded
+workspace/
+
+#other
 .idea
+.DS_Store
