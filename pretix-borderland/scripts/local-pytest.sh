@@ -1,5 +1,6 @@
 #!/bin/bash
 
+PLUGIN_DIR=$(pwd)/pretix_borderland/views
 PRETIX_DEV_ENV=build/pretix/src
 
 if [ ! -e $PRETIX_DEV_ENV ]; then
@@ -9,5 +10,5 @@ fi
 
 (
 	cd $PRETIX_DEV_ENV
-	PATH=$PATH:$(pipenv --venv)/bin PYTHONPATH=$PATH:$(pipenv --venv)/lib/python3.9/site-packages pipenv run python3 manage.py test $@
+	PATH=$PATH:$(pipenv --venv)/bin PYTHONPATH=$PATH:$(pipenv --venv)/lib/python3.9/site-packages:$PLUGIN_DIR pipenv run python3 manage.py test $@
 )

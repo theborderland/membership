@@ -22,6 +22,11 @@ build: env
 	@cd $(PRETIX_DEVENV); pipenv run pip3 install $(PLUGIN_DIR)
 	@echo "To run Membertix in dev mode run:\n\tsh scripts/local-django.sh runserver\n"
 
+.PHONY: test
+test:
+	@cd $(PRETIX_DEVENV); pipenv run pip3 install $(PLUGIN_DIR)
+	@sh scripts/local-pytest.sh pretix_borderland
+
 .PHONY: clean
 clean:
 	rm -rf build
