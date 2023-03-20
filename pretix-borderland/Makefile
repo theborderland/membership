@@ -25,7 +25,7 @@ build: env
 .PHONY: test
 test:
 	@cd $(PRETIX_DEVENV); pipenv run pip3 install $(PLUGIN_DIR)
-	@sh scripts/local-pytest.sh pretix_borderland
+	@sh scripts/local-test.sh pretix_borderland
 
 .PHONY: clean
 clean:
