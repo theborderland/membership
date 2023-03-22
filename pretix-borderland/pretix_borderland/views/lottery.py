@@ -67,6 +67,13 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
             messages.add_message(self.request, messages.ERROR,
                                  "This email address is already registered!")
             return render(self.request, template_name=self.template_name, context=self.get_context_data())
+
+        if form.instance.applied_low_income:
+            messages.add_message(self.request, messages.INFO,
+                                 "You applied for a low income ticket. "
+                                 "Please fill in the following form to complete your application!")
+            return render(self.request, template_name=self.template_name, context=self.get_context_data())
+
         send_mail(event_id=self.request.event.id,
                   to=[self.request.POST["email"]],
                   subject=self.email_subject,

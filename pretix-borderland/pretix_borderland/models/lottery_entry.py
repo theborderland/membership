@@ -18,6 +18,8 @@ class LotteryEntry(LoggedModel):
     ip = models.CharField(max_length=200, blank=True)
     cookie = models.CharField(max_length=2048, blank=True)
     browser = models.CharField(max_length=2048, blank=True)
+    applied_low_income = models.BooleanField(default=False, verbose_name="Applied to a low income membership")
+    low_income = models.BooleanField(default=False, verbose_name="Low income membership")
 
     class Meta:
         constraints = [
