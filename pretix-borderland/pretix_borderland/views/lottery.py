@@ -13,6 +13,7 @@ from ..forms import RegisterForm
 
 class Register(SuccessMessageMixin, CreateView):
     template_name = "pretix_borderland/register.html"
+    low_income_template_name = "pretix_borderland/register_low_income.html"
     form_class = RegisterForm
     success_url = '..'
     success_message = "%(first_name)s, you've registered! Good luck!"
@@ -45,21 +46,26 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
         # TODO move to config
-        ctx.update({"open": bool(os.getenv("ENABLE_LOTTERY_REGISTRATION"))})
+        ctx.update(
+            {"open": bool(os.getenv("ENABLE_LOTTERY_REGISTRATION")),
+             "low_income_enabled": bool(os.getenv("ENABLE_LOTTERY_LOW_INCOME"))})
         return ctx
 
     def form_valid(self, form):
         if form.instance.dob.strftime("%Y-%m-%d") != self.request.POST.get("dob_again",
-                                                                           "") or form.instance.dob.year > 2008:
+                                                                           "") or form.instance.dob.year > 2009:
             messages.add_message(self.request, messages.ERROR, "Check your date of birth!")
             return render(self.request, template_name=self.template_name, context=self.get_context_data())
+
         if form.instance.email != self.request.POST.get("email_again", ""):
             messages.add_message(self.request, messages.ERROR, "Check your email address!")
             return render(self.request, template_name=self.template_name, context=self.get_context_data())
+
         form.instance.event = self.request.event
         form.instance.browser = self.request.META.get('HTTP_USER_AGENT', "")
         form.instance.ip = get_client_ip(self.request)
         form.instance.cookie = self.request.COOKIES.get("pretix_csrftoken")
+
         try:
             with transaction.atomic():
                 ret = super().form_valid(form)
@@ -67,8 +73,20 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
             messages.add_message(self.request, messages.ERROR,
                                  "This email address is already registered!")
             return render(self.request, template_name=self.template_name, context=self.get_context_data())
+
+        # If the information provided in the registration form is valid, we email the user confirming
+        # their registration. If the user has applied for a low income ticket, we render after sending the email a
+        # new form, so they can fill in information to be eligible for a low income membership
         send_mail(event_id=self.request.event.id,
                   to=[self.request.POST["email"]],
                   subject=self.email_subject,
                   body=self.email_message % self.request.POST.dict())
+
+        # TODO:
+        if form.instance.applied_low_income:
+            messages.add_message(self.request, messages.INFO,
+                                 "You applied for a low income ticket. "
+                                 "Please fill in the following form to complete your application!")
+            return render(self.request, template_name=self.low_income_template_name, context=self.get_context_data())
+
         return ret

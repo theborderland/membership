@@ -23,6 +23,8 @@ class RegisterForm(forms.ModelForm):
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),
                                 label="Legal Last Name")
 
+    applied_low_income = forms.BooleanField(required=False, label="I'd like to apply to a low income membership")
+
     class Meta:
         model = LotteryEntry
-        fields = ["email", "email_again", "first_name", "last_name", "dob"]
+        fields = ["email", "email_again", "first_name", "last_name", "dob", "applied_low_income"]

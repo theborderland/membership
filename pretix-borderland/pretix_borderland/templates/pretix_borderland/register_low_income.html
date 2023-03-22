@@ -1,0 +1,38 @@
+{% extends "pretixpresale/event/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block title %}Low Income Membership Registration{% endblock %}
+
+{% block content %}
+
+{% if not (open and low_income_enabled) %}
+    <h2>Weird</h2>
+    You shouldn't be here. If you think this is a mistake, please get in touch.
+{% else %}
+
+    <p>
+        Up to this point you've been registered for the Borderland lottery, Hurray! <br/>
+        All is good in that regard, now, since you've applied for a low income membership, we'd like to collect some more information about you.
+    </p>
+    <p>
+        The membership team may contact you to ask for more information about your income, as well as other information, to study the eligibility of your case.
+    </p>
+
+    <h2>Low Income Membership Form</h2>
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <form method="post">{% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" class="btn btn-block btn-primary btn-lg" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p><small>This information is collected to study your case.</small></p>
+{% endif %}
+{% endblock %}

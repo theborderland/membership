@@ -22,7 +22,7 @@ class PluginApp(PluginConfig):
 
     class PretixPluginMeta:
         name = ugettext_lazy('Pretix Borderland Customizations')
-        author = 'Kris, Michi et al'
+        author = '@darkturo, Kris, Michi: et al'
         description = ugettext_lazy('Language, e-mail template, lottery registration etc for the Borderland')
         visible = True
         version = '1.0.0'
