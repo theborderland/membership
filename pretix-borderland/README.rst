@@ -38,7 +38,8 @@ License
 -------
 
 Copyright 2019 Kris, Michi et al
-Copyright 2022 The Borderland Tech Team 
+Copyright 2022 The Borderland Tech Team
+Copyright 2023 @darkturo
 
 Released under the terms of the Apache License 2.0
 
