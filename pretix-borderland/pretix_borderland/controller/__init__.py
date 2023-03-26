@@ -1,1 +1,1 @@
-from lowincome import IsEligibleForLowIncome
+from .lowincome import IsEligibleForLowIncome

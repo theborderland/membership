@@ -6,8 +6,8 @@ from django.dispatch import receiver
 from django.template.loader import get_template
 from django.db.models.signals import post_save
 
-from models import LowIncomeEntry
-from controller import IsEligibleForLowIncome
+from .models import LowIncomeEntry
+from .controller import IsEligibleForLowIncome
 
 @receiver(register_html_mail_renderers, dispatch_uid="renderer_borderland")
 def register_mail_renderers(sender, **kwargs):

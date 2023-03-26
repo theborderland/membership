@@ -2,6 +2,8 @@ import os
 
 from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
+from django.shortcuts import render, redirect
 
 from ..forms import LowIncomeForm
 
@@ -21,6 +23,10 @@ class LowIncome(SuccessMessageMixin, CreateView):
         return ctx
 
     def form_valid(self, form):
+        if form.instance.email != self.request.POST.get("email_again", ""):
+            messages.add_message(self.request, messages.ERROR, "Check your email address!")
+            return render(self.request, template_name=self.template_name, context=self.get_context_data())
+
         form.instance.event = self.request.event
         form.instance.email = self.request.request.POST["email"]
         form.instance.dob = self.request.request.POST["dob"]

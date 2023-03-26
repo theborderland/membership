@@ -8,7 +8,7 @@ from django.shortcuts import render
 from pretix.helpers.http import get_client_ip
 
 from ..tasks import send_mail
-from ..forms import RegisterForm
+from ..forms import RegisterForm, LowIncomeForm
 
 
 class Register(SuccessMessageMixin, CreateView):
@@ -47,7 +47,7 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
         ctx = super().get_context_data()
         # TODO move to config
         ctx.update(
-            {"open": bool(os.getenv("ENABLE_LOTTERY_REGISTRATION")),
+            {"registration_opened": bool(os.getenv("ENABLE_LOTTERY_REGISTRATION")),
              "low_income_enabled": bool(os.getenv("ENABLE_LOTTERY_LOW_INCOME"))})
         return ctx
 
@@ -82,11 +82,12 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
                   subject=self.email_subject,
                   body=self.email_message % self.request.POST.dict())
 
-        # TODO:
+
         if form.instance.applied_low_income:
-            messages.add_message(self.request, messages.INFO,
-                                 "You applied for a low income ticket. "
-                                 "Please fill in the following form to complete your application!")
-            return render(self.request, template_name=self.low_income_template_name, context=self.get_context_data())
+            ctx = self.get_context_data()
+            ctx.update({"form": LowIncomeForm()})
+            return render(self.request,
+                          template_name=self.low_income_template_name,
+                          context=ctx)
 
         return ret
