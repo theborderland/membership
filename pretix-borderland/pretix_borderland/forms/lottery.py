@@ -24,8 +24,7 @@ class RegisterForm(forms.ModelForm):
     dob = forms.DateField(
         required=True,
         label='Date of Birth',
-        widget=DatePickerWidget(),
-    )
+        widget=DatePickerWidget(attrs={'autocomplete':'bday'}))
 
     dob_again = forms.DateField(
         required=True,

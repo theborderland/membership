@@ -1,28 +1,33 @@
 {% extends "pretixpresale/event/base.html" %}
 {% load i18n %}
 {% load bootstrap3 %}
+{% load eventurl %}
 
 {% block title %}Low Income Membership Registration{% endblock %}
 
 {% block content %}
 
-{% if not low_income_enabled %}
-    <h2>Weird</h2>
-    You shouldn't be here. If you think this is a mistake, please get in touch.
+{% if not low_income_enabled or not registered %}
+    <h2>Whooopsy ... </h2>
+    Whoa there, wrangler! Hold your horses and back up a bit. This ain't the page you're looking for. <br/>
+    But don't worry, we won't leave you out in the cold. If you want to join the fun and win big, head on over to <a href="{% eventurl request.event 'plugins:pretix_borderland:register'%}">the Borderland's lottery registration page</a>.
+    Trust the AI robots, you won't regret it! 🤖...
 {% else %}
     <div class="col-sm-12">
-        <div class="col-sm-10">
-            <p>
-                Up to this point you've been registered for the Borderland lottery, Hurray! <br>
-            </p>
-            <p>
-                All is good in that regard, now, since you've applied for a low income membership, we'd like to collect some more information about you. <br/>
-                The membership team may contact you to ask for more information about your income, as well as other information, to study the eligibility of your case.
-            </p>
-        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <h2>Low Income Membership Form</h2>
 
-        <div class="col-sm-10">
-            <h2>Low Income Membership Form</h2>
+                <p>
+                    Up to this point you've been registered for the Borderland lottery, Hurray! 💥 <br/><br>
+                </p>
+                <p>
+                    Hey there, everything's hunky-dory in the lottery registration department, we've got you in for the Grand Prize.
+                    But since you're ballin' on a budget, we gotta get the deets on you.<br/>
+                    Don't worry, the Membership team is in charge, and they may get in touch to suss out additional info of your earnings and whatnot to see if you're a good fit.
+                </p>
+            </div>
+
             <div class="container">
                 <div class="row">
                     <div class='col-sm-10'>
@@ -31,6 +36,8 @@
                                 <table>
                                 {{ form.as_table }}
                                 </table>
+                                &nbsp;<br/>
+                                &nbsp;<br/>
                                 <input type="submit" class="btn btn-block btn-primary btn-lg" value="Submit">
                             </form>
                         </div>

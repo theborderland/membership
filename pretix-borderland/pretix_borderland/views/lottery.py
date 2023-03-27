@@ -4,11 +4,12 @@ from django.db import transaction, IntegrityError
 from django.views.generic import CreateView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from pretix.helpers.http import get_client_ip
 
 from ..tasks import send_mail
-from ..forms import RegisterForm, LowIncomeForm
+from ..forms import RegisterForm
+from .lowincome import LowIncome
 
 
 class Register(SuccessMessageMixin, CreateView):
@@ -85,10 +86,6 @@ The Borderland Computer 👯🏽‍️🤖‍❤️‍💋‍👩‍👩‍👧�
                   body=self.email_message % self.request.POST.dict())
 
         if form.instance.applied_low_income:
-            ctx = self.get_context_data()
-            ctx.update({"form": LowIncomeForm()})
-            return render(self.request,
-                          template_name=self.low_income_template_name,
-                          context=ctx)
+            return redirect(f"./lowincome/{self.request.POST['email']}")
 
         return ret

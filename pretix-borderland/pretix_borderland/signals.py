@@ -30,7 +30,7 @@ def low_income_application(sender, **kwargs):
     # check if the application is valid and if eligible for a low income
     if kwargs['created'] and IsEligibleForLowIncome(kwargs['instance']):
         # open model and mark as eligible
-        entry = LowIncomeEntry.object.filter(email=kwargs['instance'].email, event=kwargs['instance'].event)
+        entry = LowIncomeEntry.objects.filter(event=kwargs['instance'].event, email=kwargs['instance'].email)
         entry.low_income = True
         entry.save()
 

@@ -9,8 +9,6 @@ class LowIncomeForm(forms.ModelForm):
                                        label="Which country do you live in?")
 
     has_income = forms.TypedChoiceField(choices=[(tag.value, tag.name) for tag in YesNo],
-                                        coerce=str,
-                                        initial=YesNo.No,
                                         required=True,
                                         label="Do you have a job, are self-employed, or "
                                               "receive any form of benefits (e.g., unemployment benefits, "
@@ -34,8 +32,6 @@ class LowIncomeForm(forms.ModelForm):
         localize=False)
 
     has_assets = forms.TypedChoiceField(choices=[(tag.value, tag.name) for tag in YesNoDontKnowPreferNotToSay],
-                                        coerce=str,
-                                        initial=YesNoDontKnowPreferNotToSay.DontKnow,
                                         label="Do you own any assets (house, cash, crypto, stocks, unicorns, etc.)?")
 
     assets = forms.DecimalField(label="What is the value of the assets that you own (in Euro)?",
