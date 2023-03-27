@@ -20,17 +20,17 @@ class Register(SuccessMessageMixin, CreateView):
 
     # TODO move to config
     email_subject = "Lottery Receipt 🔥"
-    email_message = """Yay, you did it! You’ve successfully registered for the Grand Membership Lottery of the Borderland 2022! Now it’s time to kick back and give yourself time for some dreaming!
+    email_message = """Yay, you did it! You’ve successfully registered for the Grand Membership Lottery of the Borderland 2023! Now it’s time to kick back and give yourself time for some dreaming!
 
 If you’re super eager and can’t wait, here’s some things you can do to get ready:
 
   * Dream your dreams! Anything (ish) is possible at the Borderland, you just gotta dream it (and then potentially realize it)! Think about what cool shennanigans you want to cook up this year!
 
-  * Want to get into the thick of it? Check out what [responsibilities and lead roles that still has to be filled](https://coda.io/d/Realities-2022_dFvRNS5423Z/Responsibilities_sulZB#_luxNx) up for the event to actually happen and run smooothly! 
+  * Want to get into the thick of it? Check out what [responsibilities and lead roles that still has to be filled](https://coda.io/d/Realities-2023_dFvRNS5423Z/Responsibilities_sulZB#_luxNx) up for the event to actually happen and run smooothly! 
 
   * Involve yourself! If you’re ready to dive head first into some live action plotting, you should check out the [Borderland Discord](https://discord.gg/9bvgcSW2Ej) server! There’s so many cool things happening there, and anyone can help out. This is also a great place to ask questions! 
 
-  * Read last year's Survival Guide! The Survival Guide contains EVERYTHING (ish) that you need to survive the Borderland! It hasn’t been updated to the 2022 edition yet though, but there’s a bunch of vital information in the old one that is still relevant! [https://talk.theborderland.se/survival](https://talk.theborderland.se/survival/) 
+  * Read last year's Survival Guide! The Survival Guide contains EVERYTHING (ish) that you need to survive the Borderland! It hasn’t been updated to the 2023 edition yet though, but there’s a bunch of vital information in the old one that is still relevant! [https://talk.theborderland.se/survival](https://talk.theborderland.se/survival/) 
 
   * Join the Facebook group! So, Facebook isn’t always the best communication channel, as it tend to become a bit messy. But it’s still a great way to connect with people, and there’s a lot of future friends just waiting for you in there!
 
@@ -81,7 +81,6 @@ The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
                   to=[self.request.POST["email"]],
                   subject=self.email_subject,
                   body=self.email_message % self.request.POST.dict())
-
 
         if form.instance.applied_low_income:
             ctx = self.get_context_data()
