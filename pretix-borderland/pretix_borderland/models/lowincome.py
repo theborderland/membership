@@ -4,15 +4,9 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
-
-class IncomeChoices(Enum):
-    NoIncome = 1
-    LessThanTenKSEK = 2
-    LessThanThirtyKSEK = 3
-    LessThanFiftyKSEK = 4
-    MoreThanFiftyKSEK = 5
-    PreferNotToAnswer = 6
-
+class YesNo(Enum):
+    Yes = 1
+    No = 2
 
 class YesNoDontKnowPreferNotToSay(Enum):
     Yes = 1
@@ -25,10 +19,12 @@ class LowIncomeEntry(LoggedModel):
     event = models.ForeignKey('pretixbase.Event', on_delete=models.CASCADE)
     email = models.EmailField(verbose_name="E-mail address")
     dob = models.DateField(verbose_name="Date of Birth")
-    personal_income = models.IntegerField(choices=[(tag.value, tag.name) for tag in IncomeChoices])
-    household_income = models.IntegerField(choices=[(tag.value, tag.name) for tag in IncomeChoices])
-    income_source = models.IntegerField(choices=[(tag.value, tag.name) for tag in YesNoDontKnowPreferNotToSay])
-    social_security = models.IntegerField(choices=[(tag.value, tag.name) for tag in YesNoDontKnowPreferNotToSay])
+    country = models.CharField(max_length=100, verbose_name="Country")
+    has_income = models.IntegerField(choices=[(tag.value, tag.name) for tag in YesNo])
+    income = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Income")
+    last_year_income = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="Income last year")
+    has_assets = models.IntegerField(choices=[(tag.value, tag.name) for tag in YesNoDontKnowPreferNotToSay])
+    assets = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="Assets")
     timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:

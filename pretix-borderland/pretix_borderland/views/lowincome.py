@@ -12,7 +12,7 @@ class LowIncome(SuccessMessageMixin, CreateView):
     template_name = "pretix_borderland/register_low_income.html"
     form_class = LowIncomeForm
     success_url = '..'
-    success_message = "%(first_name)s, you've registered! Good luck!" # FIXME!!!!
+    success_message = "%(first_name)s, your application has been sent.!"
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
