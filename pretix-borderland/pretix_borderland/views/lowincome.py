@@ -3,7 +3,7 @@ import os
 from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import redirect
 
 from pretix.base.models import Event
 from ..forms import LowIncomeForm
@@ -29,9 +29,7 @@ class LowIncome(SuccessMessageMixin, CreateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
 
-        print("****", self.event)
         event = Event.objects.filter(slug=self.event).first()
-        print("****", event)
         is_registered = LotteryEntry.objects.filter(event=event, email=self.email).exists()
         has_applied_already = LowIncomeEntry.objects.filter(event=event, email=self.email).exists()
 
@@ -48,4 +46,9 @@ class LowIncome(SuccessMessageMixin, CreateView):
     def form_valid(self, form):
         form.instance.event = self.request.event
 
-        return super().form_valid(form)
+        try:
+            super().form_valid(form)
+        except Exception as e:
+            messages.add_message(self.request, messages.ERROR,
+                                 "You have already applied for a low income membership. Should you want to change your application, please contact the membership team directly on Discord.")
+            return redirect("../../..")
