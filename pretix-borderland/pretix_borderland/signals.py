@@ -7,7 +7,7 @@ from django.template.loader import get_template
 from django.db.models.signals import post_save
 
 from .models import LowIncomeEntry
-from .controller import IsEligibleForLowIncome
+from .controller import is_eligible_for_low_income
 
 @receiver(register_html_mail_renderers, dispatch_uid="renderer_borderland")
 def register_mail_renderers(sender, **kwargs):
@@ -28,7 +28,7 @@ def lottery_registration(sender, **kwargs):
 @receiver(post_save, sender=LowIncomeEntry, dispatch_uid='low_income_application')
 def low_income_application(sender, **kwargs):
     # check if the application is valid and if eligible for a low income
-    if kwargs['created'] and IsEligibleForLowIncome(kwargs['instance']):
+    if kwargs['created'] and is_eligible_for_low_income(kwargs['instance']):
         # open model and mark as eligible
         entry = LowIncomeEntry.objects.filter(event=kwargs['instance'].event, email=kwargs['instance'].email)
         entry.low_income = True

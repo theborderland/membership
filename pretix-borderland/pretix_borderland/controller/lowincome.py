@@ -1,7 +1,7 @@
 from ..models import LowIncomeEntry, YesNo, YesNoDontKnowPreferNotToSay
 
 
-def IsEligibleForLowIncome(entry: LowIncomeEntry):
+def is_eligible_for_low_income(entry: LowIncomeEntry):
     minimum_wage_euro = 1000.0
     income = 0.0
 
