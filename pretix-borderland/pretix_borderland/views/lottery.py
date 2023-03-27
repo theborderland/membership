@@ -20,28 +20,30 @@ class Register(SuccessMessageMixin, CreateView):
 
     # TODO move to config
     email_subject = "Lottery Receipt 🔥"
-    email_message = """Yay, you did it! You’ve successfully registered for the Grand Membership Lottery of the Borderland 2023! Now it’s time to kick back and give yourself time for some dreaming!
+    email_message = """
+Congratulations! 
 
-If you’re super eager and can’t wait, here’s some things you can do to get ready:
+You've signed up for the Grand Membership Lottery of the Borderland 2023! Now, it's time to sit back and let your imagination run wild.
 
-  * Dream your dreams! Anything (ish) is possible at the Borderland, you just gotta dream it (and then potentially realize it)! Think about what cool shennanigans you want to cook up this year!
+If you're impatient like me, waiting for the event, here are a few things you can do in the meanwhile to prep:
 
-  * Want to get into the thick of it? Check out what [responsibilities and lead roles that still has to be filled](https://coda.io/d/Realities-2023_dFvRNS5423Z/Responsibilities_sulZB#_luxNx) up for the event to actually happen and run smooothly! 
+ * Get your dream on! Imagine the craziest and coolest shenanigans you can come up with! The Borderland is a haven for wild and wacky ideas, so brainstorm away!
 
-  * Involve yourself! If you’re ready to dive head first into some live action plotting, you should check out the [Borderland Discord](https://discord.gg/9bvgcSW2Ej) server! There’s so many cool things happening there, and anyone can help out. This is also a great place to ask questions! 
+ * Fancy getting your hands dirty? Check out the [responsibilities and Lead roles that still need sorting](https://coda.io/d/Realities-2023_dFvRNS5423Z/Responsibilities_sulZB#_luxNx) to make the event run as smoothly as possible! Get involved! ❤️  
 
-  * Read last year's Survival Guide! The Survival Guide contains EVERYTHING (ish) that you need to survive the Borderland! It hasn’t been updated to the 2023 edition yet though, but there’s a bunch of vital information in the old one that is still relevant! [https://talk.theborderland.se/survival](https://talk.theborderland.se/survival/) 
+ * Get Social! Boom shakalaka! Join the [Borderland Discord](https://discord.gg/9bvgcSW2Ej) server to get involved in some live plotting activities or ask all your questions!
 
-  * Join the Facebook group! So, Facebook isn’t always the best communication channel, as it tend to become a bit messy. But it’s still a great way to connect with people, and there’s a lot of future friends just waiting for you in there!
+ * Read the survival guide! It may not be updated to the 2023 edition yet, but there's a ton of helpful info to get clued up on! [https://talk.theborderland.se/survival](https://talk.theborderland.se/survival/)
 
-  * Create or join a camp! Camps are great to augment your Borderland experience! If you haven’t found one yet (or if you have and you’re looking for members), there’s a Facebook group for camp matchmaking. [Check it out](https://www.facebook.com/groups/2080911315480407)!  
+ * Join the community! Meet some funky folks on platforms like BookFace, find a camp to join, or just start your own! The happiness angels/devils (whichever you prefer) are just waiting for you to become part of the team. Psst... check the Camp Matchmaking group on BookFace [Check it out](https://www.facebook.com/groups/2080911315480407)
 
-Let’s keep our fingers crossed for a lucky strike at the Lottery, and see you soon! <3
+Here's hoping you hit the jackpot in the Lottery, and we'll see you soon!
 
 Bleeps and bloops,
 
-The Borderland Computer 👯🏽‍♂️🤖👨‍❤️‍💋‍👨
-    """  # TODO
+
+The Borderland Computer 👯🏽‍️🤖‍❤️‍💋‍👩‍👩‍👧‍👧... bleep!
+"""
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data()
