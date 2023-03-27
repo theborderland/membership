@@ -25,7 +25,9 @@
             <div class='col-sm-6'>
                 <div class="form-group">
                     <form method="post">{% csrf_token %}
-                        {{ form.as_p }}
+                        <table>
+                        {{ form.as_table }}
+                        </table>
                         <input type="submit" class="btn btn-block btn-primary btn-lg" value="Submit">
                     </form>
                 </div>

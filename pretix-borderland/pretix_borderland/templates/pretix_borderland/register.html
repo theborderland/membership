@@ -10,7 +10,7 @@
     <h2>We're closed</h2>
     Sorry! Come back later/earlier.
 {% else %}
-    Since the event has a limited capacity we sell memberships using a lottery. Read more about it on the <a href="..">front page</a>.
+    <strong>NOTE:</strong> Since the event has a limited capacity we sell memberships using a lottery. Read more about it on the <a href="..">front page</a>.
     <h2>Important</h2>
     <p>You <strong>must</strong> register with your <strong>legal name and date of birth</strong>, as it appears on official documents. When you buy a membership you must enter <strong>the same information</strong> as you do here. When we exchange your membership for a wristband we will <strong>ask to see official ID documents</strong>.</p>
     <p>We may invalidate your membership if the information does not match. If the name on your ID does not match your membership, we may deny you entry to the event. This is to stop cheating by entering several times in the lottery.</p>
@@ -21,8 +21,14 @@
         <div class="row">
             <div class='col-sm-6'>
                 <div class="form-group">
-                    <form method="post">{% csrf_token %}
-                        {{ form.as_p }}
+                    <form id="register_form" method="post">{% csrf_token %}
+                        <table>
+                        {{ form.as_table }}
+                        </table>
+                        <br/>
+                        &#8212;Cough, Cough&#8212; Darling 🤖❤️, if you're rolling in dough 💰, then back off the low income membership option for the good of all!.<br/>
+                        No funny business &#8211; <strong>only check it if you really need it</strong>
+
                         <input type="submit" class="btn btn-block btn-primary btn-lg" value="Register">
                     </form>
                 </div>

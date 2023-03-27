@@ -4,6 +4,8 @@ from rest_framework import routers
 
 from . import api, views
 
+#handler404 = 'pretix.base.views.errors.page_not_found'
+
 event_patterns = [
     url(r'^register/$', views.Register.as_view(), name="register"),
     url(r'^order/(?P<order>[^/]+)/(?P<secret>[A-Za-z0-9]+)/refund/$',
