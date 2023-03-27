@@ -32,7 +32,6 @@ def low_income_application(sender, **kwargs):
         # open model and mark as eligible
         entry = LowIncomeEntry.objects.filter(event=kwargs['instance'].event, email=kwargs['instance'].email)
         entry.low_income = True
-        entry.save()
 
 
 #@receiver(order_info)
