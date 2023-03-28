@@ -1,6 +1,6 @@
 from django import forms
 from django_countries.fields import CountryField
-from ..models import LowIncomeEntry, YesNoDontKnowPreferNotToSay, YesNo
+from ..models import LowIncomeEntry, YesNo
 
 
 class LowIncomeForm(forms.ModelForm):
@@ -31,7 +31,7 @@ class LowIncomeForm(forms.ModelForm):
         initial=0.00,
         localize=False)
 
-    has_assets = forms.TypedChoiceField(choices=[(tag.value, tag.name) for tag in YesNoDontKnowPreferNotToSay],
+    has_assets = forms.TypedChoiceField(choices=[(tag.value, tag.name) for tag in YesNo],
                                         label="Do you own any assets (house, cash, crypto, stocks, unicorns, etc.)?")
 
     assets = forms.DecimalField(label="What is the value of the assets that you own (in Euro)?",

@@ -3,8 +3,8 @@ from pretix.base.services.mail import SendMailException, mail_send, mail
 from pretix.celery_app import app
 
 from email.utils import formataddr
-from controller import is_eligible_for_low_income
-from models import LowIncomeEntry, LotteryEntry
+from .controller import is_eligible_for_low_income
+from .models import LowIncomeEntry, LotteryEntry
 
 def send_mail(*args, **kwargs):
     send_mail_.apply_async(args=args, kwargs=kwargs)

@@ -23,7 +23,7 @@ class LowIncomeEntry(LoggedModel):
     has_income = models.IntegerField(choices=[(tag.value, tag.name) for tag in YesNo], default=YesNo.No.value)
     income = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Income", default=0.0)
     last_year_income = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="Income last year", default=0.0)
-    has_assets = models.IntegerField(choices=[(tag.value, tag.name) for tag in YesNoDontKnowPreferNotToSay], default=YesNoDontKnowPreferNotToSay.DontKnow.value)
+    has_assets = models.IntegerField(choices=[(tag.value, tag.name) for tag in YesNo], default=YesNo.No.value)
     assets = models.DecimalField(max_digits=20, decimal_places=2, verbose_name="Assets", default=0.0)
     timestamp = models.DateTimeField(auto_now_add=True)
 
