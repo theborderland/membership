@@ -38,7 +38,9 @@ If you're impatient like me, waiting for the event, here are a few things you ca
 
  * Join the community! Meet some funky folks on platforms like BookFace, find a camp to join, or just start your own! The happiness angels/devils (whichever you prefer) are just waiting for you to become part of the team. Psst... check the Camp Matchmaking group on BookFace [Check it out](https://www.facebook.com/groups/2080911315480407)
 
-Here's hoping you hit the jackpot in the Lottery, and we'll see you soon!
+Attention, low-income membership applicants! Our membership team is currently reviewing your requests with hearts in their eyes. Unfortunately, we won't be sending out separate updates on your application status. But don't worry, if you happen to strike it rich and win the lottery and are approved for the low-income membership, you're in luck! However, if you're not approved but still win the lottery, you'll have to settle for a regular membership. And if you don't win the lottery, you will not be able to buy a low-income membership at all. Oh, and by the way, no +1s will be eligible for the low-income perk, sorry to burst your bubble. Keep your eyes peeled for updates and fingers crossed for that winning lottery draw! 😎🤞
+
+We, the robots, are hoping you hit the jackpot in the Lottery, and we'll see you soon!
 
 Bleeps and bloops,
 
