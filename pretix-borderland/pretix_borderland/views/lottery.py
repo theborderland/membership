@@ -34,7 +34,7 @@ If you're impatient like me, waiting for the event, here are a few things you ca
 
  * Get Social! Boom shakalaka! Join the [Borderland Discord](https://discord.gg/9bvgcSW2Ej) server to get involved in some live plotting activities or ask all your questions!
 
- * Read the survival guide! It may not be updated to the 2023 edition yet, but there's a ton of helpful info to get clued up on! [https://talk.theborderland.se/survival](https://talk.theborderland.se/survival/)
+ * Read the survival guide! It may not be updated to the 2023 edition yet, but there's a ton of helpful info to get clued up on! [Survival](https://coda.io/d/Survival-Guide_ddTvwEwgvJw/The-Borderland-2022-Survival-Guide_su5XR?fbclid=IwAR2f50DTyQbEZnqsTZZGk4bv0pMZfEdjN7jBZIdnaruZOcKoy7CQycr6IEg#_lucB5)
 
  * Join the community! Meet some funky folks on platforms like BookFace, find a camp to join, or just start your own! The happiness angels/devils (whichever you prefer) are just waiting for you to become part of the team. Psst... check the Camp Matchmaking group on BookFace [Check it out](https://www.facebook.com/groups/2080911315480407)
 

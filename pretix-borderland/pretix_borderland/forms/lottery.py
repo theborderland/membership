@@ -32,12 +32,13 @@ class RegisterForm(forms.ModelForm):
         widget=DatePickerWidget(),
     )
 
-    applied_low_income = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
-                                            initial=False,
-                                            required=False,
-                                            disabled=False,
-                                            label="Low income membership?")
+    #
+    #applied_low_income = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+    #                                        initial=False,
+    #                                        required=False,
+    #                                        disabled=False,
+    #                                        label="Low income membership?")
 
     class Meta:
         model = LotteryEntry
-        fields = ["email", "email_again", "first_name", "last_name", "dob", "dob_again", "applied_low_income"]
+        fields = ["email", "email_again", "first_name", "last_name", "dob", "dob_again"] #, "applied_low_income"]

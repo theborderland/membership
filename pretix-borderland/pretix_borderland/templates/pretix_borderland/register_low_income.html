@@ -7,11 +7,17 @@
 
 {% block content %}
 
-{% if not low_income_enabled or not registered %}
-    <h2>Whooopsy ... </h2>
-    Whoa there, wrangler! Hold your horses and back up a bit. This ain't the page you're looking for. <br/>
-    But don't worry, we won't leave you out in the cold. If you want to join the fun and win big, head on over to <a href="{% eventurl request.event 'plugins:pretix_borderland:register'%}">the Borderland's lottery registration page</a>.
-    Trust the AI robots, you won't regret it! 🤖...
+{% if not has_applied %}
+    {% if registered %}
+        <h2>We are sorry ...</h2>
+        The low-income membership application is closed... <br/>
+        Consider joining to the lottery and get a membership at base price here <a href="{% eventurl request.event 'plugins:pretix_borderland:register'%}">the Borderland's lottery registration page</a>.
+    {% else %}
+        <h2>Whooopsy ... </h2>
+        Whoa there, wrangler! Hold your horses and back up a bit. This ain't the page you're looking for. <br/>
+        But don't worry, we won't leave you out in the cold. If you want to join the fun and win big, head on over to <a href="{% eventurl request.event 'plugins:pretix_borderland:register'%}">the Borderland's lottery registration page</a>.
+        Trust the AI robots, you won't regret it! 🤖...
+    {% endif %}
 {% else %}
     <div class="col-sm-12">
         <div class="col-sm-12">
