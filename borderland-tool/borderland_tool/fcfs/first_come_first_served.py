@@ -46,12 +46,12 @@ class FCFS:
                                body="""
 Hello there,
 
-You're receiving this email because you registered to the Borderland Grand Lottery and didn't win nor get invited by a friend.
+You're receiving this email because you registered for the Borderland Grand Lottery and neither won nor got invited by a friend.
 
-No worries!, You still have a chance to get a membership! 
+No worries! You still have a chance to get a membership! 
 
-Follow this link and purchase a membership before we run out, there are 800 memberships left, so don't think twice and get yours!    
-
+Follow this link and purchase a membership, starting from <DATE> & <TIME> until we run out. There are XXX memberships left, so don't think twice and get yours!
+  
 https://{}/{}/{}/redeem?voucher={}
 
 Bleeps and Bloops,

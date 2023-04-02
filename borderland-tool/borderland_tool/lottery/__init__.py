@@ -43,16 +43,20 @@ class Lottery:
                                    subject="So, you didn't win the Borderland lottery 😭",
                                    body="""Hello from memberships HQ. It's time to cry.
 
-It's an inevitable fact that Borderland grows in popularity faster than we can create the organizational knowledge to host a bigger event.
+It seems that The Borderland is growing in popularity faster than we can create the necessary cultural continuity and organizational capacity to host a bigger event.
 
 It's incredibly sad and unfair to have to say no to any single one of you. But sometimes facts are unfair, even in the land between dreams and reality.
 
-All hope is not lost though, as many memberships tend to change hands as the event grows
-closer and summer plans change. Also, anyone who won the lottery has the chance to invite a +1 (so now you know who to flirt with). Maybe you’ll find a way to get your membership!
+All hope is not lost though, as anyone who won the lottery has the chance to invite a +1 (so now you know who to flirt with). Feel free to ask for it in a thread in the [FB Borderland Memberships - Info & Support group](https://www.facebook.com/groups/1532887430297531). Also, not everyone who won will actually purchase a membership and not all of those who will purchase will offer +1 to someone.
+
+That means that we will have a few hundred memberships left after the lottery concludes, and we will offer those on a first-come-first-serve basis to all those who registered for the lottery but lost - including you. Stay tuned - we will send you an email.
+
+Also, many memberships tend to change hands as the event grows closer and summer plans change. Maybe you’ll find a way to get your membership transferred!
 
 Bleeps and Bloops,
 
-The Borderland Understaffed Tech Team 🤖
+The Borderland Computer 🤖
+
 """)
             print("Emailt {}" + target["email"])
 
@@ -85,9 +89,11 @@ The Borderland Understaffed Tech Team 🤖
 
     def send_voucher(self, target, voucher):
         self.pretix.send_email(to=[target["email"]],
-                               subject="You're invited to The Borderland 2022! 🔥",
+                               subject="You've won the lottery for Borderland 2023! 🔥",
                                body="""
-Wow, you won the Borderland lottery! You hereby can purchase a membership for the Borderland, and to invite a friend of your choice to purchase their membership!
+Wow, you won the Borderland lottery! 
+
+You hereby can purchase a membership for the Borderland, and to invite a friend/lover/neighbor/partner/enemy of your choice to purchase their membership!
 
 Follow this link to purchase your membership! It's valid for 48 hours.
 
@@ -99,11 +105,9 @@ Please note that this is a ~special~ lottery invitation. This means you have to 
   * Last Name: {}
   * Date of Birth: {}
 
-The second voucher you receive is not personal and can be sent to a friend of your choice, so that they may get the possibility to purchase a membership! This can be anyone really, but try to reflect on who would contribute to the co-created event, and/or who would get out a lot from going. This gift voucher has the same 48 hours limit as your original voucher.
-
 Bleeps and Bloops,
 
-The Borderland Understaffed Tech Team 🤖
+The Borderland Computer 🤖
 """.format(self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"], target["first_name"], target["last_name"],
            target["dob"]))  # TODO show validity from voucher
