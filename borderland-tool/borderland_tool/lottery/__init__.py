@@ -8,10 +8,11 @@ from dateutil import parser
 
 
 class Lottery:
-    def __init__(self, pretix, csvfile, quota):
+    def __init__(self, pretix, csvfile, quota, low_income_quota):
         self.pretix = pretix
         self.csvfile = csvfile
         self.quota = quota
+        self.low_income_quota = low_income_quota
         self.registrations_csv = self.load_csv()
         self.has_order = self.has_voucher = None
 
@@ -36,7 +37,7 @@ class Lottery:
             r for r in self.registrations_csv if self.is_eligible(r["email"])]
         print(", ".join([e["email"] for e in eligible]))
         print(len(eligible))
-        if input("Send sad email (2022 specific text!)? (y/n) ") != 'y':
+        if input("Send sad email (2023 specific text!)? (y/n) ") != 'y':
             return
         for target in eligible:
             self.pretix.send_email(to=[target["email"]],
@@ -77,6 +78,10 @@ The Borderland Computer 🤖
         return [self.create_voucher(t) for t in targets]
 
     def create_voucher(self, target):
+        quota = self.quota
+        if target["low_income"]:
+            quota = self.low_income_quota
+
         voucher = self.pretix.create_voucher(self.quota,
                                              tag="lottery",
                                              comment=json.dumps(target, indent=2),
@@ -93,7 +98,7 @@ The Borderland Computer 🤖
                                body="""
 Wow, you won the Borderland lottery! 
 
-You hereby can purchase a membership for the Borderland, and to invite a friend/lover/neighbor/partner/enemy of your choice to purchase their membership!
+You hereby can purchase a {} for the Borderland, and to invite a friend/lover/neighbor/partner/enemy of your choice to purchase their membership!
 
 Follow this link to purchase your membership! It's valid for 48 hours.
 
@@ -108,7 +113,8 @@ Please note that this is a ~special~ lottery invitation. This means you have to 
 Bleeps and Bloops,
 
 The Borderland Computer 🤖
-""".format(self.pretix.host, self.pretix.org, self.pretix.event,
+""".format("low income membership" if target["low_income"] else "membership",
+           self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"], target["first_name"], target["last_name"],
            target["dob"]))  # TODO show validity from voucher
 

@@ -19,7 +19,14 @@ class LotteryCmd:
 
     def get_lottery(self, args):
         from borderland_tool.lottery import Lottery
-        return Lottery(get_pretix(args), args.file, args.quota)
+
+        low_income_quota = None
+        if args.low_income_quota:
+            low_income_quota = args.low_income_quota
+        else:
+            low_income_quota = args.quota
+
+        return Lottery(get_pretix(args), args.file, args.quota, args.low_income_quota)
 
     def add_parser(self, subparsers):
         lottery_parser = subparsers.add_parser('lottery', help='Membership Lottery')
@@ -41,7 +48,15 @@ class LotteryCmd:
                                     type=int,
                                     default=1,
                                     required=True,
-                                    help="internal identifier of quota group to invite to (e.g. 1)")
+                                    help="internal identifier (main/premium) of quota group to invite to (e.g. 1)")
+
+        lottery_parser.add_argument("-l",
+                                    "--low-income-quota",
+                                    type=int,
+                                    default=1,
+                                    required=False,
+                                    help="internal identifier (low income) of quota group to invite to (e.g. 1)")
+
         lottery_losers = lottery_subparsers.add_parser("losers", help="Make a list of losers")
         lottery_losers.set_defaults(func=self.losers)
 
