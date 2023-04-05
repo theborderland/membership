@@ -3,7 +3,7 @@ import sys
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python3 cheaters.py <csv file>")
+        print("Usage: python3 filter_cheaters.py <csv file>")
         sys.exit(1)
 
     with open(sys.argv[1], newline='') as csvfile:
