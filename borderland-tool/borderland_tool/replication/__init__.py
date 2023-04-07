@@ -65,7 +65,7 @@ class VoucherReplicator:
     def create_invitation(self, inviteinfo):
         voucher = self.pretix.create_voucher(quota = self.quota_group,
                                              comment = json.dumps(inviteinfo, indent=2),
-                                             valid_until=datetime.now()+timedelta(hours=48))
+                                             valid_until=datetime.now()+timedelta(hours=72))
         if voucher:
             self.send_invitation(voucher, inviteinfo)
             return True
@@ -81,7 +81,7 @@ class VoucherReplicator:
                                body = """
 Wow, {} must really like you! They've invited you to purchase a membership for the Borderland!
 
-Follow this link to get yours! It's valid for 48 hours.
+Follow this link to get yours! It's valid for 72 hours.
 
 https://{}/{}/{}/redeem?voucher={}
 
@@ -89,7 +89,7 @@ This invitation is not personal, so you can pass it on if you like. It only work
 
 You can read more about the Borderland at [https://theborderland.se](https://theborderland.se/) and more about the memberships for this year [here](https://memberships.theborderland.se/borderland/2023) 
 
-The voucher is valid for 48 hours from the time it was sent to {}.
+The voucher is valid for 72 hours from the time it was sent to {}.
 
 Bleeps and Bloops,
 

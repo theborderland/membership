@@ -60,7 +60,7 @@ The Borderland Computer 🤖
 """
         for target in eligible:
             email = ""
-            if target["low_income"]:
+            if eval(target["low_income"]):
                 email = email_body + email_low_income_blurb + email_footer
             else:
                 email = email_body + email_footer
@@ -90,13 +90,13 @@ The Borderland Computer 🤖
 
     def create_voucher(self, target):
         quota = self.quota
-        if target["low_income"]:
+        if eval(target["low_income"]):
             quota = self.low_income_quota
 
-        voucher = self.pretix.create_voucher(self.quota,
+        voucher = self.pretix.create_voucher(quota,
                                              tag="lottery",
                                              comment=json.dumps(target, indent=2),
-                                             valid_until=datetime.now() + timedelta(hours=48))
+                                             valid_until=datetime.now() + timedelta(hours=72))
         if not voucher:
             raise RuntimeError("Unable to create voucher")
         self.send_voucher(target, voucher)
@@ -111,7 +111,7 @@ Wow, you won the Borderland lottery!
 
 You hereby can purchase a {} for the Borderland, and to invite a friend/lover/neighbor/partner/enemy of your choice to purchase their membership!
 
-Follow this link to purchase your membership! It's valid for 48 hours.
+Follow this link to purchase your membership! It's valid for 72 hours.
 
 https://{}/{}/{}/redeem?voucher={}
 
@@ -124,7 +124,7 @@ Please note that this is a ~special~ lottery invitation. This means you have to 
 Bleeps and Bloops,
 
 The Borderland Computer 🤖
-""".format("low income membership" if target["low_income"] else "membership",
+""".format("__low income membership__" if eval(target["low_income"]) else "__membership__",
            self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"], target["first_name"], target["last_name"],
            target["dob"]))  # TODO show validity from voucher
