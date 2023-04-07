@@ -5,7 +5,7 @@ from .models import LotteryEntry, RefundRequest
 class LotteryEntrySerializer(I18nAwareModelSerializer):
     class Meta:
         model = LotteryEntry
-        fields = ["id", "email", "first_name", "last_name", "dob", "timestamp", "ip", "cookie", "browser", "low_income"]
+        fields = ["id", "email", "first_name", "last_name", "dob", "low_income", "timestamp", "ip", "cookie", "browser"]
 
 class RefundRequestSerializer(I18nAwareModelSerializer):
     class Meta:

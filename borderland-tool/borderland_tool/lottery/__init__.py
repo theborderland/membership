@@ -39,10 +39,10 @@ class Lottery:
         print(len(eligible))
         if input("Send sad email (2023 specific text!)? (y/n) ") != 'y':
             return
-        for target in eligible:
-            self.pretix.send_email(to=[target["email"]],
-                                   subject="So, you didn't win the Borderland lottery 😭",
-                                   body="""Hello from memberships HQ. It's time to cry.
+
+        email_low_income_blurb = """One more thing, we know you applied for low income membership. Unfortunately, the only chance to get it was through winning the lottery. Any +1s, or the first come first serve sales, will be for normal memberships only. We hope that you'll find a way to afford the normal membership when it comes your way, even if you're low on funds!
+"""
+        email_body = """Hello from memberships HQ. It's time to cry.
 
 It seems that The Borderland is growing in popularity faster than we can create the necessary cultural continuity and organizational capacity to host a bigger event.
 
@@ -52,14 +52,23 @@ All hope is not lost though, as anyone who won the lottery has the chance to inv
 
 That means that we will have a few hundred memberships left after the lottery concludes, and we will offer those on a first-come-first-serve basis to all those who registered for the lottery but lost - including you. Stay tuned - we will send you an email.
 
-Also, many memberships tend to change hands as the event grows closer and summer plans change. Maybe you’ll find a way to get your membership transferred!
-
-Bleeps and Bloops,
+Lastly, have in mind that many memberships tend to change hands as the event grows closer and summer plans change, so maybe you’ll find a way to get your membership transferred! :-)
+"""
+        email_footer = """Bleeps and Bloops,
 
 The Borderland Computer 🤖
+"""
+        for target in eligible:
+            email = ""
+            if target["low_income"]:
+                email = email_body + email_low_income_blurb + email_footer
+            else:
+                email = email_body + email_footer
 
-""")
-            print("Emailt {}" + target["email"])
+            self.pretix.send_email(to=[target["email"]],
+                                   subject="So, you didn't win the Borderland lottery 😭",
+                                   body=email)
+            print("Email {}" + target["email"])
 
     def lottery(self, num):
         winners = self.raffle(num)
@@ -71,6 +80,8 @@ The Borderland Computer 🤖
     def raffle(self, num):
         eligible = [
             r for r in self.registrations_csv if self.is_eligible(r["email"])]
+#        print("Registrations: {}".format(len(self.registrations_csv)))
+#        print("Eligible: {}".format(len(eligible)))
         random.shuffle(eligible)
         return eligible[:num]
 
@@ -85,7 +96,7 @@ The Borderland Computer 🤖
         voucher = self.pretix.create_voucher(self.quota,
                                              tag="lottery",
                                              comment=json.dumps(target, indent=2),
-                                             valid_until=datetime.now()+timedelta(hours=48))
+                                             valid_until=datetime.now() + timedelta(hours=48))
         if not voucher:
             raise RuntimeError("Unable to create voucher")
         self.send_voucher(target, voucher)
@@ -136,7 +147,9 @@ The Borderland Computer 🤖
         # Cache preexisting vouchers
         if self.has_voucher is None:
             self.has_voucher = []
-            valids = [v for v in self.pretix.get_vouchers() if v['quota'] == self.quota and
+            valids = [v for v in self.pretix.get_vouchers()
+                      if v['quota'] == self.quota or
+                      v['quota'] == self.low_income_quota and
                       v['redeemed'] < v['max_usages']]  # and
             # parser.parse(v['valid_until']) > datetime.now(timezone.utc) ]
             for v in valids:
