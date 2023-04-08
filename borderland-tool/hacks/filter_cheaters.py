@@ -14,7 +14,7 @@ def main():
             key = (row['first_name'], row['last_name'], row['dob'], row['cookie'])
             if key not in seen:
                 seen.add(key)
-                print(f"{row['id']},{row['email']},{row['first_name']},{row['last_name']},{row['dob']},{row['low_income']},{row['timestamp']},{row['ip']},{row['cookie']},{row['browser']}".format(row))
+                print(f"""{row['id']},{row['email']},"{row['first_name']}","{row['last_name']}",{row['dob']},{row['low_income']},{row['timestamp']},{row['ip']},{row['cookie']},\"{row['browser']}\"""")
 
 
 if __name__ == '__main__':
