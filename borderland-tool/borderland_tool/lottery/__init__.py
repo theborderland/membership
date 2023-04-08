@@ -40,7 +40,9 @@ class Lottery:
         if input("Send sad email (2023 specific text!)? (y/n) ") != 'y':
             return
 
-        email_low_income_blurb = """One more thing, we know you applied for low income membership. Unfortunately, the only chance to get it was through winning the lottery. Any +1s, or the first come first serve sales, will be for normal memberships only. We hope that you'll find a way to afford the normal membership when it comes your way, even if you're low on funds!
+        email_low_income_blurb = """
+                
+One more thing, we know you applied for *low income membership*; unfortunately, the only chance to redeem a reduced price membership was through winning the lottery. You will still have the chance to get a regular membership, but it will be at the full price. We hope that you'll find a way to afford the normal membership through a +1 or during the first come first served sale. We hope that you'll find a way to afford the normal membership when it comes your way, even if you're low on funds!
 """
         email_body = """Hello from memberships HQ. It's time to cry.
 
@@ -54,7 +56,9 @@ That means that we will have a few hundred memberships left after the lottery co
 
 Lastly, have in mind that many memberships tend to change hands as the event grows closer and summer plans change, so maybe you’ll find a way to get your membership transferred! :-)
 """
-        email_footer = """Bleeps and Bloops,
+        email_footer = """
+
+Bleeps and Bloops,
 
 The Borderland Computer 🤖
 """
@@ -68,7 +72,7 @@ The Borderland Computer 🤖
             self.pretix.send_email(to=[target["email"]],
                                    subject="So, you didn't win the Borderland lottery 😭",
                                    body=email)
-            print("Email {}" + target["email"])
+            print(f"Email {target['email']}")
 
     def lottery(self, num):
         winners = self.raffle(num)
