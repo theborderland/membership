@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 try:
     from pretix.base.plugins import PluginConfig
 except ImportError:
@@ -21,9 +21,9 @@ class PluginApp(PluginConfig):
         settings.LOCALE_PATHS.append(localepath)
 
     class PretixPluginMeta:
-        name = ugettext_lazy('Pretix Borderland Customizations')
+        name = gettext_lazy('Pretix Borderland Customizations')
         author = '@darkturo, Kris, Michi: et al'
-        description = ugettext_lazy('Language, e-mail template, lottery registration etc for the Borderland')
+        description = gettext_lazy('Language, e-mail template, lottery registration etc for the Borderland')
         visible = True
         version = '1.0.0'
 #        compatibility = "pretix>=2.7.0"
