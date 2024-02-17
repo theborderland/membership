@@ -6,9 +6,24 @@ new pages, and functionality that is specific to the Borderland but that can be
 easily reused by other events.
 
 
+
 Development setup
 -----------------
-Make sure you have installed GNU `make` as well as `python` 3.9 and `pipenv`.
+Make sure you have installed GNU `make` as well as `python` 3.11.2 and `pipenv`.
+
+0. Make sure you have installed in your system the following tools.
+
+   * GNU Make (`make`)
+   * Python 3.11
+   * Pipenv (`pipenv`)
+   * NPM (`npm`).
+
+   Notes:
+   If you run from Windows I recommend to use WSL directly and run this on
+   debian or ubuntu. Other solutions (using chocolatey + brew may work but I
+   haven't succeed).
+   On Mac, make sure to install `brew` and brew gnu `make` with it and make
+   sure the system points to the gnu make instead of the local one.
 
 1. From this directory run `make`
 
@@ -22,12 +37,11 @@ Make sure you have installed GNU `make` as well as `python` 3.9 and `pipenv`.
    you decide to clear it out (you can do so by removing the
    `pretix-borderland/build` directory.
 
-   All subsequent times you invoke `make` or `make build`, `make` will just
-   rebuild the plugin. 
+   All subsequent times you invoke `make` or `make build` to rebuild the plugin. 
 
 2. Now spin up Membertix (`pretix` + this plugin) in local:
 
-   sh scripts/local-django.sh runserver
+   pipenv run python -m pretix runserver
 
 3. Do the changes you need to do to the plugin and execute `make` while the
    server is running. Django will detect the changes and auto-reload them so 
