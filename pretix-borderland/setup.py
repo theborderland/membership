@@ -31,8 +31,7 @@ setup(
     author='Kris, Michi, @darkturo et al',
     author_email='memberships@theborderland.se',
     license='Apache Software License',
-
-    install_requires=[],
+    install_requires=['markdown', 'ujson'],
     packages=find_packages(exclude=['tests', 'tests.*']),
     include_package_data=True,
     cmdclass=cmdclass,

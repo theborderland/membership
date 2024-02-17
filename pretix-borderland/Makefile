@@ -10,7 +10,7 @@ env: $(PRETIX_DEVENV)
 	
 $(PRETIX_DEVENV):
 	@sh scripts/prepare_base_pretix_devenv.sh
-	@cd $(PRETIX_DEVENV); pipenv run python $(PLUGIN_DIR)/setup.py develop
+	@cd $(PRETIX_DEVENV); pipenv run pip3 wheel -e $(PLUGIN_DIR)
 	$(call DJANGO) makemessages -l en_BL
 	$(call DJANGO) compilemessages
 	$(call DJANGO) collectstatic --noinput
@@ -19,6 +19,7 @@ $(PRETIX_DEVENV):
 
 .PHONY: build 
 build: env
+	@cd $(PRETIX_DEVENV); pipenv run pip3 wheel -e $(PLUGIN_DIR)
 	@cd $(PRETIX_DEVENV); pipenv run pip3 install $(PLUGIN_DIR)
 	@echo "To run Membertix in dev mode run:\n\tsh scripts/local-django.sh runserver\n"
 
