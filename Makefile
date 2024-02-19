@@ -18,5 +18,6 @@ stable:
 	docker push ${NAME}
 
 push:
-	docker push ${NAME}
+	docker push ${IMG} 
+	docker push ${LATEST}
 
