@@ -31,31 +31,31 @@
                 that some human (or a robot) may get in touch to suss out additional info of your earnings and whatnot to see if you're a good fit.
             </p>
         </div>
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-10'>
+                    <div class="form-group">
+                        <form method="post">{% csrf_token %}
+                            <table>
+                            {{ form.as_table }}
+                            </table>
+                            &nbsp;<br/>
+                            &nbsp;<br/>
+                            <input type="submit" class="btn btn-block btn-primary btn-lg" value="Submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>    
     {% else %}
     <div class="col-sm-12">
         <h2>Low Income Membership Form</h2>
-
         <p>
-            Use this form to update your information.<br/><br>
+            You have already applied for a low income membership. Should you want to change your application, please contact the membership team directly on Discord.<br/><br>
         </p>
 
-    {% endif %}
-    <div class="container">
-        <div class="row">
-            <div class='col-sm-10'>
-                <div class="form-group">
-                    <form method="post">{% csrf_token %}
-                        <table>
-                        {{ form.as_table }}
-                        </table>
-                        &nbsp;<br/>
-                        &nbsp;<br/>
-                        <input type="submit" class="btn btn-block btn-primary btn-lg" value="Submit">
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
+    {% endif %}
 
     </div>
 
@@ -65,18 +65,6 @@
     Whoa there, wrangler! Hold your horses and back up a bit. This ain't the page you're looking for. <br/>
     But don't worry, we won't leave you out in the cold. If you want to join the fun and win big, head on over to <a href="{% eventurl request.event 'plugins:pretix_borderland:register'%}">the Borderland's lottery registration page</a>.
     Trust the AI robots, you won't regret it! 🤖...
-{% endif %}
-
---
-{% if not has_applied %}
-    {% if registered %}
-    {% else %}
-        <h2>Whooopsy ... </h2>
-        Whoa there, wrangler! Hold your horses and back up a bit. This ain't the page you're looking for. <br/>
-        But don't worry, we won't leave you out in the cold. If you want to join the fun and win big, head on over to <a href="{% eventurl request.event 'plugins:pretix_borderland:register'%}">the Borderland's lottery registration page</a>.
-        Trust the AI robots, you won't regret it! 🤖...
-    {% endif %}
-{% else %}
 {% endif %}
 
 {% endblock %}
