@@ -9,10 +9,15 @@ from django.db.models.signals import post_save
 from .models import LowIncomeEntry
 from .controller import is_eligible_for_low_income
 
-@receiver(register_html_mail_renderers, dispatch_uid="renderer_borderland")
-def register_mail_renderers(sender, **kwargs):
-    from .templates.email import BorderlandMailRenderer
-    return BorderlandMailRenderer
+@receiver(register_html_mail_renderers, dispatch_uid="renderer_borderland_classic")
+def register_mail_renderer_classic(sender, **kwargs):
+    from .templates.email import BorderlandMailRendererClassic
+    return BorderlandMailRendererClassic
+
+@receiver(register_html_mail_renderers, dispatch_uid="renderer_borderland_2024")
+def register_mail_renderer_2024(sender, **kwargs):
+    from .templates.email import BorderlandMailRenderer2024
+    return BorderlandMailRenderer2024
 
 
 @receiver(front_page_top)
