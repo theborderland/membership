@@ -22,7 +22,7 @@ RUN cp -r /usr/local/lib/python*/site-packages/pretix_borderland /pretix/src/pre
 
 WORKDIR /pretix/src
 
-RUN python3 manage.py makemigrations && \
-	make production
+RUN python3 manage.py makemigrations 
+RUN make production
 
 USER pretixuser
