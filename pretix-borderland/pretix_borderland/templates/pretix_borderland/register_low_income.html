@@ -7,11 +7,69 @@
 
 {% block content %}
 
-{% if not has_applied %}
-    {% if registered %}
-        <h2>We are sorry ...</h2>
+<!--
+            <h2>We are sorry ...</h2>
         The low-income membership application is closed... <br/>
         Consider joining to the lottery and get a membership at base price here <a href="{% eventurl request.event 'plugins:pretix_borderland:register'%}">the Borderland's lottery registration page</a>.
+
+-->
+
+{% if registered %}
+    <div class="col-sm-12">
+    {% if not has_applied %}
+        <div class="col-sm-12">
+            <h2>Low Income Membership Form</h2>
+
+            <p>
+                Up to this point you've been registered for the Borderland lottery <br/><br>
+            </p>
+            <p>
+                Hey there, everything's hunky-dory in the lottery registration department: we've got you in for the Grand Prize, Hurray! 💥
+                <br/>
+                But since you're ballin' on a budget... we gotta get some extra deets on you, just some routinary questions you know.
+                Don't worry, these are confidencial, and Membership team and I (the Robot) will treat them with care. Just bear in mind
+                that some human (or a robot) may get in touch to suss out additional info of your earnings and whatnot to see if you're a good fit.
+            </p>
+        </div>
+    {% else %}
+    <div class="col-sm-12">
+        <h2>Low Income Membership Form</h2>
+
+        <p>
+            Use this form to update your information.<br/><br>
+        </p>
+
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-10'>
+                <div class="form-group">
+                    <form method="post">{% csrf_token %}
+                        <table>
+                        {{ form.as_table }}
+                        </table>
+                        &nbsp;<br/>
+                        &nbsp;<br/>
+                        <input type="submit" class="btn btn-block btn-primary btn-lg" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <p><small>This information is collected to study your case.</small></p>
+{% else %}
+    <h2>Whooopsy ... </h2>
+    Whoa there, wrangler! Hold your horses and back up a bit. This ain't the page you're looking for. <br/>
+    But don't worry, we won't leave you out in the cold. If you want to join the fun and win big, head on over to <a href="{% eventurl request.event 'plugins:pretix_borderland:register'%}">the Borderland's lottery registration page</a>.
+    Trust the AI robots, you won't regret it! 🤖...
+{% endif %}
+
+--
+{% if not has_applied %}
+    {% if registered %}
     {% else %}
         <h2>Whooopsy ... </h2>
         Whoa there, wrangler! Hold your horses and back up a bit. This ain't the page you're looking for. <br/>
@@ -19,42 +77,6 @@
         Trust the AI robots, you won't regret it! 🤖...
     {% endif %}
 {% else %}
-    <div class="col-sm-12">
-        <div class="col-sm-12">
-            <div class="col-sm-12">
-                <h2>Low Income Membership Form</h2>
-
-                <p>
-                    Up to this point you've been registered for the Borderland lottery <br/><br>
-                </p>
-                <p>
-                    Hey there, everything's hunky-dory in the lottery registration department: we've got you in for the Grand Prize, Hurray! 💥
-                    <br/>
-                    But since you're ballin' on a budget... we gotta get some extra deets on you, just some routinary questions you know.
-                    Don't worry, these are confidencial, and Membership team and I (the Robot) will treat them with care. Just bear in mind
-                    that some human (or a robot) may get in touch to suss out additional info of your earnings and whatnot to see if you're a good fit.
-                </p>
-            </div>
-
-            <div class="container">
-                <div class="row">
-                    <div class='col-sm-10'>
-                        <div class="form-group">
-                            <form method="post">{% csrf_token %}
-                                <table>
-                                {{ form.as_table }}
-                                </table>
-                                &nbsp;<br/>
-                                &nbsp;<br/>
-                                <input type="submit" class="btn btn-block btn-primary btn-lg" value="Submit">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <p><small>This information is collected to study your case.</small></p>
 {% endif %}
+
 {% endblock %}

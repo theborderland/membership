@@ -64,7 +64,7 @@ You did it! ... You’ve successfully registered for the Membership Lottery of t
             self.email_message += f"""
 
 You're all set for the the raffle. Now, in order to apply for the low-income memberships we need some more information. 
-Please use this link to [fill your income details](https://memberships.theborderland.se/borderland/2024/low-income/lowincome/{self.request.POST['email']}). 
+Please use this link to [fill your income details](https://memberships.theborderland.se/borderland/2024/register/lowincome/{self.request.POST['email']}). 
 The membership team will assess each situation and see if you're
 eligible for the disccounted memberships.
 
