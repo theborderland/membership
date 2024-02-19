@@ -78,7 +78,7 @@ Here’s some things you can do:
 
  * Want to get some action? ... Check out the [responsibilities and Lead roles that still need sorting](https://coda.io/d/Realities-2023_dFvRNS5423Z/Responsibilities_sulZB#_luxNx) to make the event run as smoothly as possible! Get involved! ❤️  
 
- * Get Social! Join the [Borderland Discord](https://discord.gg/9bvgcSW2Ej) server and/or [Facebook](https://www.facebook.com/groups/2080911315480407) to connect with other borderlings in this quest.
+ * Get Social! Join the [Borderland Discord](https://discord.gg/9bvgcSW2Ej) server and/or [Facebook](https://www.facebook.com/groups/682069748479128) to connect with other borderlings in this quest.
 
  * Read the survival guide! It may not be updated to the 2024 edition yet, but there's a ton of helpful info to get clued up on! [Survival](https://coda.io/d/Survival-Guide_ddTvwEwgvJw/The-Borderland-2022-Survival-Guide_su5XR?fbclid=IwAR2f50DTyQbEZnqsTZZGk4bv0pMZfEdjN7jBZIdnaruZOcKoy7CQycr6IEg#_lucB5)
 
