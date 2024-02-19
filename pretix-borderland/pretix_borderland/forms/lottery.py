@@ -40,4 +40,4 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = LotteryEntry
-        fields = ["email", "email_again", "first_name", "last_name", "dob", "dob_again"] #, "applied_low_income"]
+        fields = ["email", "email_again", "first_name", "last_name", "dob", "dob_again", "applied_low_income"]
