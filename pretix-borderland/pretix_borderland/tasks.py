@@ -10,7 +10,7 @@ def send_mail(*args, **kwargs):
     send_mail_.apply_async(args=args, kwargs=kwargs)
 
 @app.task(base=ProfiledEventTask)
-def send_mail_(to, subject, body, event_id=None,event=None):
+def send_mail_(to, subject, body, event_id=None, event=None):
     # TODO defaults if event == None
     renderer = event.get_html_mail_renderer()
     sender_mail = event.settings.get('mail_from')
