@@ -22,30 +22,28 @@ class Register(SuccessMessageMixin, CreateView):
     # TODO move to config
     email_subject = "Lottery Receipt 🔥"
     email_message = """
-Congratulations! 
+Congratulations! 🥳
 
-You've signed up for the Grand Membership Lottery of the Borderland 2023! Now, it's time to sit back and let your imagination run wild.
 
-If you're impatient like me, waiting for the event, here are a few things you can do in the meanwhile to prep:
+You did it! ... You’ve successfully registered for the Membership Lottery of the Borderland 2024! 
 
- * Get your dream on! Imagine the craziest and coolest shenanigans you can come up with! The Borderland is a haven for wild and wacky ideas, so brainstorm away!
+There is still some time until the raffle, and yet more time to the Borderland. No worries if you don't win the raffle, there will be plenty of opportunities to get a membership, so relax and start getting in the mood in this cold February. 
 
- * Fancy getting your hands dirty? Check out the [responsibilities and Lead roles that still need sorting](https://coda.io/d/Realities-2023_dFvRNS5423Z/Responsibilities_sulZB#_luxNx) to make the event run as smoothly as possible! Get involved! ❤️  
+In the meantime, here’s some things you can do to pre-prep the prep-prep-prep:
 
- * Get Social! Boom shakalaka! Join the [Borderland Discord](https://discord.gg/9bvgcSW2Ej) server to get involved in some live plotting activities or ask all your questions!
+ * Dream big! The Borderland is a haven all creative and non-creative endeavors, so don't hold up and start making sketches of what you'd like to create/co-create.
 
- * Read the survival guide! It may not be updated to the 2023 edition yet, but there's a ton of helpful info to get clued up on! [Survival](https://coda.io/d/Survival-Guide_ddTvwEwgvJw/The-Borderland-2022-Survival-Guide_su5XR?fbclid=IwAR2f50DTyQbEZnqsTZZGk4bv0pMZfEdjN7jBZIdnaruZOcKoy7CQycr6IEg#_lucB5)
+ * Want to get some action? ... Check out the [responsibilities and Lead roles that still need sorting](https://coda.io/d/Realities-2023_dFvRNS5423Z/Responsibilities_sulZB#_luxNx) to make the event run as smoothly as possible! Get involved! ❤️  
 
- * Join the community! Meet some funky folks on platforms like BookFace, find a camp to join, or just start your own! The happiness angels/devils (whichever you prefer) are just waiting for you to become part of the team. Psst... check the Camp Matchmaking group on BookFace [Check it out](https://www.facebook.com/groups/2080911315480407)
+ * Get Social! Join the [Borderland Discord](https://discord.gg/9bvgcSW2Ej) server and/or [Facebook](https://www.facebook.com/groups/2080911315480407) to connect with other borderlings in this quest.
 
-Attention, low-income membership applicants! Our membership team is currently reviewing your requests with hearts in their eyes. Unfortunately, we won't be sending out separate updates on your application status. But don't worry, if you happen to strike it rich and win the lottery and are approved for the low-income membership, you're in luck! However, if you're not approved but still win the lottery, you'll have to settle for a regular membership. And if you don't win the lottery, you will not be able to buy a low-income membership at all. Oh, and by the way, no +1s will be eligible for the low-income perk, sorry to burst your bubble. Keep your eyes peeled for updates and fingers crossed for that winning lottery draw! 😎🤞
+ * Read the survival guide! It may not be updated to the 2024 edition yet, but there's a ton of helpful info to get clued up on! [Survival](https://coda.io/d/Survival-Guide_ddTvwEwgvJw/The-Borderland-2022-Survival-Guide_su5XR?fbclid=IwAR2f50DTyQbEZnqsTZZGk4bv0pMZfEdjN7jBZIdnaruZOcKoy7CQycr6IEg#_lucB5)
 
-We, the robots, are hoping you hit the jackpot in the Lottery, and we'll see you soon!
 
 Bleeps and bloops,
 
 
-The Borderland Computer 👯🏽‍️🤖‍❤️‍💋‍👩‍👩‍👧‍👧... bleep!
+The Membership team ❤️❤️❤️
 """
 
     def get_context_data(self, **kwargs):
