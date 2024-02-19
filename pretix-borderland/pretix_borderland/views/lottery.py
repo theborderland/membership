@@ -61,13 +61,13 @@ You did it! ... You’ve successfully registered for the Membership Lottery of t
             return render(self.request, template_name=self.template_name, context=self.get_context_data())
 
         if form.instance.applied_low_income:
-            email_message += """
+            self.email_message += """
 You're all set for the the raffle. Now, in order to apply for the low-income memberships we need some more information. 
 Please use the link below to fill your income details. The membership team will assess each situation and see if you're
 eligible for the disccounted memberships.
 """ 
 
-        email_message += """In the meantime, there is still some time until the raffle, and yet more time to the Borderland. No worries if you don't win, there will be plenty of opportunities to get a membership, so relax and start getting in the mood for the Borderland in this cold February. 
+        self.email_message += """In the meantime, there is still some time until the raffle, and yet more time to the Borderland. No worries if you don't win, there will be plenty of opportunities to get a membership, so relax and start getting in the mood for the Borderland in this cold February. 
 
 Here’s some things you can do:
 
