@@ -34,7 +34,7 @@ class LowIncome(SuccessMessageMixin, CreateView):
 
         if self.event and self.email:
             event = Event.objects.filter(slug=self.event).first()
-            ctx.update({"registered": LotteryEntry.objects.filter(event=event, email=self.email.lower()).exists(),
+            ctx.update({"registered": LotteryEntry.objects.filter(event=event, email=self.email.lower(), applied_low_income=True).exists(),
                         "has_applied": LowIncomeEntry.objects.filter(event=event, email=self.email.lower()).exists()})
 
         return ctx
