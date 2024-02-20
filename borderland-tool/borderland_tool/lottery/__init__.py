@@ -37,7 +37,7 @@ class Lottery:
             r for r in self.registrations_csv if self.is_eligible(r["email"])]
         print(", ".join([e["email"] for e in eligible]))
         print(len(eligible))
-        if input("Send sad email (2023 specific text!)? (y/n) ") != 'y':
+        if input("Send sad email (2024 specific text!)? (y/n) ") != 'y':
             return
 
         email_low_income_blurb = """
@@ -109,9 +109,9 @@ The Borderland Computer 🤖
 
     def send_voucher(self, target, voucher):
         self.pretix.send_email(to=[target["email"]],
-                               subject="You've won the lottery for Borderland 2023! 🔥",
+                               subject="You've won the lottery for Borderland 2024! 🔥",
                                body="""
-Wow, you won the Borderland lottery! 
+Congratulations! You won the Borderland lottery! 
 
 You hereby can purchase a {} for the Borderland, and to invite a friend/lover/neighbor/partner/enemy of your choice to purchase their membership!
 
