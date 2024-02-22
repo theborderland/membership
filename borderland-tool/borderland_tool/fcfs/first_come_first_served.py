@@ -46,17 +46,18 @@ class FCFS:
                                body="""
 Hello there,
 
-You're receiving this email because you registered for the Borderland Grand Lottery and neither won nor got invited by a friend.
+Most of the memberships have been sold by now to the winners of the lottery and their plus ones, however, there are still <XXX> memberships left, and this may be your chance to get yours!
 
-No worries! You still have a chance to get a membership! 
+Yes, you read it right: you still have a chance to get a membership! 
 
-Follow this link and purchase a membership, starting from <DATE> & <TIME> until we run out. There are XXX memberships left, so don't think twice and get yours!
-  
+Follow this link and purchase a membership, starting from <DATE> & <TIME> until we run out.   
+
 https://{}/{}/{}/redeem?voucher={}
 
 Bleeps and Bloops,
 
-The Borderland Understaffed Tech Team 🤖
+
+The Membership Team 🤖
 """.format(self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"]))
 

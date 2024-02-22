@@ -40,37 +40,27 @@ class Lottery:
         if input("Send sad email (2024 specific text!)? (y/n) ") != 'y':
             return
 
-        email_low_income_blurb = """
-                
-One more thing, we know you applied for *low income membership*; unfortunately, the only chance to redeem a reduced price membership was through winning the lottery. You will still have the chance to get a regular membership, but it will be at the full price. We hope that you'll find a way to afford the normal membership through a +1 or during the first come first served sale. We hope that you'll find a way to afford the normal membership when it comes your way, even if you're low on funds!
-"""
-        email_body = """Hello from memberships HQ. It's time to cry.
+        email = """
+We know, it sucks. But some win, some lose. That's the rules of the game. 
 
 It seems that The Borderland is growing in popularity faster than we can create the necessary cultural continuity and organizational capacity to host a bigger event.
 
 It's incredibly sad and unfair to have to say no to any single one of you. But sometimes facts are unfair, even in the land between dreams and reality.
 
-All hope is not lost though, as anyone who won the lottery has the chance to invite a +1 (so now you know who to flirt with). Feel free to ask for it in a thread in the [FB Borderland Memberships - Info & Support group](https://www.facebook.com/groups/1532887430297531). Also, not everyone who won will actually purchase a membership and not all of those who will purchase will offer +1 to someone.
+All hope is not lost, though, as anyone who won the lottery has the chance to invite a +1 (so now you know who to flirt with). Feel free to ask for it in a thread in the FB Borderland Memberships - Info & Support group. Also, not everyone who won will actually purchase a membership and not all of those who will purchase will offer +1 to someone.
 
 That means that we will have a few hundred memberships left after the lottery concludes, and we will offer those on a first-come-first-serve basis to all those who registered for the lottery but lost - including you. Stay tuned - we will send you an email.
 
-Lastly, have in mind that many memberships tend to change hands as the event grows closer and summer plans change, so maybe you’ll find a way to get your membership transferred! :-)
-"""
-        email_footer = """
+And even if you didn't get one by that time, know that many memberships tend to change hands as the dates closer to the Borderland and people's summer plans change. Who knows, maybe you'll find a way to get your membership transferred!
 
-Bleeps and Bloops,
+Stay strong,
 
-The Borderland Computer 🤖
+
+The Membership Team 🤖
 """
         for target in eligible:
-            email = ""
-            if eval(target["low_income"]):
-                email = email_body + email_low_income_blurb + email_footer
-            else:
-                email = email_body + email_footer
-
             self.pretix.send_email(to=[target["email"]],
-                                   subject="So, you didn't win the Borderland lottery 😭",
+                                   subject="Waah … you didn't win The Borderland lottery 😭",
                                    body=email)
             print(f"Email {target['email']}")
 
@@ -111,13 +101,16 @@ The Borderland Computer 🤖
         self.pretix.send_email(to=[target["email"]],
                                subject="You've won the lottery for Borderland 2024! 🔥",
                                body="""
-Congratulations! You won the Borderland lottery! 
+Congratulations! You won Tthe Borderland lottery! Hurray!🎉
 
-You hereby can purchase a {} for the Borderland, and to invite a friend/lover/neighbor/partner/enemy of your choice to purchase their membership!
+You'll have the chance to acquire a membership and be amongst the first borderlings supporting Tthe Borderland, yahoo!
+And if that was peanuts ... you'll also have the chance to bring a friend/lover with you. Brilliant, isn't it? 
 
 Follow this link to purchase your membership! It's valid for 72 hours.
 
+
 https://{}/{}/{}/redeem?voucher={}
+
 
 Please note that this is a ~special~ lottery invitation. This means you have to use the same name and birth date as when you registered. For reference, the information you provided was:
 
@@ -125,9 +118,10 @@ Please note that this is a ~special~ lottery invitation. This means you have to 
   * Last Name: {}
   * Date of Birth: {}
 
-Bleeps and Bloops,
+Best regards on behalf of,
 
-The Borderland Computer 🤖
+
+The Membership Team 🤖
 """.format("__low income membership__" if eval(target["low_income"]) else "__membership__",
            self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"], target["first_name"], target["last_name"],
