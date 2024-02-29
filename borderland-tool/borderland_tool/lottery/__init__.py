@@ -112,7 +112,7 @@ Follow this link to purchase your membership! It's valid for 72 hours.
 https://{}/{}/{}/redeem?voucher={}
 
 
-Please note that this is a ~special~ lottery invitation. This means you have to use the same name and birth date as when you registered. For reference, the information you provided was:
+Please note that this is a *special* lottery invitation. This means you have to use the same name and birth date as when you registered. For reference, the information you provided was:
 
   * First Name: {}
   * Last Name: {}
@@ -122,8 +122,7 @@ Best regards on behalf of,
 
 
 The Membership Team 🤖
-""".format("__low income membership__" if eval(target["low_income"]) else "__membership__",
-           self.pretix.host, self.pretix.org, self.pretix.event,
+""".format(self.pretix.host, self.pretix.org, self.pretix.event,
            voucher["code"], target["first_name"], target["last_name"],
            target["dob"]))  # TODO show validity from voucher
 

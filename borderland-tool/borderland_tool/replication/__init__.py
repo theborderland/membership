@@ -108,7 +108,7 @@ This invitation is not personal, so you can pass it on if you like. It only work
 
 You can read more about the Borderland at [https://theborderland.se](https://theborderland.se/) and more about the memberships for this year [here](https://memberships.theborderland.se/borderland/2024) 
 
-The voucher is valid for 72 hours from the time it was sent {}.
+The voucher is valid for 72 hours from the time it was sent to {}.
 Bleeps and Bloops,
 
 
