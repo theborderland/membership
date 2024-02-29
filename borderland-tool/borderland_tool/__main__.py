@@ -100,6 +100,7 @@ def replicate(args):
     if args.all_vouchers:
         tags = None
     vr = VoucherReplicator(pretix,
+                           args.file,
                            tags,
                            args.quota,
                            args.invite_id,
@@ -184,6 +185,8 @@ def main():
                                              help="replicating +1 vouchers")
     replicate_parser.set_defaults(func=replicate)
 
+    replicate_parser.add_argument("-F", "--file", default="lottery.csv",
+                                  help="CSV file to load registrations")
     replicate_parser.add_argument("-p", "--print",
                                   action='store_true',
                                   help="print list of pending invites")
@@ -201,6 +204,7 @@ def main():
                                   type=int,
                                   required=True,
                                   help="internal identifier of quota group to invite to (e.g. 1)")
+
     replicate_parser.add_argument("-t", "--tags",
                                   action='append',
                                   metavar="TAG",
