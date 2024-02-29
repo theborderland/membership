@@ -101,9 +101,9 @@ The Membership Team 🤖
         self.pretix.send_email(to=[target["email"]],
                                subject="You've won the lottery for Borderland 2024! 🔥",
                                body="""
-Congratulations! You won Tthe Borderland lottery! Hurray!🎉
+Congratulations! You won The Borderland lottery! Hurray!🎉
 
-You'll have the chance to acquire a membership and be amongst the first borderlings supporting Tthe Borderland, yahoo!
+You'll have the chance to acquire a membership and be amongst the first borderlings supporting The Borderland, yahoo!
 And if that was peanuts ... you'll also have the chance to bring a friend/lover with you. Brilliant, isn't it? 
 
 Follow this link to purchase your membership! It's valid for 72 hours.
