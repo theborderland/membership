@@ -103,6 +103,7 @@ def replicate(args):
                            args.file,
                            tags,
                            args.quota,
+                           args.low_income_quota,
                            args.invite_id,
                            args.pref_name_id)
     if vars(args)["print"]:
@@ -204,7 +205,11 @@ def main():
                                   type=int,
                                   required=True,
                                   help="internal identifier of quota group to invite to (e.g. 1)")
-
+    replicate_parser.add_argument("-l",
+                                  "--low-income-quota",
+                                  type=int,
+                                  required=True,
+                                  help="internal identifier of low income quota group to invite to (e.g. 1)")
     replicate_parser.add_argument("-t", "--tags",
                                   action='append',
                                   metavar="TAG",

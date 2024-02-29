@@ -2,6 +2,7 @@
 
 # +1 Replication
 
+import csv
 import json
 from datetime import datetime, timedelta
 
@@ -11,12 +12,14 @@ class VoucherReplicator:
                  csv_file,
                  allowed_voucher_tags,
                  quota_group,
+                 low_income_quota_group,
                  invite_identifier,
                  prefname_identifier):
         self.vouchers = pretix.get_vouchers()
         self.orders = pretix.get_orders(status='p')
         self.allowed_voucher_tags = allowed_voucher_tags
         self.quota_group = quota_group # TODO using internal id is cumbersome
+        self.low_income_quota_group = low_income_quota_group
         self.invite_identifier = invite_identifier
         self.prefname_identifier = prefname_identifier
         self.pretix = pretix
@@ -61,6 +64,14 @@ class VoucherReplicator:
         already_invited = list(self.get_already_used_orders())
         invites = list(self.get_order_invitations())
 
+        print(f">>> {len(already_invited)} vs {len(invites)}")
+        print(f">>> TAGS {self.allowed_voucher_tags}")
+        for invite in invites:
+            print(f"invited by order: {invite['invited_by_order']}")
+            print(f"email {invite['email']}")
+            print(f"invited by voucherids {invite['invited_by_voucherids']}")
+            print(f"--- {invite}")
+
         return [ invite for invite in invites
                  if invite["invited_by_order"] not in already_invited and
                  invite["email"] and
@@ -71,20 +82,31 @@ class VoucherReplicator:
         if self.allowed_voucher_tags == None:
             return True
         id_to_tag = { v['id']: v['tag'] for v in self.vouchers }
+        print(f"****id_totag  {id_to_tag}")
         invite_tags = [ id_to_tag[v] for v in ids if v != None ]
+        print(f"invite_tags {invite_tags}")
         intersect = set(invite_tags) & set(self.allowed_voucher_tags)
+        print(f"intersect {intersect}")
         if len(intersect) > 0:
             return True
         return False
 
 
     def create_invitation(self, inviteinfo, low_income):
-        quota = self.quota_group
+        voucher = None
         if low_income:
-            quota = 0
-        voucher = self.pretix.create_voucher(quota = quota,
-                                             comment = json.dumps(inviteinfo, indent=2),
-                                             valid_until=datetime.now()+timedelta(hours=72))
+            try:
+                voucher = self.pretix.create_voucher(quota = self.low_income_quota_group,
+                                                    comment = json.dumps(inviteinfo, indent=2),
+                                                    valid_until=datetime.now()+timedelta(hours=72))
+            except Exception as e:
+                print("Warning: Low income quota is full, generating a regular voucher")
+
+        if not voucher:
+            voucher = self.pretix.create_voucher(quota = self.quota_group,
+                                                 comment = json.dumps(inviteinfo, indent=2),
+                                                 valid_until=datetime.now()+timedelta(hours=72))
+
         if voucher:
             self.send_invitation(voucher, inviteinfo)
             return True

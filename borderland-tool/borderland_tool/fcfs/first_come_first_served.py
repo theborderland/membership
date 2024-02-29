@@ -8,10 +8,11 @@ from dateutil import parser
 
 
 class FCFS:
-    def __init__(self, pretix, csvfile, quota):
+    def __init__(self, pretix, csvfile, quota, low_income_quota):
         self.pretix = pretix
         self.csvfile = csvfile
         self.quota = quota
+        self.low_income_quota = low_income_quota
         self.registered_without_membership_csv = self.load_csv()
         self.has_order = self.has_voucher = None
 
@@ -31,7 +32,7 @@ class FCFS:
     def create_voucher(self, target):
         quota = self.quota
         if target["low_income"]:
-            quota = 0
+            quota = self.low_income_quota
         voucher = self.pretix.create_voucher(quota,
                                              block_quota=False,
                                              tag="fcfs",
@@ -53,7 +54,7 @@ Most of the memberships have been sold by now to the winners of the lottery and 
 
 Yes, you read it right: you still have a chance to get a membership! 
 
-Follow this link and purchase a membership, starting from <DATE> & <TIME> until we run out.   
+Follow this link and purchase a membership until we run out.   
 
 https://{}/{}/{}/redeem?voucher={}
 
