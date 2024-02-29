@@ -29,7 +29,10 @@ class FCFS:
         return [self.create_voucher(t) for t in targets]
 
     def create_voucher(self, target):
-        voucher = self.pretix.create_voucher(self.quota,
+        quota = self.quota
+        if target["low_income"]:
+            quota = 0
+        voucher = self.pretix.create_voucher(quota,
                                              block_quota=False,
                                              tag="fcfs",
                                              comment=json.dumps(target, indent=2),

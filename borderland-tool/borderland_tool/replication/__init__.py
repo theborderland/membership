@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 class VoucherReplicator:
     def __init__(self,
                  pretix,
+                 csv_file,
                  allowed_voucher_tags,
                  quota_group,
                  invite_identifier,
@@ -19,7 +20,22 @@ class VoucherReplicator:
         self.invite_identifier = invite_identifier
         self.prefname_identifier = prefname_identifier
         self.pretix = pretix
+        self.registrations_csv = self.load_csv(csv_file)
 
+    def load_csv(self, csv_file):
+        try:
+            with open(csv_file, newline='', encoding="utf8") as c:
+                r = list(csv.DictReader(c))
+        except FileNotFoundError:
+            print("Couldn't open the csv, using an empty new file ...")
+            r = []
+        return r
+
+    def is_low_income(self, email):
+        for entries in self.registrations_csv:
+            if entries["email"] == email:
+                return entries["low_income"]
+        return False
 
     def replicate(self, force=False):
         invites = self.invites_to_send()
@@ -36,7 +52,7 @@ class VoucherReplicator:
             return
 
         for inviteinfo in invites:
-            if not self.create_invitation(inviteinfo):
+            if not self.create_invitation(inviteinfo, is_low_income(inviteinfo["email"])):
                 print("Creating invitation failed. Assuming quota is full. Bye!")
                 break
 
@@ -62,8 +78,11 @@ class VoucherReplicator:
         return False
 
 
-    def create_invitation(self, inviteinfo):
-        voucher = self.pretix.create_voucher(quota = self.quota_group,
+    def create_invitation(self, inviteinfo, low_income):
+        quota = self.quota_group
+        if low_income:
+            quota = 0
+        voucher = self.pretix.create_voucher(quota = quota,
                                              comment = json.dumps(inviteinfo, indent=2),
                                              valid_until=datetime.now()+timedelta(hours=72))
         if voucher:

@@ -85,7 +85,7 @@ The Membership Team 🤖
     def create_voucher(self, target):
         quota = self.quota
         if eval(target["low_income"]):
-            quota = self.low_income_quota
+            quota = 0
 
         voucher = self.pretix.create_voucher(quota,
                                              tag="lottery",
