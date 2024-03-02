@@ -37,7 +37,7 @@ class VoucherReplicator:
     def is_low_income(self, email):
         for entries in self.registrations_csv:
             if entries["email"] == email:
-                return entries["low_income"]
+                return entries["low_income"] == "True"
         return False
 
     def replicate(self, force=False):
@@ -55,7 +55,7 @@ class VoucherReplicator:
             return
 
         for inviteinfo in invites:
-            if not self.create_invitation(inviteinfo, is_low_income(inviteinfo["email"])):
+            if not self.create_invitation(inviteinfo, self.is_low_income(inviteinfo["email"])):
                 print("Creating invitation failed. Assuming quota is full. Bye!")
                 break
 
@@ -63,14 +63,6 @@ class VoucherReplicator:
     def invites_to_send(self):
         already_invited = list(self.get_already_used_orders())
         invites = list(self.get_order_invitations())
-
-        print(f">>> {len(already_invited)} vs {len(invites)}")
-        print(f">>> TAGS {self.allowed_voucher_tags}")
-        for invite in invites:
-            print(f"invited by order: {invite['invited_by_order']}")
-            print(f"email {invite['email']}")
-            print(f"invited by voucherids {invite['invited_by_voucherids']}")
-            print(f"--- {invite}")
 
         return [ invite for invite in invites
                  if invite["invited_by_order"] not in already_invited and
@@ -82,11 +74,8 @@ class VoucherReplicator:
         if self.allowed_voucher_tags == None:
             return True
         id_to_tag = { v['id']: v['tag'] for v in self.vouchers }
-        print(f"****id_totag  {id_to_tag}")
         invite_tags = [ id_to_tag[v] for v in ids if v != None ]
-        print(f"invite_tags {invite_tags}")
         intersect = set(invite_tags) & set(self.allowed_voucher_tags)
-        print(f"intersect {intersect}")
         if len(intersect) > 0:
             return True
         return False
