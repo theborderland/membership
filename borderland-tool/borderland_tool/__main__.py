@@ -63,7 +63,7 @@ class LotteryCmd:
 class FCFSCmd:
     def get_fcfs(self, args):
         from borderland_tool.fcfs import FCFS
-        return FCFS(get_pretix(args), args.file, args.quota)
+        return FCFS(get_pretix(args), args.file, args.quota, args.low_income_quota)
 
     def fetch(self, args):
         fcfs = self.get_fcfs(args)
@@ -92,6 +92,12 @@ class FCFSCmd:
                             default=1,
                             required=True,
                             help="internal identifier of quota group to invite to (e.g. 1)")
+        parser.add_argument("-l",
+                            "--low-income-quota",
+                            type=int,
+                            required=True,
+                            help="internal identifier of low income quota group to invite to (e.g. 1)")
+
 
 def replicate(args):
     from borderland_tool.replication import VoucherReplicator

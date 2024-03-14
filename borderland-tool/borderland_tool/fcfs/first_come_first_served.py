@@ -30,40 +30,65 @@ class FCFS:
         return [self.create_voucher(t) for t in targets]
 
     def create_voucher(self, target):
-        quota = self.quota
-        if target["low_income"]:
-            quota = self.low_income_quota
-        voucher = self.pretix.create_voucher(quota,
+        voucher = self.pretix.create_voucher(self.quota,
                                              block_quota=False,
                                              tag="fcfs",
                                              comment=json.dumps(target, indent=2),
                                              valid_until=datetime.now()+timedelta(hours=180))
         if not voucher:
             raise RuntimeError("Unable to create voucher")
-        self.send_voucher(target, voucher)
+
+        low_income_voucher = None
+        if eval(target["low_income"]):
+            low_income_voucher = self.pretix.create_voucher(self.low_income_quota,
+                                             block_quota=False,
+                                             tag="fcfs",
+                                             comment=json.dumps(target, indent=2),
+                                             valid_until=datetime.now()+timedelta(hours=180))
+
+        self.send_voucher(target, voucher, low_income_voucher)
         print("sent voucher {}".format(voucher))
         return voucher
 
-    def send_voucher(self, target, voucher):
-        self.pretix.send_email(to=[target["email"]],
-                               subject="Welcome to the Open Membership sale 🦅",
-                               body="""
+    def send_voucher(self, target, voucher, low_income_voucher=None):
+        msg = """
 Hello there,
 
-Most of the memberships have been sold by now to the winners of the lottery and their plus ones, however, there are still <XXX> memberships left, and this may be your chance to get yours!
+Most of the memberships have been sold by now to the winners of the lottery and their plus ones, however, there are still 1138 memberships left, and this may be your chance to get yours!
 
-Yes, you read it right: you still have a chance to get a membership! 
+Yes, you read it right: you still have a chance to get a membership!
 
-Follow this link and purchase a membership until we run out.   
+Follow this link and purchase a membership this Friday the 15th at 20:00 CEST until we run out.
 
-https://{}/{}/{}/redeem?voucher={}
+"""
+
+        if low_income_voucher:
+            msg += f"""
+https://{self.pretix.host}/{self.pretix.org}/{self.pretix.event}/redeem?voucher={low_income_voucher["code"]}
 
 Bleeps and Bloops,
 
 
 The Membership Team 🤖
-""".format(self.pretix.host, self.pretix.org, self.pretix.event,
-           voucher["code"]))
+
+--
+PS: If there's no more low income memberships available, you can always get a regular membership with this other voucher. Good luck!
+
+https://{self.pretix.host}/{self.pretix.org}/{self.pretix.event}/redeem?voucher={voucher["code"]}
+"""
+        else:
+            msg += f"""
+https://{self.pretix.host}/{self.pretix.org}/{self.pretix.event}/redeem?voucher={voucher["code"]}
+
+Bleeps and Bloops,
+
+
+The Membership Team 🤖
+"""
+        
+        self.pretix.send_email(to=[target["email"]],
+                               subject="Welcome to the Open Membership sale 🦅",
+                               body=msg)
 
     def load_csv(self):
         try:
