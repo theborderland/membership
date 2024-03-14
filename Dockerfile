@@ -4,7 +4,7 @@ USER root
 
 ENV DJANGO_SETTINGS_MODULE=
 
-RUN sed -i '/max-requests-jitter 50/a\\t--timeout 300 \\' /usr/local/bin/pretix
+RUN sed -i '/max-requests-jitter 50/a\\t--timeout 1200 \\' /usr/local/bin/pretix
 
 RUN pip3 install "pretix-passbook==1.9.1" "pretix-pages==1.4.1" "pretix-fontpack-free==1.8.0"
 
