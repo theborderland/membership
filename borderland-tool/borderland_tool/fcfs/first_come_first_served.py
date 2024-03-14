@@ -54,9 +54,12 @@ class FCFS:
         msg = """
 Hello there,
 
+
 Most of the memberships have been sold by now to the winners of the lottery and their plus ones, however, there are still 1138 memberships left, and this may be your chance to get yours!
 
+
 Yes, you read it right: you still have a chance to get a membership!
+
 
 Follow this link and purchase a membership this Friday the 15th at 20:00 CEST until we run out.
 
@@ -66,12 +69,15 @@ Follow this link and purchase a membership this Friday the 15th at 20:00 CEST un
             msg += f"""
 https://{self.pretix.host}/{self.pretix.org}/{self.pretix.event}/redeem?voucher={low_income_voucher["code"]}
 
+
 Bleeps and Bloops,
+
 
 
 The Membership Team 🤖
 
 --
+
 PS: If there's no more low income memberships available, you can always get a regular membership with this other voucher. Good luck!
 
 https://{self.pretix.host}/{self.pretix.org}/{self.pretix.event}/redeem?voucher={voucher["code"]}
@@ -80,12 +86,14 @@ https://{self.pretix.host}/{self.pretix.org}/{self.pretix.event}/redeem?voucher=
             msg += f"""
 https://{self.pretix.host}/{self.pretix.org}/{self.pretix.event}/redeem?voucher={voucher["code"]}
 
+
 Bleeps and Bloops,
+
 
 
 The Membership Team 🤖
 """
-        
+
         self.pretix.send_email(to=[target["email"]],
                                subject="Welcome to the Open Membership sale 🦅",
                                body=msg)
